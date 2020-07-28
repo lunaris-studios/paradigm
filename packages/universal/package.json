@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/universal",
-	"version": "1.2.0",
+	"version": "0.0.1",
 	"description": "Paradigm Universal Rendering Utilities",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -43,10 +43,10 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/icons": "1.2.0",
-		"@paradigmjs/protocol": "1.2.0",
-		"@paradigmjs/sensors": "1.2.0",
-		"@paradigmjs/util": "1.2.0",
+		"@paradigmjs/icons": "0.0.1",
+		"@paradigmjs/protocol": "0.0.1",
+		"@paradigmjs/sensors": "0.0.1",
+		"@paradigmjs/util": "0.0.1",
 		"@popperjs/core": "^2.4.0",
 		"@svgr/webpack": "^5.4.0",
 		"jss": "^10.1.1",
