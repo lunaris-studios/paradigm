@@ -47,12 +47,12 @@ jobs:
           npm run bootstrap
 
       - name: Build Production Libraries
-        id: release-libraries-6
+        id: release-libraries-7
         run: |
           npm run dist:libs
 
       - name: Publish Libraries
-        id: release-libraries-7
+        id: release-libraries-8
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
