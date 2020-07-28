@@ -1,0 +1,62 @@
+apiVersion: skaffold/v2beta4
+kind: Config
+build:
+  local:
+    push: false
+  artifacts:
+    - image: core
+      context: .
+      sync:
+        infer:
+          - "packages/*/coverage/**/*"
+          - "packages/*/dist/**/*"
+          - "packages/*/src/**/*"
+      docker:
+        dockerfile: docker/development.dockerfile
+        buildArgs:
+          NODEJS_VERSION: "{{ .NODEJS_VERSION }}"
+          
+deploy:
+  helm:
+    releases:
+      - name: "{{ .APP_NGINX_HOST }}"
+        chartPath: stable/nginx-ingress
+        version: "1.29.1"
+        remote: true
+        setValues:
+          defaultBackend.enabled: "false"
+          controller.publishService.enabled: "true"
+        setValueTemplates:
+          controller.service.ports.http: "{{ .APP_NGINX_HTTPPORT }}"
+          controller.service.ports.https: "{{ .APP_NGINX_HTTPSPORT }}"
+
+      - name: core
+        chartPath: "k8s/charts/packages"
+        artifactOverrides:
+          image: core
+        valuesFiles:
+          - ".env.yaml"
+        imageStrategy:
+          helm: {}
+        setValueTemplates:
+          packages[0].name: "{{ .PACKAGE_CORE_HOST }}"
+          packages[0].port: "{{ .PACKAGE_CORE_PORT }}"
+
+          packages[1].name: "{{ .PACKAGE_NINE_HOST }}"
+          packages[1].port: "{{ .PACKAGE_NINE_PORT }}"
+
+          ingress.enabled: "true"
+
+          ingress.hosts[0].host: "{{ .PACKAGE_CORE_URL }}"
+          ingress.hosts[0].paths[0].path: "/.*"
+          ingress.hosts[0].paths[0].port: "{{ .PACKAGE_CORE_PORT }}"
+
+          ingress.hosts[1].host: "{{ .PACKAGE_NINE_URL }}"
+          ingress.hosts[1].paths[0].path: "/.*"
+          ingress.hosts[1].paths[0].port: "{{ .PACKAGE_NINE_PORT }}"
+        overrides:
+          ingress:
+            enabled: "true"
+            annotations:
+              kubernetes.io/ingress.class: "nginx"
+              nginx.ingress.kubernetes.io/use-regex: "true"

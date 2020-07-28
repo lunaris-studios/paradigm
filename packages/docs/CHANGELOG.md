@@ -1,0 +1,38 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# [1.2.0](https://github.com/lunaris-studios/paradigm/compare/docs@1.0.2...docs@1.2.0) (2020-07-27)
+
+**Note:** Version bump only for package docs
+
+
+
+
+
+## [1.0.2](https://github.com/lunaris-studios/paradigm/compare/docs@1.0.1...docs@1.0.2) (2020-07-27)
+
+**Note:** Version bump only for package docs
+
+
+
+
+
+## 1.0.1 (2020-07-27)
+
+
+### Bug Fixes
+
+* **docs:** testing git+https repository url in package.json ([32f4c39](https://github.com/lunaris-studios/paradigm/commit/32f4c39a85383dfb7e0ebdaf00dabb6cd35173b1))
+
+
+
+
+
+# 1.0.0 (2020-07-27)
+
+
+### Bug Fixes
+
+* **docs:** testing git+https repository url in package.json ([32f4c39](https://github.com/lunaris-studios/paradigm/commit/32f4c39a85383dfb7e0ebdaf00dabb6cd35173b1))

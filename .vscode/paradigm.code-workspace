@@ -1,0 +1,78 @@
+{
+	"folders": [
+		{
+			"name": "[HOME]",
+			"path": "../"
+		},
+		{
+			"name": "[CORE]",
+			"path": "../packages/paradigm"
+		},
+		{
+			"name": "[DOCS]",
+			"path": "../packages/docs"
+		},
+		{
+			"name": "[ICONS]",
+			"path": "../packages/icons"
+		},
+		{
+			"name": "[NINE]",
+			"path": "../packages/nine"
+		},
+		{
+			"name": "[PROTOCOL]",
+			"path": "../packages/protocol"
+		},
+		{
+			"name": "[SCRIPTS]",
+			"path": "../packages/scripts"
+		},
+		{
+			"name": "[SENSORS]",
+			"path": "../packages/sensors"
+		},
+		{
+			"name": "[UNIVERSAL]",
+			"path": "../packages/universal"
+		},
+		{
+			"name": "[UTIL]",
+			"path": "../packages/util"
+		}
+	],
+	"settings": {
+		"workbench.colorCustomizations": {
+			"activityBar.activeBackground": "#ef7853",
+			"activityBar.activeBorder": "#8af4a3",
+			"activityBar.background": "#ef7853",
+			"activityBar.foreground": "#15202b",
+			"activityBar.inactiveForeground": "#15202b99",
+			"activityBarBadge.background": "#8af4a3",
+			"activityBarBadge.foreground": "#15202b",
+			"statusBar.background": "#eb5324",
+			"statusBar.border": "#eb5324",
+			"statusBar.foreground": "#e7e7e7",
+			"statusBarItem.hoverBackground": "#ef7853",
+			"titleBar.activeBackground": "#eb5324",
+			"titleBar.activeForeground": "#e7e7e7",
+			"titleBar.border": "#eb5324",
+			"titleBar.inactiveBackground": "#eb532499",
+			"titleBar.inactiveForeground": "#e7e7e799"
+		},
+		"peacock.remoteColor": "#eb5324",
+		"todo-tree.tree.scanMode": "workspace",
+		"search.useGlobalIgnoreFiles": true,
+		"conventionalCommits.scopes": [
+			"core",
+			"docs",
+			"icons",
+			"nine",
+			"protocol",
+			"scripts",
+			"sensors"
+		],
+		"peacock.color": "#eb5324",
+		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib"
+	}
+}

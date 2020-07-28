@@ -1,0 +1,76 @@
+{
+	"name": "@paradigmjs/util",
+	"version": "1.2.0",
+	"license": "MIT",
+	"author": "Sam Craig <sam@lunaris.io>",
+	"main": "dist/index.js",
+	"module": "dist/index.es.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"clean": "run-p \"clean:*\"",
+		"clean:build": "rm -rf ./dist",
+		"clean:debug": "rm -rf ./npm-debug*",
+		"clean:modules": "rm -rf ./node_modules package-lock.json",
+		"compile": "run-p \"compile:*\"",
+		"_compile:jest": "npm run test:jest-generate-output",
+		"compile:rollup": "rollup -c",
+		"dev": "run-p \"dev:*\"",
+		"dev:jest": "npm run test:jest-generate-output -- --watch",
+		"dev:rollup": "rollup -cw",
+		"dist": "run-s \"dist:*\"",
+		"dist:bundle": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
+		"lint": "run-p lint:es",
+		"lint:es": "es-lint",
+		"lint-fix": "es-lint --fix",
+		"start": "npm run dev",
+		"test": "run-s test:type-check test:jest",
+		"test:type-check": "tsc",
+		"test:jest": "jest",
+		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
+		"verify": "npm-run-all compile -p dist test lint"
+	},
+	"dependencies": {
+		"lodash-es": "^4.17.15",
+		"react": "^16.13.1",
+		"utility-types": "^3.10.0"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^3.1.0",
+		"@rollup/plugin-typescript": "^4.1.2",
+		"@testing-library/jest-dom": "^5.9.0",
+		"@testing-library/react": "^10.0.4",
+		"@types/jest": "^25.2.3",
+		"@types/lodash-es": "^4.17.3",
+		"@types/node": "^14.0.5",
+		"@types/react": "^16.9.43",
+		"@types/testing-library__jest-dom": "^5.7.0",
+		"jest": "^26.0.1",
+		"jest-extended": "^0.11.5",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.0.5",
+		"react-docgen-typescript-loader": "^3.7.2",
+		"rollup": "^2.10.9",
+		"rollup-plugin-typescript2": "^0.27.1",
+		"ts-jest": "^26.1.0",
+		"ts-loader": "^7.0.5",
+		"ttypescript": "^1.5.10",
+		"typescript": "3.9.3",
+		"typescript-transform-paths": "^1.1.14"
+	},
+	"peerDependencies": {
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/util"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e"
+}

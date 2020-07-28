@@ -1,0 +1,27 @@
+{
+	"name": "@paradigmjs/scripts",
+	"version": "1.2.0",
+	"description": "Node.js build scripts for Paradigm packages",
+	"author": "Lunaris Studios",
+	"license": "MIT",
+	"publishConfig": {
+		"access": "public",
+		"registry": "https://registry.npmjs.org/"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/scripts"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
+	"bin": {
+		"generate-icons-source": "./lib/generate-icons-source.js"
+	},
+	"scripts": {
+		"clean": "exit 0",
+		"compile": "exit 0"
+	},
+	"dependencies": {
+		"svgo": "^1.3.2"
+	}
+}

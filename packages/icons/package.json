@@ -1,0 +1,60 @@
+{
+	"name": "@paradigmjs/icons",
+	"version": "1.2.0",
+	"description": "Paradigm Icon Library",
+	"license": "MIT",
+	"author": "Sam Craig <sam@lunaris.io>",
+	"main": "dist/index.js",
+	"module": "dist/index.es.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/icons"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
+	"scripts": {
+		"clean": "run-p \"clean:*\"",
+		"clean:build": "rm -rf ./dist",
+		"clean:debug": "rm -rf ./npm-debug*",
+		"clean:modules": "rm -rf ./node_modules package-lock.json",
+		"compile": "run-p \"compile:*\"",
+		"compile:icons": "generate-icons-source",
+		"compile:rollup": "rollup -c",
+		"dev": "rollup -cw",
+		"dist": "run-s \"dist:*\"",
+		"dist:bundle": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
+		"lint": "run-p lint:es",
+		"lint:es": "es-lint",
+		"lint-fix": "es-lint --fix",
+		"start": "npm run dev",
+		"test": "run-s test:type-check test:jest",
+		"test:type-check": "tsc",
+		"test:jest": "jest",
+		"verify": "npm-run-all compile -p dist test lint"
+	},
+	"devDependencies": {
+		"@paradigmjs/scripts": "1.2.0",
+		"@rollup/plugin-alias": "^3.1.1",
+		"@rollup/plugin-url": "^5.0.1",
+		"@svgr/rollup": "^5.4.0",
+		"@types/jest": "^25.2.3",
+		"@types/svgo": "^1.3.3",
+		"jest": "^26.0.1",
+		"npm-run-all": "^4.1.5",
+		"rollup": "^1.27.12",
+		"rollup-plugin-typescript2": "^0.25.3",
+		"svgo": "^1.3.2",
+		"ts-jest": "^26.0.0",
+		"ts-node": "^8.10.1",
+		"ttypescript": "^1.5.10",
+		"typescript": "3.8.3",
+		"typescript-transform-paths": "^1.1.14"
+	}
+}

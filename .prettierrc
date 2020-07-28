@@ -1,0 +1,21 @@
+{
+	"arrowParens": "always",
+	"bracketSpacing": true,
+	"endOfLine": "lf",
+	"jsxBracketSameLine": false,
+	"jsxSingleQuote": false,
+	"overrides": [
+		{
+			"files": "*.mdx",
+			"options": {
+				"printWidth": 80
+			}
+		}
+	],
+	"printWidth": 90,
+	"semi": true,
+	"singleQuote": false,
+	"tabWidth": 2,
+	"trailingComma": "all",
+	"useTabs": true
+}

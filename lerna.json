@@ -1,0 +1,22 @@
+{
+	"lerna": "3.22.1",
+	"packages": [
+		"packages/*"
+	],
+	"version": "independent",
+	"npmClient": "npm",
+	"create": {
+		"homepage": "https://github.com/lunaris-studios/paradigm",
+		"license": "MIT"
+	},
+	"command": {
+		"publish": {
+      "message": "chore(release): publish [lerna]",
+      "registry": "https://npm.pkg.github.com"
+		},
+		"version": {
+			"yes": true,
+			"conventionalCommits": true
+		}
+	}
+}
