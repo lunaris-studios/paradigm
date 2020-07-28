@@ -16,7 +16,7 @@
 	"repository": {
 		"type": "git",
 		"url": "git@github.com:lunaris-studios/paradigm.git",
-		"directory": "packages/paradigm"
+		"directory": "packages/core"
 	},
 	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
 	"scripts": {
@@ -25,13 +25,13 @@
 		"clean:debug": "rm -rf ./npm-debug*",
 		"clean:modules": "rm -rf ./node_modules package-lock.json",
 		"compile": "run-p \"compile:*\"",
-		"_compile:jest": "npm run test:jest-generate-output",
+		"compile:jest": "npm run test:jest-generate-output",
 		"compile:rollup": "rollup -c",
 		"dev": "run-p \"dev:*\"",
 		"dev:jest": "npm run test:jest-generate-output -- --watch",
 		"dev:rollup": "rollup -cw",
 		"dist": "run-s \"dist:*\"",
-		"dist:bundle": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
+		"dist:rollup": "rollup -c",
 		"lint": "run-p lint:es",
 		"lint:es": "es-lint",
 		"lint-fix": "es-lint --fix",

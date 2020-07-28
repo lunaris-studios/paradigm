@@ -29,7 +29,7 @@
 		"dev": "run-s \"dev:*\"",
 		"dev:source": "rollup -cw",
 		"dist": "run-s \"dist:*\"",
-		"dist:bundle": "rollup -c --environment INCLUDE_DEPS,BUILD:production",
+		"dist:rollup": "rollup -c",
 		"lint": "run-p lint:es",
 		"lint:es": "es-lint",
 		"lint-fix": "es-lint --fix",

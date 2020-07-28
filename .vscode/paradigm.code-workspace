@@ -6,7 +6,7 @@
 		},
 		{
 			"name": "[CORE]",
-			"path": "../packages/paradigm"
+			"path": "../packages/core"
 		},
 		{
 			"name": "[DOCS]",
