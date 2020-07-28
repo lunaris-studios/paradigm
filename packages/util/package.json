@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/util",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"main": "dist/index.js",
