@@ -43,7 +43,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/paradigm": "1.2.0",
+		"@paradigmjs/core": "0.0.1",
 		"@paradigmjs/protocol": "0.0.1",
 		"react": "^16.13.1",
 		"react-spring": "^9.0.0-rc.3",

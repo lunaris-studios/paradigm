@@ -1,4 +1,4 @@
-import * as Paradigm from "@paradigmjs/paradigm";
+import * as Paradigm from "@paradigmjs/core";
 import * as React from "react";
 
 import * as Errors from "./nine.errors";

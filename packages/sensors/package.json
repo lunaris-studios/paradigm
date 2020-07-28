@@ -44,7 +44,7 @@
 	},
 	"dependencies": {
 		"@paradigmjs/icons": "0.0.1",
-		"@paradigmjs/paradigm": "^1.1.1",
+		"@paradigmjs/core": "0.0.1",
 		"@paradigmjs/protocol": "0.0.1",
 		"@paradigmjs/universal": "0.0.1",
 		"@paradigmjs/util": "0.0.1",

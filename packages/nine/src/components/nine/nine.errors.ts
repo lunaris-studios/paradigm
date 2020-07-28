@@ -1,6 +1,6 @@
-import * as Neptune from "@paradigmjs/paradigm";
+import * as Paradigm from "@paradigmjs/core";
 
-const ns = Neptune.DISPLAYNAME_PREFIX;
+const ns = Paradigm.DISPLAYNAME_PREFIX;
 
 export const WARN_NO_HEIGHT = ns + ` <Nine> height prop will default to 100px`;
 export const ERROR_NO_IMAGE =
