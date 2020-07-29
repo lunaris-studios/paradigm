@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.6 (2020-07-29)
+
+
+### Bug Fixes
+
+* **universal:** added 3-9 paramter overloads for compose ([5156c77](https://github.com/lunaris-studios/paradigm/commit/5156c770b7ea98a668d811e4e7c728eb0c6aef96))
+
+
+
+
+
 ## 0.0.5 (2020-07-29)
 
 
