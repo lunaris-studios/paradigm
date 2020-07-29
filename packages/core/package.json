@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/core",
-	"version": "0.0.4",
+	"version": "0.0.5",
 	"description": "Paradigm Core Component & Design System",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -45,10 +45,10 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/icons": "^0.0.4",
-		"@paradigmjs/protocol": "^0.0.4",
-		"@paradigmjs/sensors": "^0.0.4",
-		"@paradigmjs/util": "^0.0.4",
+		"@paradigmjs/icons": "^0.0.5",
+		"@paradigmjs/protocol": "^0.0.5",
+		"@paradigmjs/sensors": "^0.0.5",
+		"@paradigmjs/util": "^0.0.5",
 		"@popperjs/core": "^2.4.0",
 		"@svgr/webpack": "^5.4.0",
 		"jss": "^10.1.1",
