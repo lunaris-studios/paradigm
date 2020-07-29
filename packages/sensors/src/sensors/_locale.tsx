@@ -90,4 +90,4 @@ export class LocaleSensor extends React.Component<
 	}
 }
 
-export const withLocale = Universal.createEnhancer(LocaleSensor, "sensors", "locale");
+export const withLocaleSensor = Universal.createEnhancer(LocaleSensor, "sensors", "locale");
