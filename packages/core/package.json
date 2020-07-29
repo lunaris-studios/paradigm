@@ -48,6 +48,7 @@
 		"@paradigmjs/icons": "^0.0.2",
 		"@paradigmjs/protocol": "^0.0.2",
 		"@paradigmjs/sensors": "^0.0.2",
+		"@paradigmjs/util": "^0.0.2",
 		"@popperjs/core": "^2.4.0",
 		"@svgr/webpack": "^5.4.0",
 		"jss": "^10.1.1",

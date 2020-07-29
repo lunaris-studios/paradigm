@@ -1,7 +1,5 @@
-const ns = "[STARTER-GATSBY]";
+const ns = "[PARADIGM]";
 
 function createErrorMessage(message: string): string {
 	return `${ns} | ${message}`;
 }
-
-export const RENDER_WARN_EXPECT_DATA_TO_BE_OBJECT = createErrorMessage("");
