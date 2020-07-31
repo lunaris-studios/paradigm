@@ -16,7 +16,7 @@
 		"clean": "run-s clean:packages clean:root",
 		"clean:packages": "lerna run --parallel clean",
 		"clean:root": "rm -rf ./*-debug* && rm -rf ./node_modules package-lock.json",
-		"dev:core": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{core,icons,nine,protocol,sensors,universal,util}\" --stream",
+		"dev:core": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{core,icons,gatsby,nine,protocol,sensors,universal,util}\" --stream",
 		"dev:docs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{docs,sensors,universal,util}\" --stream",
 		"dev:sensors": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{sensors,universal,util}\" --stream",
 		"dist": "run-s dist:libs dist:apps",
