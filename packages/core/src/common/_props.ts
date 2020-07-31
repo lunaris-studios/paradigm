@@ -1,7 +1,7 @@
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 
-export const DISPLAYNAME_PREFIX = "[NEXUS]";
+export const DISPLAYNAME_PREFIX = "[PARADIGM(CORE)]";
 
 /**
  * Alias for all valid HTML props for `<div>` element.

@@ -1,7 +1,7 @@
-const ns = "[PARADIGM]";
+import { DISPLAYNAME_PREFIX } from "./_props";
 
 function createErrorMessage(message: string): string {
-	return `${ns} | ${message}`;
+	return `${DISPLAYNAME_PREFIX} | ${message}`;
 }
 
 export const RENDER_PANIC_PROPS_MUST_BE_OBJECT = createErrorMessage(
