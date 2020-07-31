@@ -1,2 +1,2 @@
-export * from "./sensors";
+export * from "./components";
 export * from "./ts";
