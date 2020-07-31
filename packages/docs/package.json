@@ -1,7 +1,7 @@
 {
 	"name": "docs",
 	"private": true,
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"description": "Paradigm Documentation Website",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -26,8 +26,8 @@
 		"test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
 	},
 	"dependencies": {
-		"@paradigmjs/sensors": "^0.0.6",
-		"@paradigmjs/universal": "^0.0.6",
+		"@paradigmjs/sensors": "^0.0.7",
+		"@paradigmjs/universal": "^0.0.7",
 		"@typescript-eslint/eslint-plugin": "^3.6.1",
 		"@typescript-eslint/parser": "^3.6.1",
 		"gatsby": "^2.23.12",
