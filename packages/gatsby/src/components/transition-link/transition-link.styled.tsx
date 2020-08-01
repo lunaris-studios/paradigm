@@ -8,6 +8,8 @@ import { default as TLink } from "gatsby-plugin-transition-link";
 
 import * as Common from "~/common";
 
+import * as Component from "./transition-link";
+
 /**
  * Table of Contents
  *

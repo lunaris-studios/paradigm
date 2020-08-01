@@ -15,13 +15,9 @@ class TransitionLinkImpl extends React.PureComponent<ITransitionLinkProps, {}> {
 	}
 
 	public render() {
-		const { children } = this.props;
+		const { children, ref, ...props } = this.props;
 
-		return (
-			<Styled.TransitionLink.Link {...this.props}>
-				{children}
-			</Styled.TransitionLink.Link>
-		);
+		return <Styled.TransitionLink.Link {...props}>{children}</Styled.TransitionLink.Link>;
 	}
 }
 
