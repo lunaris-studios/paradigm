@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/gatsby",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Paradigm Gatsby Utilities",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -43,9 +43,9 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/protocol": "^0.0.7",
-		"@paradigmjs/universal": "^0.0.7",
-		"@paradigmjs/util": "^0.0.7",
+		"@paradigmjs/protocol": "^0.0.8",
+		"@paradigmjs/universal": "^0.0.8",
+		"@paradigmjs/util": "^0.0.8",
 		"gatsby-plugin-transition-link": "^1.20.2",
 		"polished": "^3.6.3",
 		"react": "^16.13.1",

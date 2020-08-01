@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/protocol",
-	"version": "0.0.7",
+	"version": "0.0.8",
 	"description": "Paradigm Protocol Library",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
