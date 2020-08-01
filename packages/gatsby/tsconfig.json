@@ -3,6 +3,9 @@
 	"include": [
 		"src/**/*"
 	],
+	"files": [
+		"./src/ts/*.d.ts"
+	],
 	"compilerOptions": {
 		"typeRoots": [
 			"./node_modules/@types",
