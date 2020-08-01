@@ -6,12 +6,12 @@ import * as Common from "~/common";
 
 import * as Styled from "./transition-link.styled";
 
-export interface IAniLinkProps extends GPTL.TransitionLinkProps {}
+export interface ITransitionLinkProps extends GPTL.TransitionLinkProps {}
 
-class AniLinkImpl extends React.PureComponent<IAniLinkProps, {}> {
-	public static readonly displayName = `${Common.DISPLAYNAME_PREFIX}.AniLink`;
+class TransitionLinkImpl extends React.PureComponent<ITransitionLinkProps, {}> {
+	public static readonly displayName = `${Common.DISPLAYNAME_PREFIX}.TransitionLink`;
 
-	constructor(props: IAniLinkProps) {
+	constructor(props: ITransitionLinkProps) {
 		super(props);
 	}
 
@@ -26,4 +26,4 @@ class AniLinkImpl extends React.PureComponent<IAniLinkProps, {}> {
 	}
 }
 
-export const AniLink = AniLinkImpl;
+export const TransitionLink = TransitionLinkImpl;
