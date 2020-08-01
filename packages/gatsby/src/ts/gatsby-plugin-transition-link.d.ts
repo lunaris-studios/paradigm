@@ -185,5 +185,3 @@ declare module "gatsby-plugin-transition-link" {
 
 	export default TransitionLink;
 }
-
-export {};
