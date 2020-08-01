@@ -1,5 +1,4 @@
 import * as GPTL from "gatsby-plugin-transition-link";
-import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 
 import * as Common from "~/common";
