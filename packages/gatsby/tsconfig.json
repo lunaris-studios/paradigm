@@ -4,7 +4,7 @@
 		"src/**/*"
 	],
 	"files": [
-		"./src/ts/*.d.ts"
+		"./src/ts/gatsby-plugin-transition-link.d.ts"
 	],
 	"compilerOptions": {
 		"typeRoots": [
