@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/icons",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"description": "Paradigm Icon Library",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -40,7 +40,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"devDependencies": {
-		"@paradigmjs/scripts": "^0.0.9",
+		"@paradigmjs/scripts": "^0.0.10",
 		"@rollup/plugin-alias": "^3.1.1",
 		"@rollup/plugin-url": "^5.0.1",
 		"@svgr/rollup": "^5.4.0",
