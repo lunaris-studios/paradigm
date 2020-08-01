@@ -43,10 +43,9 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/icons": "^0.0.5",
-		"@paradigmjs/protocol": "^0.0.5",
-		"@paradigmjs/universal": "^0.0.5",
-		"@paradigmjs/util": "^0.0.5",
+		"@paradigmjs/protocol": "^0.0.7",
+		"@paradigmjs/universal": "^0.0.7",
+		"@paradigmjs/util": "^0.0.7",
 		"gatsby-plugin-transition-link": "^1.20.2",
 		"polished": "^3.6.3",
 		"react": "^16.13.1",
