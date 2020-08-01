@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.11 (2020-08-01)
+
+
+### Bug Fixes
+
+* **gatsby:** replaced * declaration glob capture to explication name reference ([a3d26a4](https://github.com/lunaris-studios/paradigm/commit/a3d26a4aab9c0eaa4763d92271dbfd99e210604f))
+
+
+
+
+
 ## 0.0.10 (2020-08-01)
 
 **Note:** Version bump only for package @paradigmjs/util

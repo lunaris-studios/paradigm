@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/sensors",
-	"version": "0.0.10",
+	"version": "0.0.11",
 	"description": "Paradigm Sensor Utilities",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -43,10 +43,10 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/icons": "^0.0.10",
-		"@paradigmjs/protocol": "^0.0.10",
-		"@paradigmjs/universal": "^0.0.10",
-		"@paradigmjs/util": "^0.0.10",
+		"@paradigmjs/icons": "^0.0.11",
+		"@paradigmjs/protocol": "^0.0.11",
+		"@paradigmjs/universal": "^0.0.11",
+		"@paradigmjs/util": "^0.0.11",
 		"@popperjs/core": "^2.4.0",
 		"@svgr/webpack": "^5.4.0",
 		"hoist-non-react-statics": "^3.3.2",
