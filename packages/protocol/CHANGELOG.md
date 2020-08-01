@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.12 (2020-08-01)
+
+
+### Bug Fixes
+
+* **gatsby:** removed ref passing to styled-component TransitionLink encapsulation ([5e875f0](https://github.com/lunaris-studios/paradigm/commit/5e875f044789956b691ea0fd4d63b7eb92b7b8f9))
+
+
+
+
+
 ## 0.0.11 (2020-08-01)
 
 
