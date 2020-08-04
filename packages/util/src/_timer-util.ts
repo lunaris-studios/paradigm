@@ -10,7 +10,7 @@ enum MODE {
 	TIMEOUT = 1,
 }
 
-type ExecutionFn = (...args: []) => void;
+type ExecutionFn = (...args: any[]) => void;
 
 interface Execution {
 	fn: ExecutionFn;
