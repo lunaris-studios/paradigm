@@ -3,13 +3,10 @@
 	"include": [
 		"src/**/*"
 	],
-	"files": [
-		"./src/ts/gatsby-plugin-transition-link.d.ts"
-	],
 	"compilerOptions": {
 		"typeRoots": [
 			"./node_modules/@types",
-			"./src/ts"
+			"./src/ts/declarations"
 		],
 		"baseUrl": "src",
 		"paths": {
