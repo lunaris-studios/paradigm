@@ -1,4 +1,3 @@
-import * as GPTL from "gatsby-plugin-transition-link";
 import * as React from "react";
 import * as SC from "styled-components";
 
