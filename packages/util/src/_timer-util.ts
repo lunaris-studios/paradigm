@@ -1,173 +1,76 @@
 /**
- * Acknowledgements:
- * - @kambing86 (https://github.com/kambing86/requestanimationframe-timer)
+ * requestInterval() & requestTimeout() by Joe Lambert (@joelambert)
+ * https://gist.github.com/joelambert/1002116
  */
 
 import { default as raf } from "raf";
 
-enum MODE {
-	INTERVAL = 0,
-	TIMEOUT = 1,
-}
-
-type ExecutionFn = (...args: any[]) => void;
-
-interface Execution {
-	fn: ExecutionFn;
-	ms: number;
-	args: any[];
-	mode: MODE;
-}
-
-interface NextExecution extends Execution {
-	/**
-	 * Timestamp in milliseconds at which the
-	 * timing executable should be called.
-	 */
-	nextTick: number;
-}
-
-const executionQueue = new Map<number, NextExecution>();
-const executionActive = new Set<NextExecution>();
-
-let loopStarted = false;
-let executableId = 0;
-
-/**
- * Gets the current time value in milliseconds.
- */
-function getTimeStampMS(): number {
-	return new Date().getTime();
+export interface IRequestHandle {
+	id: number;
 }
 
 /**
- * Iterate through active timing executables and run
- * the provided action.
+ * Behaves the same as setInterval except uses requestAnimationFrame() where possible for better performance.
+ * @param {Function} fn The callback function
+ * @param {number} delay The delay in milliseconds
  */
-function runActive(): void {
-	if (executionActive.size === 0) {
-		return;
-	}
+export function requestInterval(fn: Function, delay: number) {
+	const handle = {} as IRequestHandle;
+	let start = new Date().getTime();
 
-	executionActive.forEach((next: NextExecution) => {
-		const { fn, args } = next;
-		fn(...args);
-	});
+	function loop() {
+		const current = new Date().getTime();
+		const delta = current - start;
 
-	executionActive.clear();
-}
-
-/**
- * Check whether or not the timing executables in the current queue
- * should be executed, removed from the queue, or tick timing updated.
- *
- * - [IF] the executable is to be run, add it to the `executionActive`
- *   for to be processed by `runActive`.
- *
- *   - [IF] the timing executable is of type `setTimeout`, remove it from
- *     the execution `executionMap` queue.
- *
- *   - [ELSE] the timing executable is of type `setInterval`, set the updated
- *     `nextTick` value based on its base interval frequency `ms`.
- */
-function checkQueue(currentTimeTick: number): void {
-	executionQueue.forEach((value, id) => {
-		const { nextTick, ms, mode } = value;
-
-		if (currentTimeTick - nextTick >= 0) {
-			executionActive.add(value);
-			if (mode === MODE.TIMEOUT) {
-				executionQueue.delete(id);
-			} else {
-				executionQueue.set(id, {
-					...value,
-					nextTick: nextTick + ms,
-				});
-			}
+		if (delta >= delay) {
+			fn();
+			start = new Date().getTime();
 		}
-	});
+
+		handle.id = raf(loop);
+	}
+
+	handle.id = raf(loop);
+	return handle;
 }
 
 /**
- * Returns `true` if the `executionMap` is empty, signalling that
- * there are no active executables in the current queue, and to stop
- * looping.
+ * Behaves the same as clearInterval except uses cancelRequestAnimationFrame() where possible for better performance.
+ * @param {number} id ID of the requestInterval() handle
  */
-function shouldStopLoop(): boolean {
-	return Boolean(executionQueue.size === 0);
-}
-
-function loop() {
-	if (shouldStopLoop()) {
-		loopStarted = false;
-		return;
-	}
-
-	const currentTimeTick = getTimeStampMS();
-
-	checkQueue(currentTimeTick);
-	runActive();
-
-	if (shouldStopLoop()) {
-		loopStarted = false;
-		return;
-	}
-
-	raf(loop);
+export function clearRequestInterval(id: number) {
+	raf.cancel(id);
 }
 
 /**
- * Add timing executable to the execution queue.
+ * Behaves the same as setTimeout except uses requestAnimationFrame() where possible for better performance.
+ * @param {Function} fn The callback function
+ * @param {number} delay The delay in milliseconds
  */
-function addTimingExecutable(execution: Execution) {
-	const { fn, ms, args, mode } = execution;
 
-	if (!!!fn) {
-		return null;
+export function requestTimeout(fn: Function, delay: number) {
+	const handle = {} as IRequestHandle;
+	let start = new Date().getTime();
+
+	function loop() {
+		const current = new Date().getTime();
+		const delta = current - start;
+
+		if (delta >= delay) {
+			fn();
+		} else {
+			handle.id = raf(loop);
+		}
 	}
 
-	const currentExecutableId = executableId;
-
-	executionQueue.set(currentExecutableId, {
-		fn,
-		ms,
-		nextTick: getTimeStampMS() + ms,
-		args,
-		mode,
-	});
-
-	if (!!!loopStarted) {
-		loopStarted = true;
-		raf(loop);
-	}
-
-	/**
-	 * Increase the `executionId` every time `addTimingExecutable` is
-	 * invoked to provide a unique for the next executable.
-	 */
-	executableId += 1;
-
-	return currentExecutableId;
+	handle.id = raf(loop);
+	return handle;
 }
 
 /**
- * If execution queue contains the corresponding timing id,
- * remove it from the queue.
+ * Behaves the same as clearTimeout except uses cancelRequestAnimationFrame() where possible for better performance.
+ * @param {number} id ID of the requestTimeout() handle
  */
-function removeTimingExecutable(id: number) {
-	if (executionQueue.has(id)) {
-		executionQueue.delete(id);
-	}
+export function clearRequestTimeout(id: number) {
+	raf.cancel(id);
 }
-
-export function setTimeout(fn: ExecutionFn, timeout = 0, ...args: any[]) {
-	return addTimingExecutable({ fn, ms: timeout, args, mode: MODE.TIMEOUT });
-}
-export function setInterval(fn: ExecutionFn, interval = 0, ...args: any[]) {
-	return addTimingExecutable({ fn, ms: interval, args, mode: MODE.INTERVAL });
-}
-
-export const clearTimeout = removeTimingExecutable;
-export const clearInterval = removeTimingExecutable;
-
-export default { setTimeout, setInterval, clearTimeout, clearInterval };
