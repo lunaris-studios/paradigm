@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.8 (2020-08-06)
+
+
+### Bug Fixes
+
+* **protocol:** added missing export rule for Locale enums ([c8a10ea](https://github.com/lunaris-studios/paradigm/commit/c8a10ea7cee1d50536e938be4a3cef6146e64f19))
+
+
+
+
+
 ## 0.0.7 (2020-08-01)
 
 
