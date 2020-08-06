@@ -9,6 +9,7 @@ export * from "./_direction";
 export * from "./_elevation";
 export * from "./_intent";
 export * from "./_key";
+export * from "./_locale";
 export * from "./_position";
 export * from "./_scheme";
 export * from "./_size";
