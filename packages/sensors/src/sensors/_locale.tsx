@@ -1,3 +1,4 @@
+import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 import * as Universal from "@paradigmjs/universal";
 
@@ -8,7 +9,7 @@ export interface ILocaleSensorProps
 		TS.ISensorProps {}
 
 export interface ILocaleSensorState {
-	locale: string;
+	locale: Protocol.Locale;
 }
 
 const defaultProps = Object.freeze<ILocaleSensorProps>({
@@ -16,7 +17,7 @@ const defaultProps = Object.freeze<ILocaleSensorProps>({
 });
 
 const defaultState = Object.freeze<ILocaleSensorState>({
-	locale: preferredLocales(),
+	locale: Protocol.Locale.en_US,
 });
 
 /**
@@ -25,14 +26,7 @@ const defaultState = Object.freeze<ILocaleSensorState>({
  * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/getCanonicalLocales
  */
 declare namespace Intl {
-	function getCanonicalLocales(locale: readonly string[]): string[];
-}
-
-function preferredLocales(): string {
-	if (navigator.languages && navigator.languages.length > 0) {
-		return Intl.getCanonicalLocales(navigator.languages)[0];
-	}
-	return Intl.getCanonicalLocales([navigator.language])[0];
+	function getCanonicalLocales(locale: readonly string[]): Protocol.Locale[];
 }
 
 export class LocaleSensor extends React.Component<
@@ -68,7 +62,7 @@ export class LocaleSensor extends React.Component<
 		window.removeEventListener("languagechange", this.handleLanguageChange);
 	}
 
-	preferredLocales(): string {
+	private preferredLocales() {
 		if (navigator.languages && navigator.languages.length > 0) {
 			return Intl.getCanonicalLocales(navigator.languages)[0];
 		}
@@ -81,7 +75,7 @@ export class LocaleSensor extends React.Component<
 		}
 
 		this.setState({
-			locale: preferredLocales(),
+			locale: this.preferredLocales(),
 		});
 	}
 
@@ -90,4 +84,8 @@ export class LocaleSensor extends React.Component<
 	}
 }
 
-export const withLocaleSensor = Universal.createEnhancer(LocaleSensor, "sensors", "locale");
+export const withLocaleSensor = Universal.createEnhancer(
+	LocaleSensor,
+	"sensors",
+	"locale",
+);
