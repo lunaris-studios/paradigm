@@ -4,6 +4,15 @@ import * as Universal from "@paradigmjs/universal";
 
 import * as TS from "~/ts";
 
+/**
+ * TypeScript's definitions don't include this, though it has decent support in
+ * modern browsers.
+ * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/getCanonicalLocales
+ */
+declare namespace Intl {
+	function getCanonicalLocales(locale: readonly string[]): Protocol.Locale[];
+}
+
 export interface ILocaleSensorProps
 	extends Universal.UniversalProps<ILocaleSensorState>,
 		TS.ISensorProps {}
@@ -19,15 +28,6 @@ const defaultProps = Object.freeze<ILocaleSensorProps>({
 const defaultState = Object.freeze<ILocaleSensorState>({
 	locale: Protocol.Locale.en_US,
 });
-
-/**
- * TypeScript's definitions don't include this, though it has decent support in
- * modern browsers.
- * See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/getCanonicalLocales
- */
-declare namespace Intl {
-	function getCanonicalLocales(locale: readonly string[]): Protocol.Locale[];
-}
 
 export class LocaleSensor extends React.Component<
 	ILocaleSensorProps,
