@@ -14,6 +14,7 @@ export * from "./_position";
 export * from "./_scheme";
 export * from "./_size";
 export * from "./_space";
+export * from "./_stage";
 export * from "./_transition";
 export * from "./_unit";
 export * from "./_z-index";
