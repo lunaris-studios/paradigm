@@ -13,8 +13,8 @@
 			"path": "../packages/docs"
 		},
 		{
-			"name": "[GATSBY-PAGE-TRANSITION]",
-			"path": "../packages/gatsby-page-transition"
+			"name": "[GATSBY]",
+			"path": "../packages/gatsby"
 		},
 		{
 			"name": "[ICONS]",
