@@ -9,8 +9,8 @@ export interface IWindowSizeSensorProps
 		TS.ISensorProps {}
 
 export interface IWindowSizeSensorState {
-	width: number;
-	height: number;
+	width: Util.Nullable<number>;
+	height: Util.Nullable<number>;
 }
 
 const defaultProps = Object.freeze<IWindowSizeSensorProps>({
@@ -18,8 +18,8 @@ const defaultProps = Object.freeze<IWindowSizeSensorProps>({
 });
 
 const defaultState = Object.freeze<IWindowSizeSensorState>({
-	width: window.innerWidth,
-	height: window.innerHeight,
+	width: Util.isBrowser() ? window.innerWidth : null,
+	height: Util.isBrowser() ? window.innerHeight : null,
 });
 
 export class WindowSizeSensor extends React.Component<
@@ -48,6 +48,12 @@ export class WindowSizeSensor extends React.Component<
 		this.unbindEvents();
 	}
 
+	public render() {
+		return Universal.render(this.props, this.state);
+	}
+
+	//
+
 	private bindEvents() {
 		window.addEventListener("resize", this.handleResize);
 	}
@@ -62,10 +68,6 @@ export class WindowSizeSensor extends React.Component<
 		}
 		this.setState({ width: window.innerWidth, height: window.innerHeight });
 	}, this.props.throttle);
-
-	public render() {
-		return Universal.render(this.props, this.state);
-	}
 }
 
 export const withWindowSizeSensor = Universal.createEnhancer(
@@ -73,5 +75,3 @@ export const withWindowSizeSensor = Universal.createEnhancer(
 	"sensors",
 	"windowSize",
 );
-
-// stub
