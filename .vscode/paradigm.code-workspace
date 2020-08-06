@@ -79,7 +79,8 @@
 		"peacock.color": "#eb5324",
 		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [
-			"gptl"
+			"gptl",
+			"paradigmjs"
 		]
 	}
 }
