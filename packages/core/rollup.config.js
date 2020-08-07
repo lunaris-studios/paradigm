@@ -1,7 +1,5 @@
 import alias from "@rollup/plugin-alias";
 import typescript from "rollup-plugin-typescript2";
-import url from "@rollup/plugin-url";
-import svgr from "@svgr/rollup";
 
 import pkg from "./package.json";
 
@@ -34,9 +32,5 @@ export default {
 		alias({
 			entries: [{ find: "~/*", replacement: "src/*" }],
 		}),
-		url({
-			include: ["**/*.png", "**/*.jpg", "**/*.gif", "**/*.otf"],
-		}),
-		svgr()
 	],
 };
