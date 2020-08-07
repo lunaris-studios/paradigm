@@ -42,7 +42,8 @@
 		"test:type-check": "tsc",
 		"test:jest": "jest",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
-		"verify": "npm-run-all compile -p dist test lint"
+		"verify": "npm-run-all compile -p dist test lint",
+		"update": "ncu --upgrade && npm install"
 	},
 	"dependencies": {
 		"@paradigmjs/icons": "^0.0.14",
@@ -99,6 +100,7 @@
 		"jest": "^26.0.1",
 		"jest-extended": "^0.11.5",
 		"jest-styled-components": "^7.0.2",
+		"npm-check-updates": "^7.0.3",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.0.5",
 		"react-docgen-typescript-loader": "^3.7.2",
