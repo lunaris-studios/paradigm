@@ -15,6 +15,7 @@
  */
 
 import * as React from "react";
+import * as Protocol from "@paradigmjs/protocol";
 
 import * as Util from "~/util";
 import * as Common from "~/common";
@@ -43,13 +44,13 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 
 	constructor(props: P, context?: any) {
 		super(props, context);
-		if (!Util.isNodeEnv(Common.NodeEnv.PRODUCTION)) {
+		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
 			this.validateProps(this.props);
 		}
 	}
 
 	public componentDidUpdate(_prevProps: P, _prevState: S, _snapshot?: SS) {
-		if (!Util.isNodeEnv(Common.NodeEnv.PRODUCTION)) {
+		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
 			this.validateProps(this.props);
 		}
 	}
