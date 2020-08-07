@@ -65,8 +65,8 @@
 			"titleBar.inactiveForeground": "#e7e7e799"
 		},
 		"peacock.remoteColor": "#eb5324",
+		"peacock.color": "#eb5324",
 		"todo-tree.tree.scanMode": "workspace",
-		"search.useGlobalIgnoreFiles": true,
 		"conventionalCommits.scopes": [
 			"core",
 			"docs",
@@ -74,9 +74,9 @@
 			"nine",
 			"protocol",
 			"scripts",
-			"sensors"
+			"sensors",
+			"util"
 		],
-		"peacock.color": "#eb5324",
 		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [
 			"gptl",
