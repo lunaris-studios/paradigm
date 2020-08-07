@@ -40,6 +40,7 @@ export abstract class AbstractPureComponent<
 
 	// Not bothering to remove entries when their timeouts finish because clearing invalid ID is a no-op
 	private timeoutIds: number[] = [];
+	private requestTimeoutIds: number[] = [];
 
 	constructor(props: P) {
 		super(props);
@@ -56,7 +57,10 @@ export abstract class AbstractPureComponent<
 
 	public componentWillUnmount() {
 		this.clearTimeouts();
+		this.clearRequestTimeouts();
 	}
+
+	//
 
 	/**
 	 * Set a timeout and remember its ID.
@@ -78,6 +82,28 @@ export abstract class AbstractPureComponent<
 				window.clearTimeout(timeoutId);
 			}
 			this.timeoutIds = [];
+		}
+	};
+
+	/**
+	 * Set a timeout driven by raf() and remember
+	 * its ID. All stored timeouts will be cleared when component unmounts.
+	 */
+	public setRequestTimeout(callback: any, timeout: number = 0) {
+		const handle = Util.requestTimeout(callback, timeout);
+		this.requestTimeoutIds.push(handle.id);
+		return () => Util.clearRequestTimeout(handle.id);
+	}
+
+	/**
+	 * Clear all known raf() timeouts.
+	 */
+	public clearRequestTimeouts = () => {
+		if (this.requestTimeoutIds.length > 0) {
+			for (const requestTimeoutId of this.requestTimeoutIds) {
+				Util.clearRequestTimeout(requestTimeoutId);
+			}
+			this.requestTimeoutIds = [];
 		}
 	};
 

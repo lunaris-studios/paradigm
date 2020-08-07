@@ -3,17 +3,17 @@ import * as Testing from "@testing-library/react";
 
 import * as Util from "~/util";
 
-import * as Component from "./abstract-component";
+import * as Component from "./abstract-pure-component";
 
 const TEST_TIMEOUT = 10;
 
-describe("AbstractComponent", () => {
-	interface IAbstractComponentWithTimeoutProps {}
+describe("AbstractPureComponent", () => {
+	interface IAbstractPureComponentWithTimeoutProps {}
 
-	class AbstractComponent extends Component.AbstractComponent<
-		IAbstractComponentWithTimeoutProps
+	class AbstractPureComponent extends Component.AbstractPureComponent<
+		IAbstractPureComponentWithTimeoutProps
 	> {
-		constructor(props: IAbstractComponentWithTimeoutProps) {
+		constructor(props: IAbstractPureComponentWithTimeoutProps) {
 			super(props);
 		}
 
@@ -23,24 +23,24 @@ describe("AbstractComponent", () => {
 	}
 
 	it("renders correctly", () => {
-		const { baseElement } = Testing.render(<AbstractComponent />);
+		const { baseElement } = Testing.render(<AbstractPureComponent />);
 		expect(baseElement).toMatchSnapshot();
 	});
 
-	interface IAbstractComponentWithTimeoutProps {}
-	interface IAbstractComponentWithTimeoutState {
+	interface IAbstractPureComponentWithTimeoutProps {}
+	interface IAbstractPureComponentWithTimeoutState {
 		flag: number;
 	}
 
-	class AbstractComponentWithTimeout extends Component.AbstractComponent<
-		IAbstractComponentWithTimeoutProps,
-		IAbstractComponentWithTimeoutState
+	class AbstractPureComponentWithTimeout extends Component.AbstractPureComponent<
+		IAbstractPureComponentWithTimeoutProps,
+		IAbstractPureComponentWithTimeoutState
 	> {
-		constructor(props: IAbstractComponentWithTimeoutProps) {
+		constructor(props: IAbstractPureComponentWithTimeoutProps) {
 			super(props);
 		}
 
-		public state: IAbstractComponentWithTimeoutState = { flag: 0 };
+		public state: IAbstractPureComponentWithTimeoutState = { flag: 0 };
 
 		public timeout = this.setTimeout(
 			() =>
@@ -62,7 +62,7 @@ describe("AbstractComponent", () => {
 	}
 
 	it("creates timeout", async () => {
-		const { getByTestId } = Testing.render(<AbstractComponentWithTimeout />);
+		const { getByTestId } = Testing.render(<AbstractPureComponentWithTimeout />);
 
 		expect(getByTestId("flag")).toHaveTextContent("0");
 
@@ -72,7 +72,7 @@ describe("AbstractComponent", () => {
 	});
 
 	it("active timeout can be cancelled", async () => {
-		const { getByTestId } = Testing.render(<AbstractComponentWithRAFTimeout />);
+		const { getByTestId } = Testing.render(<AbstractPureComponentWithRAFTimeout />);
 
 		expect(getByTestId("flag")).toHaveTextContent("0");
 
@@ -83,22 +83,22 @@ describe("AbstractComponent", () => {
 		expect(getByTestId("flag")).not.toHaveTextContent("1");
 	});
 
-	interface IAbstractComponentWithRAFTimeoutProps {}
-	interface IAbstractComponentWithRAFTimeoutState {
+	interface IAbstractPureComponentWithRAFTimeoutProps {}
+	interface IAbstractPureComponentWithRAFTimeoutState {
 		flag: number;
 	}
 
-	class AbstractComponentWithRAFTimeout extends Component.AbstractComponent<
-		IAbstractComponentWithRAFTimeoutProps,
-		IAbstractComponentWithRAFTimeoutState
+	class AbstractPureComponentWithRAFTimeout extends Component.AbstractPureComponent<
+		IAbstractPureComponentWithRAFTimeoutProps,
+		IAbstractPureComponentWithRAFTimeoutState
 	> {
-		constructor(props: IAbstractComponentWithRAFTimeoutProps) {
+		constructor(props: IAbstractPureComponentWithRAFTimeoutProps) {
 			super(props);
 
 			this.timeout = this.timeout.bind(this);
 		}
 
-		public state: IAbstractComponentWithRAFTimeoutState = { flag: 0 };
+		public state: IAbstractPureComponentWithRAFTimeoutState = { flag: 0 };
 
 		public timeout = this.setRequestTimeout(
 			() =>
@@ -120,7 +120,7 @@ describe("AbstractComponent", () => {
 	}
 
 	it("creates raf() timeout", async () => {
-		const { getByTestId } = Testing.render(<AbstractComponentWithRAFTimeout />);
+		const { getByTestId } = Testing.render(<AbstractPureComponentWithRAFTimeout />);
 
 		expect(getByTestId("flag")).toHaveTextContent("0");
 
@@ -130,7 +130,7 @@ describe("AbstractComponent", () => {
 	});
 
 	it("active raf() timeout can be cancelled", async () => {
-		const { getByTestId } = Testing.render(<AbstractComponentWithRAFTimeout />);
+		const { getByTestId } = Testing.render(<AbstractPureComponentWithRAFTimeout />);
 
 		expect(getByTestId("flag")).toHaveTextContent("0");
 
