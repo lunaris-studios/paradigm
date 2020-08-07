@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/util",
-	"version": "0.0.13",
+	"version": "0.0.14",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"main": "dist/index.js",
@@ -33,7 +33,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/protocol": "^0.0.13",
+		"@paradigmjs/protocol": "^0.0.14",
 		"@types/lodash-es": "^4.17.3",
 		"@types/raf": "^3.4.0",
 		"lodash-es": "^4.17.15",
