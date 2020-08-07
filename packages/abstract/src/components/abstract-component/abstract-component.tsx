@@ -1,6 +1,5 @@
 import * as React from "react";
 import * as Protocol from "@paradigmjs/protocol";
-import * as _Util from "@paradigmjs/util";
 
 import * as Util from "~/util";
 
@@ -91,7 +90,6 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 			this.requestTimeoutIds = [];
 		}
 	};
-
 
 	/**
 	 * Ensures that the props specified for a component are valid.
