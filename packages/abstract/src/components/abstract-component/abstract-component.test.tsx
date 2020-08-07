@@ -1,0 +1,131 @@
+import * as React from "react";
+import * as Testing from "@testing-library/react";
+
+import * as Util from "~/util";
+
+import * as Component from "./abstract-component";
+
+const TEST_TIMEOUT = 10;
+
+describe("AbstractComponent", () => {
+	interface IAbstractComponentWithTimeoutProps {}
+
+	class AbstractComponent extends Component.AbstractComponent<
+		IAbstractComponentWithTimeoutProps
+	> {
+		constructor(props: IAbstractComponentWithTimeoutProps) {
+			super(props);
+		}
+
+		public render() {
+			return <div />;
+		}
+	}
+
+	it("renders correctly", () => {
+		const { baseElement } = Testing.render(<AbstractComponent />);
+		expect(baseElement).toMatchSnapshot();
+	});
+
+	interface IAbstractComponentWithTimeoutProps {}
+	interface IAbstractComponentWithTimeoutState {
+		flag: number;
+	}
+
+	class AbstractComponentWithTimeout extends Component.AbstractComponent<
+		IAbstractComponentWithTimeoutProps,
+		IAbstractComponentWithTimeoutState
+	> {
+		constructor(props: IAbstractComponentWithTimeoutProps) {
+			super(props);
+		}
+
+		public state: IAbstractComponentWithTimeoutState = { flag: 0 };
+
+		public timeout = this.setTimeout(
+			() =>
+				this.setState({
+					flag: 1,
+				}),
+			TEST_TIMEOUT,
+		);
+
+		public render() {
+			const { flag } = this.state;
+			return (
+				<React.Fragment>
+					<span data-testid="flag">{flag}</span>
+					<span data-testid="timeout">{flag}</span>
+				</React.Fragment>
+			);
+		}
+	}
+
+	it("creates and destroys timeouts", async () => {
+		const { getByTestId } = Testing.render(<AbstractComponentWithTimeout />);
+
+		expect(getByTestId("flag")).toHaveTextContent("0");
+
+		await Testing.waitFor(() => {
+			expect(getByTestId("flag")).toHaveTextContent("1");
+		});
+	});
+
+	interface IAbstractComponentWithRAFTimeoutProps {}
+	interface IAbstractComponentWithRAFTimeoutState {
+		flag: number;
+	}
+
+	class AbstractComponentWithRAFTimeout extends Component.AbstractComponent<
+		IAbstractComponentWithRAFTimeoutProps,
+		IAbstractComponentWithRAFTimeoutState
+	> {
+		constructor(props: IAbstractComponentWithRAFTimeoutProps) {
+			super(props);
+
+			this.timeout = this.timeout.bind(this);
+		}
+
+		public state: IAbstractComponentWithRAFTimeoutState = { flag: 0 };
+
+		public timeout = this.setRequestTimeout(
+			() =>
+				this.setState({
+					flag: 1,
+				}),
+			TEST_TIMEOUT,
+		);
+
+		public render() {
+			const { flag } = this.state;
+			return (
+				<React.Fragment>
+					<span data-testid="flag">{flag}</span>
+					<span data-testid="timeout" onClick={this.timeout} />
+				</React.Fragment>
+			);
+		}
+	}
+
+	it("creates raf() timeout", async () => {
+		const { getByTestId } = Testing.render(<AbstractComponentWithRAFTimeout />);
+
+		expect(getByTestId("flag")).toHaveTextContent("0");
+
+		await Testing.waitFor(() => {
+			expect(getByTestId("flag")).toHaveTextContent("1");
+		});
+	});
+
+	it("active raf() timeout can be cancelled", async () => {
+		const { getByTestId } = Testing.render(<AbstractComponentWithRAFTimeout />);
+
+		expect(getByTestId("flag")).toHaveTextContent("0");
+
+		Testing.fireEvent.click(getByTestId("timeout"));
+
+		Util.wait(TEST_TIMEOUT);
+
+		expect(getByTestId("flag")).not.toHaveTextContent("1");
+	});
+});

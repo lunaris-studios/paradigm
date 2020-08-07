@@ -1,0 +1,75 @@
+{
+	"name": "@paradigmjs/abstract",
+	"version": "0.0.1",
+	"description": "Abstract React Components",
+	"license": "MIT",
+	"author": "Sam Craig <sam@lunaris.io>",
+	"main": "dist/index.js",
+	"module": "dist/index.es.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist"
+	],
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/abstract"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
+	"scripts": {
+		"clean": "run-p \"clean:*\"",
+		"clean:build": "rm -rf ./dist",
+		"clean:debug": "rm -rf ./npm-debug*",
+		"clean:modules": "rm -rf ./node_modules package-lock.json",
+		"compile": "run-p \"compile:*\"",
+		"compile:jest": "npm run test:jest -- --json --outputFile=./coverage/.jest-test-results.json",
+		"compile:rollup": "rollup -c",
+		"dev": "run-p \"dev:*\"",
+		"dev:jest": "npm run test:jest -- --watch",
+		"dev:rollup": "rollup -cw",
+		"dist": "run-s \"dist:*\"",
+		"dist:rollup": "rollup -c",
+		"lint": "run-p lint:es",
+		"lint:es": "es-lint",
+		"lint-fix": "es-lint --fix",
+		"start": "npm run dev",
+		"test": "run-s \"test:*\"",
+		"test:type-check": "tsc",
+		"test:jest": "jest",
+		"verify": "npm-run-all compile -p dist test lint",
+		"update": "ncu --upgrade && npm install"
+	},
+	"dependencies": {
+		"@paradigmjs/protocol": "^0.0.14",
+		"@paradigmjs/util": "^0.0.14",
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"devDependencies": {
+		"@rollup/plugin-alias": "^3.1.1",
+		"@rollup/plugin-typescript": "^5.0.2",
+		"@testing-library/jest-dom": "^5.11.2",
+		"@testing-library/react": "^10.4.8",
+		"@types/jest": "^26.0.9",
+		"@types/node": "^14.0.27",
+		"@types/react": "^16.9.44",
+		"@types/react-dom": "^16.9.8",
+		"@types/testing-library__jest-dom": "^5.9.2",
+		"eslint-config-react-app": "^5.2.1",
+		"jest": "^26.2.2",
+		"jest-extended": "^0.11.5",
+		"npm-check-updates": "^7.0.3",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.0.5",
+		"react-docgen-typescript-loader": "^3.7.2",
+		"rollup": "^2.23.0",
+		"rollup-plugin-typescript2": "^0.27.1",
+		"ts-jest": "^26.1.4",
+		"ttypescript": "^1.5.10",
+		"typescript": "3.9.7",
+		"typescript-transform-paths": "^2.0.0"
+	}
+}

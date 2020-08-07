@@ -5,6 +5,10 @@
 			"path": "../"
 		},
 		{
+			"name": "[ABSTRACT]",
+			"path": "../packages/abstract"
+		},
+		{
 			"name": "[CORE]",
 			"path": "../packages/core"
 		},
