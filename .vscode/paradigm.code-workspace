@@ -79,7 +79,8 @@
 			"protocol",
 			"scripts",
 			"sensors",
-			"util"
+			"util",
+			"abstract"
 		],
 		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [
