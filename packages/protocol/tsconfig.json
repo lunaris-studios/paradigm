@@ -1,11 +1,18 @@
 {
 	"extends": "../../config/tsconfig.base",
-	"include": ["src/**/*"],
-	"exclude": ["node_modules/**", "src/**/*.test.*"],
+	"include": [
+		"src/**/*"
+	],
+	"exclude": [
+		"./__tests__/*",
+		"./src/**/*.test.*",
+	],
 	"compilerOptions": {
-		"baseUrl": "src",
-    "paths": {
-      "~/*": ["*"]
-    }
+		"baseUrl": "./src",
+		"paths": {
+			"~/*": [
+				"*"
+			]
+		}
 	}
 }

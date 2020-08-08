@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as Protocol from "@paradigmjs/protocol";
-
-import * as Util from "~/util";
+import * as Util from "@paradigmjs/util";
 
 /**
  * An abstract component that Paradigm components can extend
@@ -33,13 +32,13 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 		}
 	}
 
-	public componentDidUpdate(_prevProps: P, _prevState: S, _snapshot?: SS) {
+	public componentDidUpdate = (_prevProps: P, _prevState: S, _snapshot?: SS) => {
 		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
 			this.validateProps(this.props);
 		}
 	}
 
-	public componentWillUnmount() {
+	public componentWillUnmount = () => {
 		this.clearTimeouts();
 		this.clearRequestTimeouts();
 	}
@@ -51,7 +50,7 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	 * All stored timeouts will be cleared when component unmounts.
 	 * @returns a "cancel" function that will clear timeout when invoked.
 	 */
-	public setTimeout(callback: () => void, timeout?: number) {
+	public setTimeout = (callback: () => void, timeout?: number) => {
 		const handle = window.setTimeout(callback, timeout);
 		this.timeoutIds.push(handle);
 		return () => window.clearTimeout(handle);
@@ -73,7 +72,7 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	 * Set a timeout driven by raf() and remember
 	 * its ID. All stored timeouts will be cleared when component unmounts.
 	 */
-	public setRequestTimeout(callback: any, timeout: number = 0) {
+	public setRequestTimeout = (callback: any, timeout: number = 0) => {
 		const handle = Util.requestTimeout(callback, timeout);
 		this.requestTimeoutIds.push(handle.id);
 		return () => Util.clearRequestTimeout(handle.id);
@@ -100,7 +99,7 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	 * [propTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation) feature.
 	 * Like propTypes, these runtime checks run only in development mode.
 	 */
-	protected validateProps(_props: P) {
+	protected validateProps = (_props: P) => {
 		// implement in subclass
 	}
 }

@@ -3,12 +3,12 @@
 	"include": [
 		"src/**/*"
 	],
+	"exclude": [
+		"./__tests__/*",
+		"./src/**/*.test.*",
+	],
 	"compilerOptions": {
-		"typeRoots": [
-			"./node_modules/@types",
-			"./src/ts/declarations"
-		],
-		"baseUrl": "src",
+		"baseUrl": "./src",
 		"paths": {
 			"~/*": [
 				"*"
