@@ -1,8 +1,8 @@
 import * as React from "react";
 import * as Universal from "@paradigmjs/universal";
-import * as Util from "@paradigmjs/util";
 
 import * as TS from "~/ts";
+import * as Util from "~/util";
 
 export interface IDeviceMotionSensorProps
 	extends Universal.UniversalProps<IDeviceMotionSensorState>,

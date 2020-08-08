@@ -23,5 +23,8 @@
 	},
 	"dependencies": {
 		"svgo": "^1.3.2"
+	},
+	"devDependencies": {
+		"@zerollup/ts-transform-paths": "^1.7.18"
 	}
 }
