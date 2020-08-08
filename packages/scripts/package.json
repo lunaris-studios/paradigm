@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/scripts",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"description": "Node.js build scripts for Paradigm packages",
 	"author": "Lunaris Studios",
 	"license": "MIT",

@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/abstract",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Abstract React Components",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -43,8 +43,8 @@
 		"update": "ncu --upgrade && npm install"
 	},
 	"dependencies": {
-		"@paradigmjs/protocol": "^0.0.14",
-		"@paradigmjs/util": "^0.0.14",
+		"@paradigmjs/protocol": "^0.0.15",
+		"@paradigmjs/util": "^0.0.15",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
 	},
