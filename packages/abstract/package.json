@@ -28,7 +28,7 @@
 		"compile:jest": "npm run test:jest -- --json --outputFile=./coverage/.jest-test-results.json",
 		"compile:rollup": "rollup -c",
 		"dev": "run-p \"dev:*\"",
-		"dev:jest": "npm run test:jest -- --watch",
+		"dev:jest": "npm run test:jest -- --watchAll",
 		"dev:rollup": "rollup -cw",
 		"dist": "run-s \"dist:*\"",
 		"dist:rollup": "rollup -c",
@@ -66,10 +66,10 @@
 		"prettier": "^2.0.5",
 		"react-docgen-typescript-loader": "^3.7.2",
 		"rollup": "^2.23.0",
-		"rollup-plugin-typescript2": "^0.27.1",
+		"rollup-plugin-typescript2": "^0.27.2",
 		"ts-jest": "^26.1.4",
 		"ttypescript": "^1.5.10",
-		"typescript": "3.9.7",
+		"typescript": "^3.9.7",
 		"typescript-transform-paths": "^2.0.0"
 	}
 }
