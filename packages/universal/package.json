@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/universal",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"description": "Paradigm Universal Rendering Utilities",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -43,7 +43,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/util": "^0.0.14",
+		"@paradigmjs/util": "^0.0.15",
 		"@popperjs/core": "^2.4.0",
 		"@svgr/webpack": "^5.4.0",
 		"jss": "^10.1.1",

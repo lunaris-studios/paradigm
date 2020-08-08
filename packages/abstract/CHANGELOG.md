@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.0.2 (2020-08-08)
+
+
+### Bug Fixes
+
+* added @zerorollup/ts-transform-paths to rollup for all packages ([a06f33c](https://github.com/lunaris-studios/paradigm/commit/a06f33c28213824948b812ee1367cdf87c9f569e))
+
+
+
+
+
 ## 0.0.13 (2020-08-06)
 
 

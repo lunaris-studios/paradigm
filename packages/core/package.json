@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/core",
-	"version": "0.0.14",
+	"version": "0.0.15",
 	"description": "Paradigm Core Component & Design System",
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
@@ -46,10 +46,10 @@
 		"update": "ncu --upgrade && npm install"
 	},
 	"dependencies": {
-		"@paradigmjs/icons": "^0.0.14",
-		"@paradigmjs/protocol": "^0.0.14",
-		"@paradigmjs/sensors": "^0.0.14",
-		"@paradigmjs/util": "^0.0.14",
+		"@paradigmjs/icons": "^0.0.15",
+		"@paradigmjs/protocol": "^0.0.15",
+		"@paradigmjs/sensors": "^0.0.15",
+		"@paradigmjs/util": "^0.0.15",
 		"@popperjs/core": "^2.4.0",
 		"@svgr/webpack": "^5.4.0",
 		"jss": "^10.1.1",
