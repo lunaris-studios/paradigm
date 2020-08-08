@@ -1,5 +1,6 @@
 import alias from "@rollup/plugin-alias";
-import typescript from "rollup-plugin-typescript2";
+import ttypescript from "ttypescript";
+import tsPlugin from "rollup-plugin-typescript2";
 
 import pkg from "./package.json";
 
@@ -22,9 +23,17 @@ export default {
 		...Object.keys(pkg.peerDependencies || {}),
 	],
 	plugins: [
-		typescript({
-			// Always use locally installed version of `typescript`
-			typescript: require("typescript"),
+		tsPlugin({
+			clean: true,
+			typescript: ttypescript,
+			tsconfigDefaults: {
+				compilerOptions: {
+					plugins: [
+						{ transform: "@zerollup/ts-transform-paths" },
+						{ transform: "@zerollup/ts-transform-paths", afterDeclarations: true },
+					],
+				},
+			},
 		}),
 		alias({
 			entries: [{ find: "~/*", replacement: "src/*" }],

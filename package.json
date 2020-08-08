@@ -19,6 +19,7 @@
 		"dev": "npm run dev:libs",
 		"dev:libs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{abstract,core,icons,gatsby-page-transition,nine,protocol,sensors,universal,util}\" --stream",
 		"dev:docs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{docs,sensors,universal,util}\" --stream",
+		"depcheck": "depcheck",
 		"dist": "run-s dist:libs dist:apps",
 		"dist:libs": "lerna run dist --scope \"@paradigmjs/{abstract,core,icons,gatsby,nine,protocol,scripts,sensors,universal,util}\"",
 		"dist:apps": "lerna run dist --scope \"@paradigmjs/{core,docs,protocol,sensors,universal}\"",
@@ -37,12 +38,9 @@
 		"verify": "npm-run-all -s compile dist:libs dist:apps -p test lint"
 	},
 	"devDependencies": {
-		"@graphql-codegen/cli": "^1.14.0",
-		"@graphql-codegen/typescript": "^1.15.4",
-		"@types/history": "^4.7.6",
 		"@typescript-eslint/eslint-plugin": "^3.0.1",
 		"@typescript-eslint/parser": "^3.0.1",
-		"babel-eslint": "10.1.0",
+		"depcheck": "^1.0.0",
 		"eslint": "7.1.0",
 		"eslint-config-react-app": "^5.2.1",
 		"eslint-plugin-flowtype": "5.1.0",
@@ -50,17 +48,8 @@
 		"eslint-plugin-jsx-a11y": "6.2.3",
 		"eslint-plugin-react": "7.20.0",
 		"eslint-plugin-react-hooks": "4.0.2",
-		"husky": "^4.2.5",
 		"lerna": "^3.22.0",
-		"lint-staged": "^10.2.6",
 		"npm-run-all": "^4.1.5",
-		"prettier": "^2.0.5",
-		"ts-jest": "^25.5.1",
-		"ts-loader": "^7.0.4",
-		"typescript-transform-paths": "^2.0.0"
-	},
-	"dependencies": {
-		"gatsby-plugin-typescript": "^2.4.6",
-		"graphql": "^15.1.0"
+		"prettier": "^2.0.5"
 	}
 }
