@@ -9,28 +9,25 @@ export default {
 		{
 			file: pkg.main,
 			format: "cjs",
+			sourcemap: true,
 		},
 		{
 			file: pkg.module,
 			format: "es",
+			sourcemap: true,
 		},
 	],
-	external: [...Object.keys(pkg.dependencies || {}), ...Object.keys(pkg.peerDependencies || {})],
+	external: [
+		...Object.keys(pkg.dependencies || {}),
+		...Object.keys(pkg.peerDependencies || {}),
+	],
 	plugins: [
 		typescript({
-			clean: true,
-			typescript: require("ttypescript"),
-			tsconfigDefaults: {
-				compilerOptions: {
-					plugins: [
-						{ transform: "typescript-transform-paths" },
-						{ transform: "typescript-transform-paths", afterDeclarations: true },
-					],
-				},
-			},
+			// Always use locally installed version of `typescript`
+			typescript: require("typescript"),
 		}),
 		alias({
 			entries: [{ find: "~/*", replacement: "src/*" }],
-		})
+		}),
 	],
 };
