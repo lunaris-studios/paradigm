@@ -11,10 +11,6 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	S,
 	SS
 > {
-	// unsafe lifecycle methods
-	public componentWillUpdate: never;
-	public componentWillReceiveProps: never;
-	public componentWillMount: never;
 	// this should be static, not an instance method
 	public getDerivedStateFromProps: never;
 
@@ -23,6 +19,7 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 
 	// Not bothering to remove entries when their timeouts finish because clearing invalid ID is a no-op
 	private timeoutIds: number[] = [];
+
 	private requestTimeoutIds: number[] = [];
 
 	constructor(props: P) {
@@ -36,12 +33,12 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
 			this.validateProps(this.props);
 		}
-	}
+	};
 
-	public componentWillUnmount = () => {
+	public componentWillUnmount = (): void => {
 		this.clearTimeouts();
 		this.clearRequestTimeouts();
-	}
+	};
 
 	//
 
@@ -50,20 +47,20 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	 * All stored timeouts will be cleared when component unmounts.
 	 * @returns a "cancel" function that will clear timeout when invoked.
 	 */
-	public setTimeout = (callback: () => void, timeout?: number) => {
+	public setTimeout = (callback: () => void, timeout = 0): Util.RequestFn => {
 		const handle = window.setTimeout(callback, timeout);
 		this.timeoutIds.push(handle);
-		return () => window.clearTimeout(handle);
-	}
+		return (): void => window.clearTimeout(handle);
+	};
 
 	/**
 	 * Clear all known timeouts.
 	 */
-	public clearTimeouts = () => {
+	public clearTimeouts = (): void => {
 		if (this.timeoutIds.length > 0) {
-			for (const timeoutId of this.timeoutIds) {
-				window.clearTimeout(timeoutId);
-			}
+			this.requestTimeoutIds.forEach((id) => {
+				Util.clearRequestTimeout(id);
+			});
 			this.timeoutIds = [];
 		}
 	};
@@ -72,20 +69,20 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	 * Set a timeout driven by raf() and remember
 	 * its ID. All stored timeouts will be cleared when component unmounts.
 	 */
-	public setRequestTimeout = (callback: any, timeout: number = 0) => {
+	public setRequestTimeout = (callback: Util.RequestFn, timeout = 0): Util.RequestFn => {
 		const handle = Util.requestTimeout(callback, timeout);
 		this.requestTimeoutIds.push(handle.id);
-		return () => Util.clearRequestTimeout(handle.id);
-	}
+		return (): void => Util.clearRequestTimeout(handle.id);
+	};
 
 	/**
 	 * Clear all known raf() timeouts.
 	 */
-	public clearRequestTimeouts = () => {
+	public clearRequestTimeouts = (): void => {
 		if (this.requestTimeoutIds.length > 0) {
-			for (const requestTimeoutId of this.requestTimeoutIds) {
-				Util.clearRequestTimeout(requestTimeoutId)
-			}
+			this.requestTimeoutIds.forEach((id) => {
+				Util.clearRequestTimeout(id);
+			});
 			this.requestTimeoutIds = [];
 		}
 	};
@@ -99,7 +96,7 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 	 * [propTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation) feature.
 	 * Like propTypes, these runtime checks run only in development mode.
 	 */
-	protected validateProps = (_props: P) => {
+	protected validateProps = (_props: P): void => {
 		// implement in subclass
-	}
+	};
 }

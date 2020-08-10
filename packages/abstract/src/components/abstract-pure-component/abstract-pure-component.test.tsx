@@ -17,7 +17,7 @@ describe("AbstractPureComponent", () => {
 			super(props);
 		}
 
-		public render() {
+		public render(): JSX.Element {
 			return <div />;
 		}
 	}
@@ -50,7 +50,7 @@ describe("AbstractPureComponent", () => {
 			TEST_TIMEOUT,
 		);
 
-		public render() {
+		public render(): JSX.Element {
 			const { flag } = this.state;
 			return (
 				<React.Fragment>
@@ -66,7 +66,7 @@ describe("AbstractPureComponent", () => {
 
 		expect(getByTestId("flag")).toHaveTextContent("0");
 
-		await Testing.waitFor(() => {
+		await Testing.waitFor((): void => {
 			expect(getByTestId("flag")).toHaveTextContent("1");
 		});
 	});
@@ -108,12 +108,18 @@ describe("AbstractPureComponent", () => {
 			TEST_TIMEOUT,
 		);
 
-		public render() {
+		public render(): JSX.Element {
 			const { flag } = this.state;
 			return (
 				<React.Fragment>
 					<span data-testid="flag">{flag}</span>
-					<span data-testid="timeout" onClick={this.timeout} />
+					<button
+						aria-label="timeout"
+						data-testid="timeout"
+						onClick={this.timeout}
+						onKeyDown={this.timeout}
+						type="button"
+					/>
 				</React.Fragment>
 			);
 		}
