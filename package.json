@@ -23,32 +23,30 @@
 		"dist": "run-s dist:libs dist:apps",
 		"dist:libs": "lerna run dist --scope \"@paradigmjs/{abstract,core,icons,gatsby,nine,protocol,scripts,sensors,universal,util}\"",
 		"dist:apps": "lerna run dist --scope \"@paradigmjs/{core,docs,protocol,sensors,universal}\"",
-		"format": "prettier --write \"./**/*.{ts,tsx}\"",
-		"format-check": "prettier --check \"./**/*.{ts,tsx}\"",
+		"format": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,md}\"",
+		"format-check": "prettier --check \"./**/*.{js,jsx,ts,tsx,json,md}\"",
 		"generate": "lerna run --parallel generate",
 		"link": "lerna link",
-		"lint": "lerna run --parallel lint",
-		"lint-fix": "lerna run --parallel lint-fix",
+		"lint": "eslint './packages/**/*.{js,jsx,ts,tsx}'",
+		"lint-fix": "npm run lint -- --fix",
 		"release": "lerna publish",
 		"run": "lerna run",
 		"start": "npm run start:core",
 		"start:core": "run-s bootstrap dev:core",
 		"start:docs": "run-s bootstrap dev:docs",
 		"test": "lerna run --parallel test",
-		"verify": "npm-run-all -s compile dist:libs dist:apps -p test lint"
+		"verify": "npm-run-all -s compile dist:libs dist:apps -p test lint",
+		"update": "ncu --upgrade && npm install"
 	},
 	"devDependencies": {
-		"@typescript-eslint/eslint-plugin": "^3.0.1",
-		"@typescript-eslint/parser": "^3.0.1",
-		"eslint": "7.1.0",
-		"eslint-config-react-app": "^5.2.1",
-		"eslint-plugin-flowtype": "5.1.0",
-		"eslint-plugin-import": "2.20.2",
-		"eslint-plugin-jsx-a11y": "6.2.3",
-		"eslint-plugin-react": "7.20.0",
-		"eslint-plugin-react-hooks": "4.0.2",
-		"lerna": "^3.22.0",
+		"husky": "^4.2.5",
+		"lerna": "^3.22.1",
+		"lint-staged": "^10.2.11",
+		"npm-check-updates": "^7.0.4",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.0.5"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,md}": "prettier --write"
 	}
 }
