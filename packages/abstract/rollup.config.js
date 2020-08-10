@@ -28,6 +28,7 @@ export default {
 			typescript: ttypescript,
 			tsconfigDefaults: {
 				compilerOptions: {
+					exclude: ["./__tests__/*", "./src/**/*.test.*"],
 					plugins: [
 						{ transform: "@zerollup/ts-transform-paths" },
 						{ transform: "@zerollup/ts-transform-paths", afterDeclarations: true },

@@ -1,9 +1,7 @@
 import * as React from "react";
 import * as Protocol from "@paradigmjs/protocol";
-import * as Util from "@paradigmjs/util";
-import * as _Util from "~/util";
 
-export const add = _Util.add;
+import * as Util from "~/util";
 
 /**
  * An abstract component that Paradigm components can extend
@@ -14,10 +12,6 @@ export abstract class AbstractPureComponent<
 	S = {},
 	SS = {}
 > extends React.PureComponent<P, S, SS> {
-	// unsafe lifecycle method
-	public componentWillUpdate: never;
-	public componentWillReceiveProps: never;
-	public componentWillMount: never;
 	// this should be static, not an instance method
 	public getDerivedStateFromProps: never;
 
@@ -26,6 +20,7 @@ export abstract class AbstractPureComponent<
 
 	// Not bothering to remove entries when their timeouts finish because clearing invalid ID is a no-op
 	private timeoutIds: number[] = [];
+
 	private requestTimeoutIds: number[] = [];
 
 	constructor(props: P) {
@@ -35,16 +30,16 @@ export abstract class AbstractPureComponent<
 		}
 	}
 
-	public componentDidUpdate = (_prevProps: P, _prevState: S, _snapshot?: SS) => {
+	public componentDidUpdate = (_prevProps: P, _prevState: S, _snapshot?: SS): void => {
 		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
 			this.validateProps(this.props);
 		}
-	}
+	};
 
-	public componentWillUnmount = () => {
+	public componentWillUnmount = (): void => {
 		this.clearTimeouts();
 		this.clearRequestTimeouts();
-	}
+	};
 
 	//
 
@@ -53,20 +48,20 @@ export abstract class AbstractPureComponent<
 	 * All stored timeouts will be cleared when component unmounts.
 	 * @returns a "cancel" function that will clear timeout when invoked.
 	 */
-	public setTimeout = (callback: () => void, timeout?: number) => {
+	public setTimeout = (callback: () => void, timeout = 0): Util.RequestFn => {
 		const handle = window.setTimeout(callback, timeout);
 		this.timeoutIds.push(handle);
-		return () => window.clearTimeout(handle);
-	}
+		return (): void => window.clearTimeout(handle);
+	};
 
 	/**
 	 * Clear all known timeouts.
 	 */
-	public clearTimeouts = () => {
+	public clearTimeouts = (): void => {
 		if (this.timeoutIds.length > 0) {
-			for (const timeoutId of this.timeoutIds) {
-				window.clearTimeout(timeoutId);
-			}
+			this.requestTimeoutIds.forEach((id) => {
+				Util.clearRequestTimeout(id);
+			});
 			this.timeoutIds = [];
 		}
 	};
@@ -75,20 +70,20 @@ export abstract class AbstractPureComponent<
 	 * Set a timeout driven by raf() and remember
 	 * its ID. All stored timeouts will be cleared when component unmounts.
 	 */
-	public setRequestTimeout = (callback: any, timeout: number = 0) => {
+	public setRequestTimeout = (callback: Util.RequestFn, timeout = 0): Util.RequestFn => {
 		const handle = Util.requestTimeout(callback, timeout);
 		this.requestTimeoutIds.push(handle.id);
-		return () => Util.clearRequestTimeout(handle.id);
-	}
+		return (): void => Util.clearRequestTimeout(handle.id);
+	};
 
 	/**
 	 * Clear all known raf() timeouts.
 	 */
-	public clearRequestTimeouts = () => {
+	public clearRequestTimeouts = (): void => {
 		if (this.requestTimeoutIds.length > 0) {
-			for (const requestTimeoutId of this.requestTimeoutIds) {
-				Util.clearRequestTimeout(requestTimeoutId);
-			}
+			this.requestTimeoutIds.forEach((id) => {
+				Util.clearRequestTimeout(id);
+			});
 			this.requestTimeoutIds = [];
 		}
 	};
@@ -102,7 +97,7 @@ export abstract class AbstractPureComponent<
 	 * [propTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation) feature.
 	 * Like propTypes, these runtime checks run only in development mode.
 	 */
-	protected validateProps = (_props: P) => {
+	protected validateProps = (_props: P): void => {
 		// implement in subclass
-	}
+	};
 }
