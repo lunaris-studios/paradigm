@@ -27,8 +27,8 @@
 		"format-check": "prettier --check \"./**/*.{js,jsx,ts,tsx,json,md}\"",
 		"generate": "lerna run --parallel generate",
 		"link": "lerna link",
-		"lint": "eslint './packages/**/*.{js,jsx,ts,tsx}'",
-		"lint-fix": "npm run lint -- --fix",
+		"lint": "lerna run --parallel ",
+		"lint-fix": "lerna run --parallel lint-fixed",
 		"release": "lerna publish",
 		"run": "lerna run",
 		"start": "npm run start:core",
@@ -39,6 +39,8 @@
 		"update": "ncu --upgrade && npm install"
 	},
 	"devDependencies": {
+		"eslint-config-airbnb-typescript": "^9.0.0",
+		"eslint-config-prettier": "^6.11.0",
 		"husky": "^4.2.5",
 		"lerna": "^3.22.1",
 		"lint-staged": "^10.2.11",
