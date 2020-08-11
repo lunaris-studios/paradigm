@@ -29,7 +29,7 @@ export abstract class AbstractComponent<P, S = {}, SS = {}> extends React.Compon
 		}
 	}
 
-	public componentDidUpdate = (_prevProps: P, _prevState: S, _snapshot?: SS) => {
+	public componentDidUpdate = (_prevProps: P, _prevState: S, _snapshot?: SS): void => {
 		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
 			this.validateProps(this.props);
 		}
