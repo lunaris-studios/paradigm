@@ -2,6 +2,11 @@
 	"name": "@paradigmjs/icons",
 	"version": "0.0.15",
 	"description": "Paradigm Icon Library",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/icons"
+	},
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"main": "dist/index.js",
@@ -10,15 +15,6 @@
 	"files": [
 		"dist"
 	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:lunaris-studios/paradigm.git",
-		"directory": "packages/icons"
-	},
-	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
 	"scripts": {
 		"clean": "run-p \"clean:*\"",
 		"clean:build": "rm -rf ./dist",
@@ -31,12 +27,13 @@
 		"dist": "run-s \"dist:*\"",
 		"dist:rollup": "rollup -c",
 		"lint": "run-p \"lint:*\"",
-		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"lint-fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
+		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"start": "npm run dev",
 		"test": "run-s test:type-check test:jest",
-		"test:type-check": "tsc",
 		"test:jest": "jest",
+		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"devDependencies": {
@@ -44,27 +41,17 @@
 		"@rollup/plugin-alias": "^3.1.1",
 		"@rollup/plugin-url": "^5.0.1",
 		"@svgr/rollup": "^5.4.0",
-		"@types/jest": "^26.0.9",
-		"@types/svgo": "^1.3.3",
-		"@zerollup/ts-transform-paths": "^1.7.18",
-		"jest": "^26.2.2",
-		"npm-run-all": "^4.1.5",
-		"rollup": "^2.23.0",
-		"rollup-plugin-typescript2": "^0.27.2",
-		"svgo": "^1.3.2",
-		"ts-jest": "^26.1.4",
-		"ts-node": "^8.10.1",
-		"ttypescript": "^1.5.10",
-		"typescript": "^3.9.7",
-		"typescript-transform-paths": "^1.1.14",
 		"@testing-library/jest-dom": "^5.11.2",
 		"@testing-library/react": "^10.4.8",
+		"@types/jest": "^26.0.9",
 		"@types/node": "^14.0.27",
 		"@types/react": "^16.9.44",
 		"@types/react-dom": "^16.9.8",
+		"@types/svgo": "^1.3.3",
 		"@types/testing-library__jest-dom": "^5.9.2",
 		"@typescript-eslint/eslint-plugin": "^2.34.0",
 		"@typescript-eslint/parser": "^2.34.0",
+		"@zerollup/ts-transform-paths": "^1.7.18",
 		"babel-eslint": "^10.1.0",
 		"eslint": "^7.2.0",
 		"eslint-config-airbnb": "^18.2.0",
@@ -81,8 +68,25 @@
 		"eslint-plugin-react": "^7.20.5",
 		"eslint-plugin-react-hooks": "^4.0.0",
 		"eslint-plugin-unicorn": "^21.0.0",
+		"jest": "^26.2.2",
 		"jest-extended": "^0.11.5",
 		"npm-check-updates": "^7.0.3",
-		"prettier": "^2.0.5"
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.0.5",
+		"rollup": "^2.23.0",
+		"rollup-plugin-typescript2": "^0.27.2",
+		"svgo": "^1.3.2",
+		"ts-jest": "^26.1.4",
+		"ts-node": "^8.10.1",
+		"ttypescript": "^1.5.10",
+		"typescript": "^3.9.7",
+		"typescript-transform-paths": "^1.1.14"
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
+	"dependencies": {
+		"npm-check-updates": "^7.1.0"
 	}
 }

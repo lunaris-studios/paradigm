@@ -59,12 +59,10 @@
 			"activityBarBadge.background": "#8af4a3",
 			"activityBarBadge.foreground": "#15202b",
 			"statusBar.background": "#eb5324",
-			"statusBar.border": "#eb5324",
 			"statusBar.foreground": "#e7e7e7",
 			"statusBarItem.hoverBackground": "#ef7853",
 			"titleBar.activeBackground": "#eb5324",
 			"titleBar.activeForeground": "#e7e7e7",
-			"titleBar.border": "#eb5324",
 			"titleBar.inactiveBackground": "#eb532499",
 			"titleBar.inactiveForeground": "#e7e7e799"
 		},
@@ -72,15 +70,19 @@
 		"peacock.color": "#eb5324",
 		"todo-tree.tree.scanMode": "workspace",
 		"conventionalCommits.scopes": [
+			"abstract",
+			"config",
 			"core",
+			"docker",
 			"docs",
 			"icons",
+			"k8s",
 			"nine",
+			"nix",
 			"protocol",
 			"scripts",
 			"sensors",
 			"util",
-			"abstract"
 		],
 		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [

@@ -1,6 +1,11 @@
 {
 	"name": "@paradigmjs/util",
 	"version": "0.0.15",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/util"
+	},
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"main": "dist/index.js",
@@ -23,13 +28,14 @@
 		"dist": "run-s \"dist:*\"",
 		"dist:rollup": "rollup -c",
 		"lint": "run-p \"lint:*\"",
-		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"lint-fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
+		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"start": "npm run dev",
 		"test": "run-s test:type-check test:jest",
-		"test:type-check": "tsc",
 		"test:jest": "jest --passWithNoTests",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
+		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
@@ -38,6 +44,7 @@
 		"@types/raf": "^3.4.0",
 		"@types/react-dom": "^16.9.8",
 		"lodash-es": "^4.17.15",
+		"npm-check-updates": "^7.1.0",
 		"raf": "^3.4.1",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
@@ -51,23 +58,11 @@
 		"@types/jest": "^26.0.9",
 		"@types/node": "^14.0.27",
 		"@types/react": "^16.9.44",
-		"@types/testing-library__jest-dom": "^5.9.2",
-		"@zerollup/ts-transform-paths": "^1.7.18",
-		"jest": "^26.2.2",
-		"jest-extended": "^0.11.5",
-		"npm-run-all": "^4.1.5",
-		"prettier": "^2.0.5",
-		"react-docgen-typescript-loader": "^3.7.2",
-		"rollup": "^2.23.0",
-		"rollup-plugin-typescript2": "^0.27.2",
-		"ts-jest": "^26.1.4",
-		"ts-loader": "^7.0.5",
-		"ttypescript": "^1.5.10",
-		"typescript": "^3.9.7",
-		"typescript-transform-paths": "^1.1.14",
 		"@types/react-dom": "^16.9.8",
+		"@types/testing-library__jest-dom": "^5.9.2",
 		"@typescript-eslint/eslint-plugin": "^2.34.0",
 		"@typescript-eslint/parser": "^2.34.0",
+		"@zerollup/ts-transform-paths": "^1.7.18",
 		"babel-eslint": "^10.1.0",
 		"eslint": "^7.2.0",
 		"eslint-config-airbnb": "^18.2.0",
@@ -84,15 +79,22 @@
 		"eslint-plugin-react": "^7.20.5",
 		"eslint-plugin-react-hooks": "^4.0.0",
 		"eslint-plugin-unicorn": "^21.0.0",
-		"npm-check-updates": "^7.0.3"
+		"jest": "^26.2.2",
+		"jest-extended": "^0.11.5",
+		"npm-check-updates": "^7.0.3",
+		"npm-run-all": "^4.1.5",
+		"prettier": "^2.0.5",
+		"react-docgen-typescript-loader": "^3.7.2",
+		"rollup": "^2.23.0",
+		"rollup-plugin-typescript2": "^0.27.2",
+		"ts-jest": "^26.1.4",
+		"ts-loader": "^7.0.5",
+		"ttypescript": "^1.5.10",
+		"typescript": "^3.9.7",
+		"typescript-transform-paths": "^1.1.14"
 	},
 	"publishConfig": {
 		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:lunaris-studios/paradigm.git",
-		"directory": "packages/util"
 	},
 	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e"
 }

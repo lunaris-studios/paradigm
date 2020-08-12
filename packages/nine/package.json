@@ -2,6 +2,11 @@
 	"name": "@paradigmjs/nine",
 	"version": "0.0.15",
 	"description": "React library to create 9-slice image surfaces",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/nine"
+	},
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"main": "dist/index.js",
@@ -10,15 +15,6 @@
 	"files": [
 		"dist"
 	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:lunaris-studios/paradigm.git",
-		"directory": "packages/nine"
-	},
-	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
 	"scripts": {
 		"clean": "run-p \"clean:*\"",
 		"clean:build": "rm -rf ./dist",
@@ -33,18 +29,20 @@
 		"dist": "run-s \"dist:*\"",
 		"dist:rollup": "rollup -c",
 		"lint": "run-p \"lint:*\"",
-		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"lint-fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
+		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"start": "npm run dev",
 		"test": "run-s test:type-check test:jest",
-		"test:type-check": "tsc",
 		"test:jest": "jest",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
+		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
 		"@paradigmjs/core": "^0.0.15",
 		"@paradigmjs/protocol": "^0.0.15",
+		"npm-check-updates": "^7.1.0",
 		"react": "^16.13.1",
 		"react-spring": "^9.0.0-rc.3",
 		"styled-components": "^5.1.1"
@@ -91,5 +89,9 @@
 	"peerDependencies": {
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
-	}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e"
 }
