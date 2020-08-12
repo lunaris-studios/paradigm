@@ -1,8 +1,5 @@
 {
 	"name": "paradigm",
-	"publishConfig": {
-		"registry": "https://registry.npmjs.org/"
-	},
 	"private": true,
 	"workspaces": {
 		"packages": [
@@ -12,17 +9,17 @@
 	"scripts": {
 		"bootstrap": "lerna bootstrap",
 		"bundle": "lerna run --parallel bundle",
-		"compile": "lerna run --parallel compile",
 		"clean": "run-s clean:packages clean:root",
 		"clean:packages": "lerna run --parallel clean",
 		"clean:root": "rm -rf ./*-debug* && rm -rf ./node_modules package-lock.json",
-		"dev": "npm run dev:libs",
-		"dev:libs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{abstract,core,icons,gatsby-page-transition,nine,protocol,sensors,universal,util}\" --stream",
-		"dev:docs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{docs,sensors,universal,util}\" --stream",
+		"compile": "lerna run --parallel compile",
 		"depcheck": "depcheck",
+		"dev": "npm run dev:libs",
+		"dev:docs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{docs,sensors,universal,util}\" --stream",
+		"dev:libs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{abstract,core,icons,gatsby-page-transition,nine,protocol,sensors,universal,util}\" --stream",
 		"dist": "run-s dist:libs dist:apps",
-		"dist:libs": "lerna run dist --scope \"@paradigmjs/{abstract,core,icons,gatsby,nine,protocol,scripts,sensors,universal,util}\"",
 		"dist:apps": "lerna run dist --scope \"@paradigmjs/{core,docs,protocol,sensors,universal}\"",
+		"dist:libs": "lerna run dist --scope \"@paradigmjs/{abstract,core,icons,gatsby,nine,protocol,scripts,sensors,universal,util}\"",
 		"format": "prettier --write \"./**/*.{js,jsx,ts,tsx,json,md}\"",
 		"format-check": "prettier --check \"./**/*.{js,jsx,ts,tsx,json,md}\"",
 		"generate": "lerna run --parallel generate",
@@ -31,12 +28,16 @@
 		"lint-fix": "lerna run --parallel lint-fixed",
 		"release": "lerna publish",
 		"run": "lerna run",
+		"sort": "sort-package-json \"./package.json\" \"./packages/*/package.json\"",
 		"start": "npm run start:core",
 		"start:core": "run-s bootstrap dev:core",
 		"start:docs": "run-s bootstrap dev:docs",
 		"test": "lerna run --parallel test",
-		"verify": "npm-run-all -s compile dist:libs dist:apps -p test lint",
-		"update": "ncu --upgrade && npm install"
+		"update": "ncu --upgrade && npm install",
+		"verify": "npm-run-all -s compile dist:libs dist:apps -p test lint"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,md}": "prettier --write"
 	},
 	"devDependencies": {
 		"eslint-config-airbnb-typescript": "^9.0.0",
@@ -46,9 +47,10 @@
 		"lint-staged": "^10.2.11",
 		"npm-check-updates": "^7.0.4",
 		"npm-run-all": "^4.1.5",
-		"prettier": "^2.0.5"
+		"prettier": "^2.0.5",
+		"sort-package-json": "^1.44.0"
 	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx,json,md}": "prettier --write"
+	"publishConfig": {
+		"registry": "https://registry.npmjs.org/"
 	}
 }

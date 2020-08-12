@@ -2,6 +2,11 @@
 	"name": "@paradigmjs/sensors",
 	"version": "0.0.15",
 	"description": "Paradigm Sensor Utilities",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/sensors"
+	},
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"main": "dist/index.js",
@@ -10,15 +15,6 @@
 	"files": [
 		"dist"
 	],
-	"publishConfig": {
-		"access": "public"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git@github.com:lunaris-studios/paradigm.git",
-		"directory": "packages/sensors"
-	},
-	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
 	"scripts": {
 		"clean": "run-p \"clean:*\"",
 		"clean:build": "rm -rf ./dist",
@@ -33,13 +29,13 @@
 		"dist": "run-s \"dist:*\"",
 		"dist:rollup": "rollup -c",
 		"lint": "run-p \"lint:*\"",
-		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"lint-fix": "eslint --fix './src/**/*.{js,jsx,ts,tsx}'",
+		"lint:es": "eslint './src/**/*.{js,jsx,ts,tsx}'",
 		"start": "npm run dev",
 		"test": "run-s test:type-check test:jest",
-		"test:type-check": "tsc",
 		"test:jest": "jest",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
+		"test:type-check": "tsc",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
@@ -92,18 +88,31 @@
 		"@typescript-eslint/eslint-plugin": "^2.34.0",
 		"@typescript-eslint/parser": "^2.34.0",
 		"@zerollup/ts-transform-paths": "^1.7.18",
+		"babel-eslint": "^10.1.0",
 		"babel-loader": "8.1.0",
 		"babel-plugin-styled-components": "^1.10.7",
 		"babel-preset-react-app": "^9.1.2",
 		"csstype": "^2.6.10",
+		"eslint": "^7.2.0",
+		"eslint-config-airbnb": "^18.2.0",
+		"eslint-config-airbnb-typescript": "^9.0.0",
+		"eslint-config-prettier": "^6.11.0",
 		"eslint-config-react-app": "^5.2.1",
+		"eslint-import-resolver-typescript": "^2.2.0",
+		"eslint-plugin-eslint-comments": "^3.2.0",
+		"eslint-plugin-flowtype": "^4.0.0",
 		"eslint-plugin-import": "^2.22.0",
+		"eslint-plugin-jest": "^23.20.0",
 		"eslint-plugin-jsx-a11y": "^6.3.1",
+		"eslint-plugin-prettier": "^3.1.4",
+		"eslint-plugin-promise": "^4.2.1",
 		"eslint-plugin-react": "^7.20.5",
 		"eslint-plugin-react-hooks": "^4.0.0",
+		"eslint-plugin-unicorn": "^21.0.0",
 		"jest": "^26.2.2",
 		"jest-extended": "^0.11.5",
 		"jest-styled-components": "^7.0.2",
+		"npm-check-updates": "^7.0.3",
 		"npm-run-all": "^4.1.5",
 		"prettier": "^2.0.5",
 		"react-docgen-typescript-loader": "^3.7.2",
@@ -115,23 +124,14 @@
 		"ttypescript": "^1.5.10",
 		"typescript": "^3.9.7",
 		"typescript-transform-paths": "^2.0.0",
-		"url-loader": "^4.1.0",
-		"babel-eslint": "^10.1.0",
-		"eslint": "^7.2.0",
-		"eslint-config-airbnb": "^18.2.0",
-		"eslint-config-airbnb-typescript": "^9.0.0",
-		"eslint-config-prettier": "^6.11.0",
-		"eslint-import-resolver-typescript": "^2.2.0",
-		"eslint-plugin-eslint-comments": "^3.2.0",
-		"eslint-plugin-flowtype": "^4.0.0",
-		"eslint-plugin-jest": "^23.20.0",
-		"eslint-plugin-prettier": "^3.1.4",
-		"eslint-plugin-promise": "^4.2.1",
-		"eslint-plugin-unicorn": "^21.0.0",
-		"npm-check-updates": "^7.0.3"
+		"url-loader": "^4.1.0"
 	},
 	"peerDependencies": {
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
-	}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e"
 }
