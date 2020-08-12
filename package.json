@@ -33,7 +33,9 @@
 		"start:core": "run-s bootstrap dev:core",
 		"start:docs": "run-s bootstrap dev:docs",
 		"test": "lerna run --parallel test",
-		"update": "ncu --upgrade && npm install",
+		"update": "run-s update:root update:packages",
+		"update:root": "ncu --upgrade && npm install",
+		"update:packages": "lerna run --parallel update",
 		"verify": "npm-run-all -s compile dist:libs dist:apps -p test lint"
 	},
 	"lint-staged": {
