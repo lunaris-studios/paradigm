@@ -41,6 +41,7 @@
 	"dependencies": {
 		"@paradigmjs/protocol": "^0.0.15",
 		"@paradigmjs/util": "^0.0.15",
+		"npm-check-updates": "^7.1.0",
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1"
 	},

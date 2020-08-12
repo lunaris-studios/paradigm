@@ -36,6 +36,7 @@
 		"test:jest": "jest",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
 		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
@@ -43,6 +44,7 @@
 		"@paradigmjs/universal": "^0.0.15",
 		"@paradigmjs/util": "^0.0.15",
 		"gatsby-plugin-transition-link": "^1.20.2",
+		"npm-check-updates": "^7.1.0",
 		"polished": "^3.6.3",
 		"react": "^16.13.1",
 		"react-helmet": "^6.0.0",

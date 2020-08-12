@@ -36,6 +36,7 @@
 		"test:jest": "jest",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
 		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
@@ -48,6 +49,7 @@
 		"hoist-non-react-statics": "^3.3.2",
 		"jss": "^10.1.1",
 		"lodash": "^4.17.15",
+		"npm-check-updates": "^7.1.0",
 		"polished": "^3.6.3",
 		"ramda": "^0.27.0",
 		"react": "^16.13.1",

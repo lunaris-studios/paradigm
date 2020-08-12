@@ -33,6 +33,7 @@
 		"test": "run-s test:type-check test:jest",
 		"test:jest": "jest",
 		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"devDependencies": {
@@ -84,5 +85,8 @@
 	"publishConfig": {
 		"access": "public"
 	},
-	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e"
+	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
+	"dependencies": {
+		"npm-check-updates": "^7.1.0"
+	}
 }

@@ -36,11 +36,13 @@
 		"test:jest": "jest",
 		"test:jest-generate-output": "jest --json --outputFile=./coverage/.jest-test-results.json || true",
 		"test:type-check": "tsc",
+		"update": "ncu --upgrade && npm install",
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
 		"@paradigmjs/core": "^0.0.15",
 		"@paradigmjs/protocol": "^0.0.15",
+		"npm-check-updates": "^7.1.0",
 		"react": "^16.13.1",
 		"react-spring": "^9.0.0-rc.3",
 		"styled-components": "^5.1.1"
