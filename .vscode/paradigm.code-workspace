@@ -70,15 +70,19 @@
 		"peacock.color": "#eb5324",
 		"todo-tree.tree.scanMode": "workspace",
 		"conventionalCommits.scopes": [
+			"abstract",
+			"config",
 			"core",
+			"docker",
 			"docs",
 			"icons",
+			"k8s",
 			"nine",
+			"nix",
 			"protocol",
 			"scripts",
 			"sensors",
 			"util",
-			"abstract"
 		],
 		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [
