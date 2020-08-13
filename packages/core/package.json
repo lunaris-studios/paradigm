@@ -42,6 +42,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
+		"@paradigmjs/abstract": "^0.0.2",
 		"@paradigmjs/icons": "^0.0.15",
 		"@paradigmjs/protocol": "^0.0.15",
 		"@paradigmjs/sensors": "^0.0.15",
