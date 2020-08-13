@@ -11,13 +11,7 @@
 		"prettier/react",
 		"prettier/@typescript-eslint"
 	],
-	"plugins": [
-		"@typescript-eslint",
-		"eslint-comments",
-		"jest",
-		"promise",
-		"unicorn"
-	],
+	"plugins": ["@typescript-eslint", "eslint-comments", "jest", "promise", "unicorn"],
 	"settings": {
 		"import/resolver": {
 			"typescript": {}
@@ -30,29 +24,33 @@
 		"jest": true
 	},
 	"ignorePatterns": [
-    "node_modules",
-    "dist",
-    "lib",
-    "fixtures",
-    "coverage",
-    "__snapshots__",
-    "generated"
-  ],
+		"node_modules",
+		"dist",
+		"lib",
+		"fixtures",
+		"coverage",
+		"__snapshots__",
+		"generated"
+	],
 	"rules": {
-		"@typescript-eslint/interface-name-prefix": [
+		"@typescript-eslint/naming-convetions": [
 			"warn",
 			{
-				"prefixWithI": "always"
+				"selector": "typeParameter",
+				"format": ["StrictPascalCase"],
+				"prefix": ["T"]
+			},
+			{
+				"selector": "interface",
+				"format": ["StrictPascalCase"],
+				"prefix": ["I"]
 			}
 		],
 		"@typescript-eslint/no-empty-interface": "off",
 		"@typescript-eslint/no-useless-constructor": "off",
 		"max-classes-per-file": "off",
 		// Always prefer explicit implementations
-		"react/jsx-fragments": [
-			"warn",
-			"element"
-		],
+		"react/jsx-fragments": ["warn", "element"],
 		"react/static-property-placement": [
 			"warn",
 			"property assignment",
