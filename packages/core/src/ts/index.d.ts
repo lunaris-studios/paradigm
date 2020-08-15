@@ -1,3 +1,7 @@
+/**
+ * Fonts
+ */
+
 declare module "*.woff2" {
 	const src: string;
 	export default src;
@@ -19,6 +23,22 @@ declare module "*.ttf" {
 }
 
 declare module "*.otf" {
+	const src: string;
+	export default src;
+}
+
+/**
+ * Images
+ */
+
+declare module "*.svg" {
+	const src: string;
+	const ReactComponent: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
+	export { ReactComponent };
+	export default src;
+}
+
+declare module "*.png" {
 	const src: string;
 	export default src;
 }

@@ -1,11 +1,11 @@
+import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
 
 import * as Common from "~/common";
-import * as Components from "~/components";
 import * as Util from "~/util";
 
-import * as Styled from "./spinner.styled";
 import * as Errors from "./spinner.errors";
+import * as Styled from "./spinner.styled";
 
 // see http://stackoverflow.com/a/18473154/3124288 for calculating arc path
 const R = 45;
@@ -63,10 +63,10 @@ const defaultProps = Object.freeze<ISpinnerProps>({
 	value: 0.25,
 });
 
-export class Spinner extends Components.AbstractPureComponent<ISpinnerProps, {}> {
+export class Spinner extends Abstract.AbstractPureComponent<ISpinnerProps> {
 	public static displayName = `${Common.DISPLAYNAME_PREFIX}.Spinner`;
 
-	static readonly defaultProps: ISpinnerProps = defaultProps;
+	public static readonly defaultProps: ISpinnerProps = defaultProps;
 
 	public static Styled = Styled;
 	public static Errors = Errors;
@@ -75,14 +75,14 @@ export class Spinner extends Components.AbstractPureComponent<ISpinnerProps, {}>
 	public static readonly SIZE_STANDARD = SpinnerSize.SIZE_STANDARD;
 	public static readonly SIZE_LARGE = SpinnerSize.SIZE_LARGE;
 
-	public componentDidUpdate(prevProps: ISpinnerProps) {
+	public componentDidUpdate = (prevProps: ISpinnerProps): void => {
 		if (prevProps.value !== this.props.value) {
 			// IE/Edge: re-render after changing value to force SVG update
 			this.forceUpdate();
 		}
-	}
+	};
 
-	public render() {
+	public render(): JSX.Element {
 		const { intent, value, tagName } = this.props;
 		const size = this.getSize();
 
@@ -92,9 +92,9 @@ export class Spinner extends Components.AbstractPureComponent<ISpinnerProps, {}>
 			(STROKE_WIDTH * Spinner.SIZE_LARGE) / size,
 		);
 		const strokeOffset =
-			PATH_LENGTH - PATH_LENGTH * (value == null ? 0.25 : Util.clamp(value, 0, 1));
+			PATH_LENGTH - PATH_LENGTH * (value === null ? 0.25 : Util.clamp(value, 0, 1));
 
-		const isSpinning = Boolean(value != null);
+		const isSpinning = Boolean(value !== null);
 
 		// multiple DOM elements around SVG are necessary to properly isolate animation:
 		// - SVG elements in IE do not support anim/trans so they must be set on a parent HTML element.
@@ -122,30 +122,35 @@ export class Spinner extends Components.AbstractPureComponent<ISpinnerProps, {}>
 		);
 	}
 
-	protected validateProps(props: ISpinnerProps) {
+	//
+
+	protected validateProps = (props: ISpinnerProps): void => {
 		const { value } = props;
 		if (value > 1 || value < 0) {
+			/* eslint no-console: "off" */
 			console.warn(Errors.SPINNER_WARN_VALUE_OUT_OF_BOUNDS);
 		}
-	}
+	};
 
 	/**
 	 * Resolve size to a pixel value.
 	 * Size can be set by props, default, or minimum constant.
 	 */
-	private getSize() {
+	private getSize = (): number => {
 		const { size } = this.props;
-		if (size == null) {
+		if (size === null) {
 			return Spinner.SIZE_STANDARD;
 		}
 		return Math.max(MIN_SIZE, size);
-	}
+	};
 
-	/** Compute viewbox such that stroked track sits exactly at edge of image frame. */
-	private getViewBox(strokeWidth: number) {
+	/**
+	 * Compute viewbox such that stroked track sits exactly at edge of image frame.
+	 */
+	private getViewBox = (strokeWidth: number): string => {
 		const radius = R + strokeWidth / 2;
 		const viewBoxX = (50 - radius).toFixed(2);
 		const viewBoxWidth = (radius * 2).toFixed(2);
 		return `${viewBoxX} ${viewBoxX} ${viewBoxWidth} ${viewBoxWidth}`;
-	}
+	};
 }
