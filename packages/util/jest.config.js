@@ -7,7 +7,7 @@ module.exports = {
 		".+\\.svg$": "<rootDir>/mocks/svg-mock.tsx",
 		".+\\.((s)css|less)$": "<rootDir>/mocks/style-mock.js",
 		".+\\.(jpg|jpeg|png|gif|eot|otf|webp|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-			"<rootDir>/mocks/file-transformer.js",
+			"<rootDir>/mocks/file-mock.js",
 		"^~/(.*)$": "<rootDir>/src/$1",
 	},
 	moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],

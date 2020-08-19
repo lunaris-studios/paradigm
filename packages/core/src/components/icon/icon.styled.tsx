@@ -1,11 +1,9 @@
 import * as React from "react";
 import * as SC from "styled-components";
-
-import * as Common from "~/common";
-import * as Components from "~/components";
-
 // re-import `styled-components` development mode DOM classnames.
 import styled, { css } from "styled-components";
+
+import * as Util from "~/util";
 
 /**
  * Table of Contents
@@ -21,15 +19,10 @@ import styled, { css } from "styled-components";
  */
 
 interface Icon {
-	Container: SC.StyledComponent<
-		"div",
-		any,
-		IIconContainerAttrs,
-		keyof IIconContainerAttrs
-	>;
+	Container: Util.StyledComponent<"div", IIconContainerAttrs>;
 
-	SVG: SC.StyledComponent<"svg", any, IIconSVGAttrs, keyof IIconSVGAttrs>;
-	Title: SC.StyledComponent<"desc", any, IIconTitleAttrs, keyof IIconTitleAttrs>;
+	SVG: Util.StyledComponent<"svg", IIconSVGAttrs>;
+	Title: Util.StyledComponent<"desc", IIconTitleAttrs>;
 }
 
 export const Icon = {} as Icon;

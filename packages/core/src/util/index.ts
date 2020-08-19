@@ -1,1 +1,1 @@
-export * from "@paradigmjs/util"
+export * from "@paradigmjs/util";

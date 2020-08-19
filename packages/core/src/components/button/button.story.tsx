@@ -1,16 +1,17 @@
+import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
-import * as Knobs from "@storybook/addon-knobs";
-import * as Actions from "@storybook/addon-actions";
+import * as SR from "@storybook/react";
 
-import { TestButton } from "./button";
+import * as Component from "./button";
+
+const Template: SR.Story<Component.IButtonProps> = (args) => (
+	<Component.Button {...args} />
+);
+
+export const Basic = Template.bind({});
+Basic.args = {};
 
 export default {
 	title: "Button",
-	component: TestButton,
-	decorators: [Knobs.withKnobs],
-};
-
-export const interactive = () => {
-	const label = Knobs.text("Label", "Quit");
-	return <TestButton onClick={Actions.action("TestButton")} text={label} />;
-};
+	component: Component.Button,
+} as SR.Meta;

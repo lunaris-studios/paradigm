@@ -1,11 +1,11 @@
-import * as T from "typography";
+import { TypographyOptions } from "typography";
 
 import * as Constants from "~/constants";
 
 /**
- * Default typography theme for Neptune.
+ * Default typography theme for Paradigm.
  */
-export const Typography = Object.freeze<T.TypographyOptions>({
+export const Typography = Object.freeze<TypographyOptions>({
 	baseFontSize: "21px",
 	baseLineHeight: 1.5,
 	headerFontFamily: ["Rosario", "sans-serif"],

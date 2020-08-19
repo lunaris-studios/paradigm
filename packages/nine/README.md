@@ -1,6 +1,6 @@
-# [Neptune](http://neptune.lunaris.io/) 9-Slice Component
+# [Paradigm](http://Paradigm.lunaris.io/) 9-Slice Component
 
-Neptune is a React UI toolkit for the web.
+Paradigm is a React UI toolkit for the web.
 
 This package provides a React component to generate completely dynamic [9-slice](http://rwillustrator.blogspot.com/2007/04/understanding-9-slice-scaling.html) surfaces.
 
@@ -27,4 +27,4 @@ class MyComponent extends React.Component {
 }
 ```
 
-### [9-Slice Documentation](http://neptune.lunaris.io/docs/#table) | [Full Documentation](http://neptune.lunaris.io/docs) | [Source Code](https://github.com/lunaris-studios/neptune)
+### [9-Slice Documentation](http://Paradigm.lunaris.io/docs/#table) | [Full Documentation](http://Paradigm.lunaris.io/docs) | [Source Code](https://github.com/lunaris-studios/Paradigm)

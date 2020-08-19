@@ -12,6 +12,6 @@ export const Basic = Template.bind({});
 Basic.args = {};
 
 export default {
-	title: "Example/Spinner",
+	title: "Spinner",
 	component: Component.Spinner,
 } as SR.Meta;

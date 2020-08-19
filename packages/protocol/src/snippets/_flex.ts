@@ -3,9 +3,9 @@ import { css } from "styled-components";
 
 /** */
 export function flex(
-	flexDirection: CSS.FlexDirectionProperty = "row",
-	justifyContent: CSS.JustifyContentProperty = "center",
-	alignItems: CSS.AlignItemsProperty = "center",
+	flexDirection: CSS.Property.FlexDirection = "row",
+	justifyContent: CSS.Property.JustifyContent = "center",
+	alignItems: CSS.Property.AlignItems = "center",
 ) {
 	return css`
 		display: flex;

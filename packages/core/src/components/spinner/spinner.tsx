@@ -8,24 +8,29 @@ import * as Errors from "./spinner.errors";
 import * as Styled from "./spinner.styled";
 
 // see http://stackoverflow.com/a/18473154/3124288 for calculating arc path
-const R = 45;
-const SPINNER_TRACK = `M 50,50 m 0,-${R} a ${R},${R} 0 1 1 0,${
+export const R = 45;
+export const SPINNER_TRACK = `M 50,50 m 0,-${R} a ${R},${R} 0 1 1 0,${
 	R * 2
 } a ${R},${R} 0 1 1 0,-${R * 2}`;
 
 // unitless total length of SVG path, to which stroke-dash* properties are relative.
 // https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/pathLength
 // this value is the result of `<path d={SPINNER_TRACK} />.getTotalLength()` and works in all browsers:
-const PATH_LENGTH = 280;
+export const PATH_LENGTH = 280;
 
-const MIN_SIZE = 10;
-const STROKE_WIDTH = 4;
-const MIN_STROKE_WIDTH = 16;
+export const MIN_SIZE = 10;
+export const STROKE_WIDTH = 4;
+export const MIN_STROKE_WIDTH = 16;
 
 export enum SpinnerSize {
 	SIZE_SMALL = 20,
 	SIZE_STANDARD = 50,
 	SIZE_LARGE = 100,
+}
+
+export enum SpinnerValueClamp {
+	MIN = 0,
+	MAX = 1,
 }
 
 export interface ISpinnerProps extends Common.IProps, Common.IIntentProps {
@@ -75,12 +80,12 @@ export class Spinner extends Abstract.AbstractPureComponent<ISpinnerProps> {
 	public static readonly SIZE_STANDARD = SpinnerSize.SIZE_STANDARD;
 	public static readonly SIZE_LARGE = SpinnerSize.SIZE_LARGE;
 
-	public componentDidUpdate = (prevProps: ISpinnerProps): void => {
+	public componentDidUpdate(prevProps: ISpinnerProps): void {
 		if (prevProps.value !== this.props.value) {
 			// IE/Edge: re-render after changing value to force SVG update
 			this.forceUpdate();
 		}
-	};
+	}
 
 	public render(): JSX.Element {
 		const { intent, value, tagName } = this.props;
@@ -92,7 +97,11 @@ export class Spinner extends Abstract.AbstractPureComponent<ISpinnerProps> {
 			(STROKE_WIDTH * Spinner.SIZE_LARGE) / size,
 		);
 		const strokeOffset =
-			PATH_LENGTH - PATH_LENGTH * (value === null ? 0.25 : Util.clamp(value, 0, 1));
+			PATH_LENGTH -
+			PATH_LENGTH *
+				(value === null
+					? 0.25
+					: Util.clamp(value, SpinnerValueClamp.MIN, SpinnerValueClamp.MAX));
 
 		const isSpinning = Boolean(value !== null);
 
@@ -124,33 +133,33 @@ export class Spinner extends Abstract.AbstractPureComponent<ISpinnerProps> {
 
 	//
 
-	protected validateProps = (props: ISpinnerProps): void => {
+	protected validateProps(props: ISpinnerProps): void {
 		const { value } = props;
 		if (value > 1 || value < 0) {
 			/* eslint no-console: "off" */
-			console.warn(Errors.SPINNER_WARN_VALUE_OUT_OF_BOUNDS);
+			// console.warn(Errors.SPINNER_WARN_VALUE_OUT_OF_BOUNDS);
 		}
-	};
+	}
 
 	/**
 	 * Resolve size to a pixel value.
 	 * Size can be set by props, default, or minimum constant.
 	 */
-	private getSize = (): number => {
+	private getSize(): number {
 		const { size } = this.props;
 		if (size === null) {
 			return Spinner.SIZE_STANDARD;
 		}
 		return Math.max(MIN_SIZE, size);
-	};
+	}
 
 	/**
 	 * Compute viewbox such that stroked track sits exactly at edge of image frame.
 	 */
-	private getViewBox = (strokeWidth: number): string => {
+	private getViewBox(strokeWidth: number): string {
 		const radius = R + strokeWidth / 2;
 		const viewBoxX = (50 - radius).toFixed(2);
 		const viewBoxWidth = (radius * 2).toFixed(2);
 		return `${viewBoxX} ${viewBoxX} ${viewBoxWidth} ${viewBoxWidth}`;
-	};
+	}
 }

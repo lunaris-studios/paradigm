@@ -1,3 +1,4 @@
+import * as Icon from "@paradigmjs/icons";
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 
@@ -20,7 +21,7 @@ export type HTMLInputProps = React.InputHTMLAttributes<HTMLInputElement>;
  *
  * In React, `boolean`, `null`, and `undefined` do not produce any output.
  */
-export type MaybeElement = JSX.Element | false | null | undefined;
+export type MaybeElement = JSX.Element | false | undefined;
 
 /**
  * A shared base interface for all Blueprint component props.
@@ -49,10 +50,10 @@ export interface IActionProps extends IIntentProps, IProps {
 	disabled?: boolean;
 
 	/** Name of a Blueprint UI icon (or an icon element) to render before the text. */
-	// icon?: IconName | MaybeElement;
+	icon?: Icon.IconName | MaybeElement;
 
 	/** Click event handler. */
-	onClick?: Nullable<(event: React.MouseEvent<HTMLElement>) => void>;
+	onClick?: React.MouseEventHandler<HTMLElement>;
 
 	/** Action text. Can be any single React renderable. */
 	text?: React.ReactNode;

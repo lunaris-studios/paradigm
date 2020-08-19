@@ -33,7 +33,7 @@
 		"generated"
 	],
 	"rules": {
-		"@typescript-eslint/naming-convetions": [
+		"@typescript-eslint/naming-convention": [
 			"warn",
 			{
 				"selector": "typeParameter",
@@ -77,12 +77,18 @@
 				"variables": true
 			}
 		],
-		// Makes no sense to allow type inferrence for expression parameters, but require typing the response
 		"@typescript-eslint/explicit-function-return-type": [
 			"error",
 			{
 				"allowExpressions": true,
+				"allowHigherOrderFunctions": true,
 				"allowTypedFunctionExpressions": true
+			}
+		],
+		"@typescript-eslint/explicit-module-boundary-types": [
+			"error",
+			{
+				"allowHigherOrderFunctions": true
 			}
 		],
 		"@typescript-eslint/no-use-before-define": [
@@ -95,6 +101,22 @@
 			}
 		],
 		// Common abbreviations are known and readable
-		"unicorn/prevent-abbreviations": "off"
+		"unicorn/prevent-abbreviations": "off",
+		// ALlow co-located class members for improved readability
+		"@typescript-eslint/lines-between-class-members": "off",
+		// Allow imports of `devDependencies` in test & declaration files
+		"import/no-extraneous-dependencies": [
+			"error",
+			{
+				"devDependencies": ["**/*.test.ts", "**/*.test.tsx", "**/*.d.ts"]
+			}
+		],
+		"react/jsx-props-no-spreading": "warn",
+		"@typescript-eslint/ban-types": [
+			"error",
+			{
+				"object": false
+			}
+		]
 	}
 }

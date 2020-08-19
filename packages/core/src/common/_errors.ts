@@ -1,8 +1,7 @@
 import { DISPLAYNAME_PREFIX } from "./_props";
-import { create } from "lodash";
 
 function createErrorMessage(message: string): string {
-	return "${DISPLAYNAME_PREFIX} | ${message}";
+	return `${DISPLAYNAME_PREFIX} | ${message}`;
 }
 
 // TODO(sam): alphabetize errors.

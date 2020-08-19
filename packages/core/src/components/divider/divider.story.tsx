@@ -1,40 +1,17 @@
+import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
-import * as Knobs from "@storybook/addon-knobs";
-import * as Actions from "@storybook/addon-actions";
+import * as SR from "@storybook/react";
 
-import { Divider } from "./divider";
+import * as Component from "./divider";
+
+const Template: SR.Story<Component.IDividerProps> = (args) => (
+	<Component.Divider {...args} />
+);
+
+export const Basic = Template.bind({});
+Basic.args = {};
 
 export default {
 	title: "Divider",
-	component: Divider,
-	decorators: [Knobs.withKnobs],
-};
-
-export const interactive = () => {
-	return <Divider />;
-};
-interactive.story = {
-	parameters: {
-		jest: ["divider.test.tsx"],
-	},
-};
-
-export const Vertical = () => {
-	return (
-		<div style={{ display: "flex", justifyContent: "column" }}>
-			<div />
-			<Divider />
-			<div />
-		</div>
-	);
-};
-
-export const Horizontal = () => {
-	return (
-		<div style={{ display: "flex", justifyContent: "row" }}>
-			<div />
-			<Divider />
-			<div />
-		</div>
-	);
-};
+	component: Component.Divider,
+} as SR.Meta;

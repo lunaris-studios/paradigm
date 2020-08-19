@@ -1,5 +1,4 @@
 import * as React from "react";
-import * as Util from "@paradigmjs/util";
 import { default as hoistNonReactStatics } from "hoist-non-react-statics";
 
 /**

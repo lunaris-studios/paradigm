@@ -1,8 +1,7 @@
-// const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const path = require("path");
 
 module.exports = {
-	stories: ["../src/**/*.stories.(mdx|tsx)"],
+	stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
 	addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
 	typescript: {
 		check: false,
@@ -16,7 +15,14 @@ module.exports = {
 	},
 	webpackFinal: async (config) => {
 		config.resolve.alias = {
+			...config.resolve.alias,
 			"~": path.resolve(__dirname, "..", "src"),
+			// https://github.com/storybookjs/storybook/issues/6204#issuecomment-478992364
+			"core-js/modules": path.resolve(
+				__dirname,
+				"..",
+				"node_modules/@storybook/core/node_modules/core-js/modules",
+			),
 		};
 		return config;
 	},

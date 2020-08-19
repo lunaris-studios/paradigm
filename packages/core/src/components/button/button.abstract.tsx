@@ -1,6 +1,8 @@
+import * as Abstract from "@paradigmjs/abstract";
 import * as Icons from "@paradigmjs/icons";
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
+import * as Spring from "react-spring";
 
 import * as Common from "~/common";
 import * as Components from "~/components";
@@ -8,7 +10,7 @@ import * as Util from "~/util";
 
 import * as Styled from "./button.styled";
 
-export interface IButtonProps extends Common.IActionProps {
+export interface IAbstractButtonProps extends Common.IActionProps {
 	/**
 	 * If set to `true`, the button will display in an active state.
 	 * This is equivalent to setting `className={Classes.ACTIVE}`.
@@ -28,7 +30,7 @@ export interface IButtonProps extends Common.IActionProps {
 	/**
 	 * A ref handler that receives the native HTML element backing this component.
 	 */
-	elementRef?: (ref: Nullable<HTMLElement | null>) => any;
+	elementRef?: (ref: HTMLElement | null) => any;
 
 	/**
 	 * Whether this button should expand to fill its container.
@@ -37,7 +39,7 @@ export interface IButtonProps extends Common.IActionProps {
 	fill: boolean;
 
 	/**
-	 * Name of a Neptune UI icon (or an icon element) to render before the text.
+	 * Name of a Paradigm UI icon (or an icon element) to render before the text.
 	 */
 	icon?: Icons.IconName | Common.MaybeElement;
 
@@ -67,7 +69,7 @@ export interface IButtonProps extends Common.IActionProps {
 	outlined: boolean;
 
 	/**
-	 * Name of a Neptune UI icon (or an icon element) to render after the text.
+	 * Name of a Paradigm UI icon (or an icon element) to render after the text.
 	 */
 	rightIcon?: Icons.IconName | Common.MaybeElement;
 
@@ -85,11 +87,15 @@ export interface IButtonProps extends Common.IActionProps {
 	type: "submit" | "reset" | "button";
 }
 
-export interface IButtonState {
+export interface IAbstractButtonState {
 	isActive: boolean;
 }
 
-const defaultProps = Object.freeze<IButtonProps>({
+export interface IAbstractButtonRefHandlers {
+	button: React.Ref<any>;
+}
+
+const defaultProps = Object.freeze<IAbstractButtonProps>({
 	active: false,
 	alignText: Protocol.Alignment.CENTER,
 	disabled: false,
@@ -103,22 +109,30 @@ const defaultProps = Object.freeze<IButtonProps>({
 	type: "button",
 });
 
-export const defaultState = Object.freeze<IButtonState>({
+export const defaultState = Object.freeze<IAbstractButtonState>({
 	isActive: false,
 });
 
 export abstract class AbstractButton<
-	H extends React.HTMLAttributes<any>
-> extends Components.AbstractPureComponent<IButtonProps & H, IButtonState> {
-	static readonly defaultProps: IButtonProps = defaultProps;
+	TAbstractButtonAttributes extends Spring.AnimatedProps<React.HTMLAttributes<any>>
+> extends Abstract.AbstractPureComponent<
+	IAbstractButtonProps & TAbstractButtonAttributes,
+	IAbstractButtonState
+> {
+	constructor(props: IAbstractButtonProps & TAbstractButtonAttributes) {
+		super(props);
 
-	public state: IButtonState = defaultState;
+		this.handleKeyDown = this.handleKeyDown.bind(this);
+		this.handleKeyUp = this.handleKeyUp.bind(this);
+	}
 
-	private currentKeyDown: Nullable<number> = null;
+	public static readonly defaultProps: IAbstractButtonProps = defaultProps;
+	public static readonly defaultState: IAbstractButtonState = defaultState;
+	public state: IAbstractButtonState = defaultState;
 
-	public buttonRef: Nullable<HTMLElement> = null;
-	protected refHandlers = {
-		button: (ref: HTMLElement | null) => {
+	public buttonRef: Util.Nullable<HTMLElement> = null;
+	protected refHandlers: IAbstractButtonRefHandlers = {
+		button: (ref) => {
 			this.buttonRef = ref;
 			if (this.props.elementRef && ref) {
 				Util.safeInvoke(this.props.elementRef, ref);
@@ -126,19 +140,23 @@ export abstract class AbstractButton<
 		},
 	};
 
+	private currentKeyDown: number = -1;
+
 	public abstract render(): JSX.Element;
 
+	/** */
+
 	public getCommonButtonProps() {
-		const disabled = this.props.disabled || this.props.loading;
+		const { disabled, loading, onClick, tabIndex } = this.props;
 
 		return {
-			...this.props,
-			disabled,
-			onClick: disabled ? null : this.props.onClick,
+			// ...this.props,
+			disabled: disabled || loading,
+			onClick: disabled ? undefined : onClick,
 			onKeyDown: this.handleKeyDown,
 			onKeyUp: this.handleKeyUp,
 			ref: this.refHandlers.button,
-			tabIndex: disabled ? -1 : this.props.tabIndex,
+			tabIndex: disabled ? -1 : tabIndex,
 		};
 	}
 
@@ -146,25 +164,27 @@ export abstract class AbstractButton<
 	// that "Type argument candidate 'KeyboardEvent<T>' is not a valid type
 	// argument because it is not a supertype of candidate
 	// 'KeyboardEvent<HTMLElement>'."
-	protected handleKeyDown = (event: React.KeyboardEvent<any>) => {
+	protected handleKeyDown(event: React.KeyboardEvent<any>) {
 		if (Util.isKeyboardClick(event.which)) {
 			event.preventDefault();
 			if (event.which !== this.currentKeyDown) {
 				this.setState({ isActive: true });
 			}
 		}
+
 		this.currentKeyDown = event.which;
 		Util.safeInvoke(this.props.onKeyDown, event);
-	};
+	}
 
-	protected handleKeyUp = (event: React.KeyboardEvent<any>) => {
+	protected handleKeyUp(event: React.KeyboardEvent<any>) {
 		if (!Util.isNull(this.buttonRef) && Util.isKeyboardClick(event.which)) {
 			this.setState({ isActive: false });
 			this.buttonRef.click();
 		}
-		this.currentKeyDown = null;
+
+		this.currentKeyDown = -1;
 		Util.safeInvoke(this.props.onKeyUp, event);
-	};
+	}
 
 	protected renderChildren(): React.ReactNode {
 		const { children, icon, loading, rightIcon, text } = this.props;

@@ -2,8 +2,8 @@
 
 exports[`Divider renders correctly 1`] = `
 .c0 {
+  border-color: #10161a;
   margin: 4px;
-  opacity: 0.75;
   border-bottom-width: 1px;
   border-bottom-style: solid;
   border-right-width: 1px;
@@ -12,5 +12,6 @@ exports[`Divider renders correctly 1`] = `
 
 <div
   class="c0"
+  color="#10161a"
 />
 `;

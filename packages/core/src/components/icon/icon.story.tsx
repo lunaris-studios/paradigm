@@ -1,21 +1,15 @@
-import * as Icon from "@paradigmjs/icons";
+import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
-import * as Knobs from "@storybook/addon-knobs";
-import * as Actions from "@storybook/addon-actions";
+import * as SR from "@storybook/react";
 
 import * as Component from "./icon";
+
+const Template: SR.Story<Component.IIconProps> = (args) => <Component.Icon {...args} />;
+
+export const Basic = Template.bind({});
+Basic.args = {};
 
 export default {
 	title: "Icon",
 	component: Component.Icon,
-	decorators: [Knobs.withKnobs],
-};
-
-export const interactive = () => {
-	return <Component.Icon icon={Icon.IconNames.ADD} />;
-};
-interactive.story = {
-	parameters: {
-		jest: ["icon.test.tsx"],
-	},
-};
+} as SR.Meta;

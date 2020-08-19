@@ -1,11 +1,11 @@
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 import * as SC from "styled-components";
+import * as Util from "@paradigmjs/util";
+// re-import `styled-components` development mode DOM classnames.
+import styled, { css, keyframes } from "styled-components";
 
 import * as Common from "~/common";
-
-// re-import `styled-components` development mode DOM classnames.
-import styled, { keyframes } from "styled-components";
 
 /**
  * Table of Contents
@@ -19,12 +19,7 @@ import styled, { keyframes } from "styled-components";
  */
 
 interface Spinner {
-	Container: SC.StyledComponent<
-		"div",
-		any,
-		ISpinnerContainerAttrs,
-		keyof ISpinnerContainerAttrs
-	>;
+	Container: Util.StyledComponent<"div", ISpinnerContainerProps>;
 
 	SVG: SpinnerSVG;
 }
@@ -37,13 +32,7 @@ export const Spinner = {} as Spinner;
 
 interface ISpinnerContainerProps {}
 
-interface ISpinnerContainerAttrs extends ISpinnerContainerProps {}
-
-Spinner.Container = styled("div").attrs(
-	(props: ISpinnerContainerProps): ISpinnerContainerAttrs => ({
-		...props,
-	}),
-)`
+Spinner.Container = styled("div")`
 	align-items: center;
 	/* center animation container inside parent element to isolate layout */
 	display: flex;
@@ -60,14 +49,8 @@ Spinner.Container = styled("div").attrs(
  */
 
 interface SpinnerSVG {
-	Container: SC.StyledComponent<
-		"svg",
-		any,
-		ISpinnerSVGContainerAttrs,
-		keyof ISpinnerSVGContainerAttrs
-	>;
+	Container: Util.StyledComponent<"svg", ISpinnerSVGContainerProps>;
 
-	Shared: SpinnerSVGShared;
 	Path: SpinnerSVGPath;
 }
 
@@ -79,10 +62,7 @@ Spinner.SVG = {} as SpinnerSVG;
 
 interface ISpinnerSVGContainerProps extends Common.IIntentProps {
 	isSpinning: boolean;
-	animation: SC.Keyframes | string;
 }
-
-interface ISpinnerSVGContainerAttrs extends ISpinnerSVGContainerProps {}
 
 const spinnerAnimation = keyframes`{
 	from {
@@ -93,100 +73,43 @@ const spinnerAnimation = keyframes`{
 	}
 }`;
 
-Spinner.SVG.Container = styled("svg").attrs(
-	(props: ISpinnerSVGContainerProps): ISpinnerSVGContainerAttrs => ({
-		...props,
-		animation: props.isSpinning ? spinnerAnimation : "none",
-	}),
-)`
+Spinner.SVG.Container = styled("svg")`
 	display: block;
 	fill: ${Protocol.Color.TRANSPARENT};
-	animation: ${(props) => props.animation} 500ms linear infinite;
-`;
-
-/**
- * [Spinner.SVG.Shared]
- * - [Spinner.SVG.Shared.Path(WRAPPER)]
- */
-
-interface SpinnerSVGShared {
-	Path: SC.StyledComponent<
-		"path",
-		any,
-		ISpinnerSVGSharedPathAttrs,
-		keyof ISpinnerSVGSharedPathAttrs
-	>;
-}
-
-Spinner.SVG.Shared = {} as SpinnerSVGShared;
-
-/**
- * [Spinner.SVG.Shared.Path]
- */
-
-interface ISpinnerSVGSharedPathProps {}
-
-interface ISpinnerSVGSharedPathAttrs extends ISpinnerSVGSharedPathProps {}
-
-Spinner.SVG.Shared.Path = styled("path").attrs(
-	(props: ISpinnerSVGSharedPathProps): ISpinnerSVGSharedPathAttrs => ({
-		...props,
-	}),
-)`
-	fill-opacity: 0;
+	animation: ${(props: ISpinnerSVGContainerProps) =>
+			props.isSpinning ? spinnerAnimation : "none"}
+		500ms linear infinite;
 `;
 
 /**
  * [Spinner.SVG.Path]
+ * - [Spinner.SVG.Path.Shared(CSS)]
  * - [Spinner.SVG.Path.Track(ELEMENT)]
  * - [Spinner.SVG.Path.Head(ELEMENT)]
  */
 
 interface SpinnerSVGPath {
-	Head: SC.StyledComponent<
-		typeof Spinner.SVG.Shared.Path,
-		any,
-		ISpinnerSVGPathHeadAttrs,
-		keyof ISpinnerSVGPathHeadAttrs
-	>;
-	Track: SC.StyledComponent<
-		typeof Spinner.SVG.Shared.Path,
-		any,
-		ISpinnerSVGPathTrackAttrs,
-		keyof ISpinnerSVGPathTrackAttrs
-	>;
+	Shared: SC.FlattenSimpleInterpolation;
+
+	Head: Util.StyledComponent<"path", ISpinnerSVGPathHeadProps>;
+	Track: Util.StyledComponent<"path", ISpinnerSVGPathTrackProps>;
 }
 
 Spinner.SVG.Path = {} as SpinnerSVGPath;
 
 /**
- * [Spinner.SVG.Path.Track]
+ * [Spinner.SVG.Path.Shared]
  */
 
-interface ISpinnerSVGPathTrackProps {}
-
-interface ISpinnerSVGPathTrackAttrs extends ISpinnerSVGPathTrackProps {}
-
-const SPINNER_SVG_PATH_HEAD_TRACK = Protocol.bind("scheme", {
-	[Protocol.Scheme.DARK]: Protocol.Color.BLACK_2,
-	[Protocol.Scheme.LIGHT]: Protocol.Color.BLACK_4,
-});
-
-Spinner.SVG.Path.Track = styled(Spinner.SVG.Shared.Path).attrs(
-	(props: ISpinnerSVGPathTrackProps): ISpinnerSVGPathTrackAttrs => ({
-		...props,
-	}),
-)`
-	stroke: ${SPINNER_SVG_PATH_HEAD_TRACK};
+Spinner.SVG.Path.Shared = css`
+	fill-opacity: 0;
 `;
 
 /**
  * [Spinner.SVG.Path.Head]
  */
 
-interface ISpinnerSVGPathHeadProps {}
-
-interface ISpinnerSVGPathHeadAttrs extends ISpinnerSVGPathHeadProps {}
+interface ISpinnerSVGPathHeadProps extends Common.IIntentProps {}
 
 const SPINNER_SVG_PATH_HEAD_HEAD = Protocol.bind("scheme", {
 	[Protocol.Scheme.DARK]: Protocol.Color.BLACK_3,
@@ -194,13 +117,28 @@ const SPINNER_SVG_PATH_HEAD_HEAD = Protocol.bind("scheme", {
 });
 
 // TODO (sam): Add intent / color injection
-Spinner.SVG.Path.Head = styled("path").attrs(
-	(props: ISpinnerSVGPathHeadProps): ISpinnerSVGPathHeadAttrs => ({
-		...props,
-	}),
-)`
+Spinner.SVG.Path.Head = styled("path")`
+	${Spinner.SVG.Path.Shared}
+	/*  */
 	stroke: ${SPINNER_SVG_PATH_HEAD_HEAD};
 	stroke-linecap: round;
 	transform-origin: center;
 	transition: stroke-dashoffset 200ms ${Protocol.TRANSITION_EASE};
+`;
+
+/**
+ * [Spinner.SVG.Path.Track]
+ */
+
+interface ISpinnerSVGPathTrackProps extends Common.IIntentProps {}
+
+const SPINNER_SVG_PATH_HEAD_TRACK = Protocol.bind("scheme", {
+	[Protocol.Scheme.DARK]: Protocol.Color.BLACK_2,
+	[Protocol.Scheme.LIGHT]: Protocol.Color.BLACK_4,
+});
+
+Spinner.SVG.Path.Track = styled("path")`
+	${Spinner.SVG.Path.Shared}
+	/*  */
+	stroke: ${SPINNER_SVG_PATH_HEAD_TRACK};
 `;

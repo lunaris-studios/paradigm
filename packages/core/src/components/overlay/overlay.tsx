@@ -1,8 +1,8 @@
+import * as Abstract from "@paradigmjs/abstract";
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 import * as Spring from "react-spring";
 
-import * as Animators from "~/animators";
 import * as Common from "~/common";
 import * as Components from "~/components";
 
@@ -238,19 +238,46 @@ const defaultState = Object.freeze<IOverlayState>({
 	hasEverOpened: false,
 });
 
-export class Overlay extends Components.AbstractPureComponent<
+export class Overlay extends Abstract.AbstractPureComponent<
 	IOverlayProps,
 	IOverlayState
 > {
 	public static displayName = `${Common.DISPLAYNAME_PREFIX}.Overlay`;
 
-	static readonly defaultProps: IOverlayProps = defaultProps;
-	public static defaultState: IOverlayState = defaultState;
+	constructor(props: IOverlayProps) {
+		super(props);
+
+		this.handleBackdropMouseDown = this.handleBackdropMouseDown.bind(this);
+		this.handleDocumentClick = this.handleDocumentClick.bind(this);
+		this.handleDocumentFocus = this.handleDocumentFocus.bind(this);
+		this.handleKeyDown = this.handleKeyDown.bind(this);
+	}
+
+	public static readonly defaultProps: IOverlayProps = defaultProps;
+	public static readonly defaultState: IOverlayState = defaultState;
 
 	public state: IOverlayState = { hasEverOpened: this.props.isOpen };
 	private animated: Animated.Controller = new Animated.Controller();
 
 	public containerRef: React.RefObject<HTMLDivElement> = React.createRef();
+
+	public componentDidMount() {
+		if (this.props.isOpen) {
+			this.overlayWillOpen();
+		}
+	}
+
+	public componentDidUpdate(prevProps: IOverlayProps): void {
+		if (prevProps.isOpen && !this.props.isOpen) {
+			this.overlayWillClose();
+		} else if (!prevProps.isOpen && this.props.isOpen) {
+			this.overlayWillOpen();
+		}
+	}
+
+	public componentWillUnmount(): void {
+		this.overlayWillClose();
+	}
 
 	public render() {
 		/** No reason to render anything at all if we're being truly lazy */
@@ -271,7 +298,11 @@ export class Overlay extends Components.AbstractPureComponent<
 		} = this.props;
 
 		const transitionContent = (
-			<Styled.Overlay.Container onKeyDown={this.handleKeyDown} ref={this.containerRef}>
+			<Styled.Overlay.Container
+				onKeyDown={this.handleKeyDown}
+				ref={this.containerRef}
+				isOpen={isOpen}
+			>
 				<Styled.Overlay.Content>{children}</Styled.Overlay.Content>
 				{hasBackdrop && (
 					<Styled.Overlay.Backdrop
@@ -300,27 +331,9 @@ export class Overlay extends Components.AbstractPureComponent<
 		);
 	}
 
-	public componentDidMount() {
-		if (this.props.isOpen) {
-			this.overlayWillOpen();
-		}
-	}
-
-	public componentDidUpdate(prevProps: IOverlayProps) {
-		if (prevProps.isOpen && !this.props.isOpen) {
-			this.overlayWillClose();
-		} else if (!prevProps.isOpen && this.props.isOpen) {
-			this.overlayWillOpen();
-		}
-	}
-
-	public componentWillUnmount() {
-		this.overlayWillClose();
-	}
-
 	/** */
 
-	private overlayWillOpen() {
+	private overlayWillOpen(): void {
 		const { autoFocus, enforceFocus, canOutsideClickClose, hasBackdrop } = this.props;
 
 		if (autoFocus) {
@@ -336,7 +349,7 @@ export class Overlay extends Components.AbstractPureComponent<
 		}
 	}
 
-	private overlayWillClose() {
+	private overlayWillClose(): void {
 		document.removeEventListener(
 			"focus",
 			this.handleDocumentFocus,
@@ -345,7 +358,7 @@ export class Overlay extends Components.AbstractPureComponent<
 		document.removeEventListener("mousedown", this.handleDocumentClick);
 	}
 
-	private handleDocumentClick = (event: MouseEvent) => {
+	private handleDocumentClick(event: MouseEvent): void {
 		const { canOutsideClickClose, isOpen, onClose } = this.props;
 		const eventTarget = event.target as HTMLElement;
 
@@ -358,9 +371,9 @@ export class Overlay extends Components.AbstractPureComponent<
 			// casting to any because this is a native event
 			Util.safeInvoke(onClose, event as any);
 		}
-	};
+	}
 
-	private handleBackdropMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
+	private handleBackdropMouseDown(event: React.MouseEvent<HTMLDivElement>) {
 		const { canOutsideClickClose, enforceFocus, onClose } = this.props;
 		if (canOutsideClickClose) {
 			Util.safeInvoke(onClose, event);
@@ -370,9 +383,9 @@ export class Overlay extends Components.AbstractPureComponent<
 			// make sure document.activeElement is updated before bringing the focus back
 			this.focusOverlay();
 		}
-	};
+	}
 
-	private handleDocumentFocus = (event: FocusEvent) => {
+	private handleDocumentFocus(event: FocusEvent): void {
 		const { enforceFocus } = this.props;
 		if (
 			enforceFocus &&
@@ -385,9 +398,9 @@ export class Overlay extends Components.AbstractPureComponent<
 			event.stopImmediatePropagation();
 			this.focusOverlay();
 		}
-	};
+	}
 
-	private focusOverlay() {
+	private focusOverlay(): void {
 		// container ref may be undefined between component mounting and Portal rendering
 		// activeElement may be undefined in some rare cases in IE
 		if (
@@ -406,12 +419,12 @@ export class Overlay extends Components.AbstractPureComponent<
 		}
 	}
 
-	private handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+	private handleKeyDown(event: React.KeyboardEvent<HTMLElement>): void {
 		const { canEscapeKeyClose, onClose } = this.props;
 		if (event.which === Protocol.Key.ESCAPE && canEscapeKeyClose) {
 			Util.safeInvoke(onClose, event);
 			// prevent browser-specific escape key behavior (Safari exits fullscreen)
 			event.preventDefault();
 		}
-	};
+	}
 }
