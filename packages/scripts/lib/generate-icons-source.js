@@ -4,7 +4,8 @@
 const fs = require("fs");
 const path = require("path");
 const SVGO = require("svgo");
-const { COPYRIGHT_HEADER } = require("./constants");
+
+const constants = require("./constants");
 
 const svgo = new SVGO({ plugins: [{ convertShapeToPath: { convertArcs: true } }] });
 
@@ -20,9 +21,11 @@ const svgo = new SVGO({ plugins: [{ convertShapeToPath: { convertArcs: true } }]
 /** @type {IconMetadata[]} */
 const ICONS_METADATA = require(path.resolve(
 	process.cwd(),
-	"./resources/icons/icons.json"
+	"./resources/icons/icons.json",
 )).sort((a, b) => a.iconName.localeCompare(b.iconName));
-const ICONS_WITH_FONT_SUPPORT = ICONS_METADATA.filter((icon) => typeof icon.content === "string");
+const ICONS_WITH_FONT_SUPPORT = ICONS_METADATA.filter(
+	(icon) => typeof icon.content === "string",
+);
 const GENERATED_SRC_DIR = path.resolve(process.cwd(), "./src/generated");
 
 if (!fs.existsSync(GENERATED_SRC_DIR)) {
@@ -34,29 +37,34 @@ writeLinesToFile(
 	"_icon-map.scss",
 	'@import "icon-variables";',
 	"$icons: (",
-	...ICONS_WITH_FONT_SUPPORT.map((icon) => `  "${icon.iconName}": ${toSassVariable(icon)},`),
-	");"
+	...ICONS_WITH_FONT_SUPPORT.map(
+		(icon) => `  "${icon.iconName}": ${toSassVariable(icon)},`,
+	),
+	");",
 );
 
 // list out content strings for icons with font support
 writeLinesToFile(
 	"_icon-variables.scss",
-	...ICONS_WITH_FONT_SUPPORT.map((icon) => `${toSassVariable(icon)}: "${icon.content}";`)
+	...ICONS_WITH_FONT_SUPPORT.map((icon) => `${toSassVariable(icon)}: "${icon.content}";`),
 );
 
 // map ENUM_NAME to unicode character
 writeLinesToFile(
 	"icon-content.ts",
 	...ICONS_WITH_FONT_SUPPORT.map(
-		(icon) => `export const ${toEnumName(icon)} = "${icon.content.replace("\\", "\\u")}";`
-	)
+		(icon) =>
+			`export const ${toEnumName(icon)} = "${icon.content.replace("\\", "\\u")}";`,
+	),
 );
 
 // map ENUM_NAME to icon-name, must include ALL icons (not just those with font support)
 // so that we can reference their SVG paths
 writeLinesToFile(
 	"icon-names.ts",
-	...ICONS_METADATA.map((icon) => `export const ${toEnumName(icon)} = "${icon.iconName}";`)
+	...ICONS_METADATA.map(
+		(icon) => `export const ${toEnumName(icon)} = "${icon.iconName}";`,
+	),
 );
 
 /**
@@ -66,7 +74,7 @@ writeLinesToFile(
  */
 async function writeLinesToFile(filename, ...lines) {
 	const outputPath = path.join(GENERATED_SRC_DIR, filename);
-	const contents = [COPYRIGHT_HEADER, ...lines, ""].join("\n");
+	const contents = [constants.COPYRIGHT_HEADER, ...lines, ""].join("\n");
 	fs.writeFileSync(outputPath, contents);
 }
 
@@ -98,7 +106,7 @@ async function buildPathsObject(objectName, size) {
 		ICONS_METADATA.map(async (icon) => {
 			const filepath = path.resolve(
 				__dirname,
-				`../../../resources/icons/${size}px/${icon.iconName}.svg`
+				`../../../resources/icons/${size}px/${icon.iconName}.svg`,
 			);
 			const svg = fs.readFileSync(filepath, "utf-8");
 			const pathStrings = await svgo
@@ -106,7 +114,7 @@ async function buildPathsObject(objectName, size) {
 				.then(({ data }) => data.match(/ d="[^"]+"/g) || [])
 				.then((paths) => paths.map((s) => s.slice(3)));
 			return `    "${icon.iconName}": [${pathStrings.join(",\n")}],`;
-		})
+		}),
 	);
 }
 
@@ -122,6 +130,6 @@ async function buildPathsObject(objectName, size) {
 		"",
 		"export const IconSvgPaths20: Record<IconName, string[]> = {",
 		...(await buildPathsObject("IconSvgPaths", 20)),
-		"};"
+		"};",
 	);
 })();
