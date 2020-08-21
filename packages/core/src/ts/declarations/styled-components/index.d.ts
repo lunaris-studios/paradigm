@@ -1,7 +1,7 @@
 import * as Protocol from "@paradigmjs/protocol";
 
 import "styled-components";
-import {} from "styled-components/cssprop";
+import "styled-components/cssprop";
 
 declare module "styled-components" {
 	/**
