@@ -17,10 +17,6 @@
 			"path": "../packages/docs"
 		},
 		{
-			"name": "[GATSBY]",
-			"path": "../packages/gatsby"
-		},
-		{
 			"name": "[ICONS]",
 			"path": "../packages/icons"
 		},
