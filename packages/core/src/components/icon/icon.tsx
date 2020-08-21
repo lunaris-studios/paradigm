@@ -25,7 +25,7 @@ export interface IIconProps extends Common.IIntentProps, Common.IProps {
 	htmlTitle?: string;
 
 	/**
-	 * Name of a Blueprint UI icon, or an icon element, to render. This prop is
+	 * Name of a Paradigm UI icon, or an icon element, to render. This prop is
 	 * required because it determines the content of the component, but it can
 	 * be explicitly set to falsy values to render nothing.
 	 *
@@ -36,14 +36,14 @@ export interface IIconProps extends Common.IIntentProps, Common.IProps {
 	 *   will render a blank icon to occupy space.
 	 * - If given a `JSX.Element`, that element will be rendered and _all other
 	 *   props on this component are ignored._ This type is supported to
-	 *   simplify icon support in other Blueprint components. As a consumer, you
+	 *   simplify icon support in other Paradigm components. As a consumer, you
 	 *   should avoid using `<Icon icon={<Element />}` directly; simply render
 	 *   `<Element />` instead.
 	 */
 	icon?: Icons.IconName | Common.MaybeElement;
 
 	/**
-	 * Size of the icon, in pixels. Blueprint contains 16px and 20px SVG icon
+	 * Size of the icon, in pixels. Paradigm contains 16px and 20px SVG icon
 	 * images, and chooses the appropriate resolution based on this prop.
 	 * @default Icon.SIZE_STANDARD = 16
 	 */

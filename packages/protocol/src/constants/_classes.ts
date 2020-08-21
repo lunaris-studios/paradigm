@@ -267,7 +267,7 @@ export const ICON_STANDARD = `${ICON}-standard`;
 export const ICON_LARGE = `${ICON}-large`;
 
 /**
- * Returns the namespace prefix for all Blueprint CSS classes.
+ * Returns the namespace prefix for all Paradigm CSS classes.
  * Customize this namespace at build time with the `process.env.BLUEPRINT_NAMESPACE` environment variable.
  */
 export function getClassNamespace() {
