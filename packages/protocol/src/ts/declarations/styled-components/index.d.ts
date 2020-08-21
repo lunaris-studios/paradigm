@@ -1,6 +1,6 @@
-import "styled-components";
-
 import * as BIN from "~/bin";
+
+import "styled-components";
 
 declare module "styled-components" {
 	/**
