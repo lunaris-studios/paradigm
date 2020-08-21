@@ -128,15 +128,13 @@ export abstract class AbstractButton<
 
 	public static readonly defaultProps: IAbstractButtonProps = defaultProps;
 	public static readonly defaultState: IAbstractButtonState = defaultState;
-	public state: IAbstractButtonState = defaultState;
+	public state = defaultState;
 
-	public buttonRef: Util.Nullable<HTMLElement> = null;
-	protected refHandlers: IAbstractButtonRefHandlers = {
-		button: (ref) => {
+	protected buttonRef: HTMLElement | undefined = undefined;
+	protected refHandlers = {
+		button: (ref: HTMLElement) => {
 			this.buttonRef = ref;
-			if (this.props.elementRef && ref) {
-				Util.safeInvoke(this.props.elementRef, ref);
-			}
+			Util.safeInvoke(this.props.elementRef, ref);
 		},
 	};
 
@@ -179,7 +177,9 @@ export abstract class AbstractButton<
 	protected handleKeyUp(event: React.KeyboardEvent<any>) {
 		if (!Util.isNull(this.buttonRef) && Util.isKeyboardClick(event.which)) {
 			this.setState({ isActive: false });
-			this.buttonRef.click();
+			// `buttonRef` will always be defined via `getCommonButtonProps()` on the
+			// parent implementation.
+			this.buttonRef!.click();
 		}
 
 		this.currentKeyDown = -1;

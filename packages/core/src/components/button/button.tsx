@@ -48,7 +48,7 @@ export class AnchorButton extends Abstract.AbstractButton<
 				href={commonProps.disabled ? undefined : href}
 				tabIndex={commonProps.disabled ? -1 : tabIndex}
 			>
-				{this.renderChildren()}
+				{this.refHandlers.button}
 			</Styled.Button.Container>
 		);
 	}
