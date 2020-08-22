@@ -15,15 +15,12 @@ export abstract class AbstractPureComponent<
 	// this should be static, not an instance method
 	public getDerivedStateFromProps: never;
 
-	/** Component displayName should be `public static`. This property exists to prevent incorrect usage. */
-	protected displayName: never;
-
 	// Not bothering to remove entries when their timeouts finish because clearing invalid ID is a no-op
 	private timeoutIds: number[] = [];
 
 	private requestTimeoutIds: number[] = [];
 
-	constructor(props: P) {
+	constructor(props: P, context?: any) {
 		super(props);
 		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION) && this.validateProps) {
 			this.validateProps(this.props);
