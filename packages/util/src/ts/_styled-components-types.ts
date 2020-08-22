@@ -6,4 +6,5 @@ import * as SC from "styled-components";
 export type StyledComponent<
 	TElement extends keyof JSX.IntrinsicElements | React.ComponentType<any>,
 	TAttributes extends object
-> = SC.StyledComponent<TElement, any, TAttributes, never>;
+> = SC.StyledComponent<TElement, SC.DefaultTheme, TAttributes, never>;
+// TODO(sam): add support for attrs()
