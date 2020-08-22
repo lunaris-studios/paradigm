@@ -1,6 +1,7 @@
 import alias from "@rollup/plugin-alias";
-import ttypescript from "ttypescript";
+import cleaner from "rollup-plugin-cleaner";
 import tsPlugin from "rollup-plugin-typescript2";
+import ttypescript from "ttypescript";
 
 import pkg from "./package.json";
 
@@ -34,6 +35,9 @@ export default {
 					],
 				},
 			},
+		}),
+		cleaner({
+			targets: pkg.files,
 		}),
 		alias({
 			entries: [{ find: "~/*", replacement: "src/*" }],
