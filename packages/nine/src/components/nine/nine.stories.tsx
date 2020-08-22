@@ -1,9 +1,12 @@
 import * as React from "react";
-import * as SR from "@storybook/react";
+
+import * as Util from "~/util";
 
 import * as Component from "./nine";
 
-const Template: SR.Story<Component.INineProps> = (args) => <Component.Nine {...args} />;
+const Template: Util.Storybook.React.Story<Component.INineProps> = (args) => (
+	<Component.Nine {...args} />
+);
 
 export const Basic = Template.bind({});
 Basic.args = {};
@@ -11,4 +14,4 @@ Basic.args = {};
 export default {
 	title: "Nine",
 	component: Component.Nine,
-} as SR.Meta;
+} as Util.Storybook.React.Meta;

@@ -1,10 +1,12 @@
 import * as Protocol from "@paradigmjs/protocol";
 import * as SC from "styled-components";
-
-import * as Types from "./nine.types";
-
 // re-import `styled-components` development mode DOM classnames.
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+import * as Util from "~/util";
+
+import * as Component from "./nine";
+import * as Types from "./nine.types";
 
 /**
  * Table of Contents
@@ -20,21 +22,11 @@ import styled from "styled-components";
  */
 
 interface Nine {
-	Container: SC.StyledComponent<
-		"div",
-		any,
-		INineContainerAttrs,
-		keyof INineContainerAttrs
-	>;
-	Row: SC.StyledComponent<"div", any, INineRowAttrs, keyof INineRowAttrs>;
+	Container: Util.SC.Styled<"div", INineContainerProps>;
+	Row: Util.SC.Styled<"div", INineRowProps>;
 
-	StubImage: SC.StyledComponent<
-		"img",
-		any,
-		INineStubImageAttrs,
-		keyof INineStubImageAttrs
-	>;
-	Section: SC.StyledComponent<"div", any, INineSectionAttrs, keyof INineSectionAttrs>;
+	StubImage: Util.SC.Styled<"img", INineStubImageProps>;
+	Section: Util.SC.Styled<"div", INineSectionProps>;
 }
 
 export const Nine = {} as Nine;
@@ -43,38 +35,25 @@ export const Nine = {} as Nine;
  * [Nine.Container]
  */
 
-interface INineContainerProps
-	extends SC.ThemeProps<SC.DefaultTheme>,
-		Types.INineDimensions {}
+interface INineContainerProps {
+	height: Component.INineProps["height"];
+	width: Component.INineProps["width"];
+}
 
-interface INineContainerAttrs extends INineContainerProps {}
-
-Nine.Container = styled("div").attrs(
-	(props: INineContainerProps): INineContainerAttrs => ({
-		...props,
-	}),
-)`
-	height: ${(props) =>
-		props.height != null
-			? Protocol.Snippets.value(props.height, Protocol.Unit.PX)
-			: "auto"};
-	width: ${(props) =>
-		props.width != null
-			? Protocol.Snippets.value(props.width, Protocol.Unit.PX)
-			: "auto"};
+Nine.Container = styled("div")<INineContainerProps>`
+	height: ${(props) => Protocol.Snippets.value(props.height, Protocol.Unit.PX)};
+	width: ${(props) => Protocol.Snippets.value(props.width, Protocol.Unit.PX)};
 
 	display: grid;
 	grid-auto-columns: auto;
 	grid-auto-rows: auto;
 	grid-template-areas:
-		"${Types.ENineCoordinate.NORTH_WEST} ${Types.ENineCoordinate.NORTH} ${
-	Types.ENineCoordinate.NORTH_EAST
+		"${Types.NineCoordinate.NORTH_WEST} ${Types.NineCoordinate.NORTH} ${
+	Types.NineCoordinate.NORTH_EAST
 }"
-		"${Types.ENineCoordinate.WEST} ${Types.ENineCoordinate.CENTER} ${
-	Types.ENineCoordinate.EAST
-}"
-		"${Types.ENineCoordinate.SOUTH_WEST} ${Types.ENineCoordinate.SOUTH} ${
-	Types.ENineCoordinate.SOUTH_EAST
+		"${Types.NineCoordinate.WEST} ${Types.NineCoordinate.CENTER} ${Types.NineCoordinate.EAST}"
+		"${Types.NineCoordinate.SOUTH_WEST} ${Types.NineCoordinate.SOUTH} ${
+	Types.NineCoordinate.SOUTH_EAST
 }";
 `;
 
@@ -82,29 +61,17 @@ Nine.Container = styled("div").attrs(
  * [Nine.Row]
  */
 
-interface INineRowProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface INineRowProps {}
 
-interface INineRowAttrs extends INineRowProps {}
-
-Nine.Row = styled("div").attrs(
-	(props: INineRowProps): INineRowAttrs => ({
-		...props,
-	}),
-)``;
+Nine.Row = styled("div")<INineRowProps>``;
 
 /**
  * [Nine.StubImage]
  */
 
-interface INineStubImageProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface INineStubImageProps {}
 
-interface INineStubImageAttrs extends INineStubImageProps {}
-
-Nine.StubImage = styled("img").attrs(
-	(props: INineStubImageProps): INineStubImageAttrs => ({
-		...props,
-	}),
-)`
+Nine.StubImage = styled("img")<INineStubImageProps>`
 	display: none;
 `;
 
@@ -112,116 +79,69 @@ Nine.StubImage = styled("img").attrs(
  * [Nine.Section]
  */
 
-interface INineSectionProps extends SC.ThemeProps<SC.DefaultTheme> {
-	/**
-	 * An array of coordinates that Inidicates the cardinal position  9-slice section
-	 * on the surface.
-	 */
-	coordinates: Types.ENineCoordinate;
-
-	/**
-	 * Squared length reserved for the non-scalable, static corner elements.
-	 * of the 9-slice layout.
-	 * @default 8;
-	 */
-	corner: number;
-
-	/**
-	 * File path of the image to use for the background of the 9-slice
-	 * surface.
-	 * @default null
-	 */
-	image: Nullable<string>;
-
-	/**
-	 * Height & width of the 9-slice image
-	 */
-	imageSize: Nullable<Types.INineDimensions>;
+interface INineSectionProps {
+	coordinates: Types.NineCoordinate;
+	corner: Component.INineProps["corner"];
+	image: Component.INineProps["image"];
+	imageSize: Component.INineState["imageSize"];
 }
 
-interface INineSectionAttrs extends INineSectionProps {
-	dimensions: ReturnType<typeof getSectionDimensions>;
-	backgroundImagePosition: ReturnType<typeof getSectionBackgroundImagePosition>;
-}
-
-interface INineSectionBackgroundImagePosition {
-	x: Nullable<string>;
-	y: Nullable<string>;
-}
-
-Nine.Section = styled("div").attrs(
-	(props: INineSectionProps): INineSectionAttrs => ({
-		...props,
-		dimensions: getSectionDimensions(props.coordinates, props.corner),
-		backgroundImagePosition: getSectionBackgroundImagePosition(
+Nine.Section = styled("div")<INineSectionProps>`
+	${Protocol.Snippets.debug()}
+	/** */
+	${(props) => {
+		const dimensions = getSectionDimensions(props.coordinates, props.corner);
+		const backgroundImagePosition = getSectionBackgroundImagePosition(
 			props.coordinates,
 			props.corner,
-		),
-	}),
-)`
-	${Protocol.Snippets.debug()}
+		);
 
-	height: ${(props) =>
-		props.dimensions.height != null ? props.dimensions.height : "auto"};
-	width: ${(props) => (props.dimensions.width != null ? props.dimensions.width : "auto")};
+		return css`
+			height: ${dimensions.height || "auto"}
+			width: ${dimensions.width || "auto"}
 
+			background-position-x: ${backgroundImagePosition.x};
+			background-position-y: ${backgroundImagePosition.y};
+		`;
+	}}
+	/** */
 	grid-area: ${(props) => props.coordinates};
-
 	background-image: ${(props) => props.image};
-	background-position-x: ${(props) =>
-		props.backgroundImagePosition.x != null ? props.backgroundImagePosition.x : "auto"};
-	background-position-y: ${(props) =>
-		props.backgroundImagePosition.y != null ? props.backgroundImagePosition.y : "auto"};
 `;
 
 function getSectionDimensions(
-	ENinecoordinates: Types.ENineCoordinate,
+	coordinates: Types.NineCoordinate,
 	corner: INineSectionProps["corner"],
-): Types.INineDimensions {
-	let dimensions = {} as Types.INineDimensions;
+): Types.INineSectionDimensions {
+	const dimensions: Types.INineSectionDimensions = {
+		height: 0,
+		width: 0,
+	};
 
-	const cornerPx = Protocol.Snippets.value(corner, Protocol.Unit.PX);
-
-	switch (ENinecoordinates) {
+	switch (coordinates) {
 		/** Corners */
-		case Types.ENineCoordinate.NORTH_WEST:
-		case Types.ENineCoordinate.NORTH_EAST:
-		case Types.ENineCoordinate.SOUTH_WEST:
-		case Types.ENineCoordinate.SOUTH_WEST:
-			dimensions = Object.freeze<Types.INineDimensions>({
-				height: cornerPx,
-				width: cornerPx,
-			});
+		case Types.NineCoordinate.NORTH_WEST:
+		case Types.NineCoordinate.NORTH_EAST:
+		case Types.NineCoordinate.SOUTH_WEST:
+		case Types.NineCoordinate.SOUTH_EAST:
+			dimensions.height = corner;
+			dimensions.width = corner;
 			break;
 
 		/** Top & Bottom */
 
-		case Types.ENineCoordinate.NORTH:
-		case Types.ENineCoordinate.SOUTH:
-			dimensions = Object.freeze<Types.INineDimensions>({
-				height: cornerPx,
-				width: null,
-			});
+		case Types.NineCoordinate.NORTH:
+		case Types.NineCoordinate.SOUTH:
+			dimensions.height = corner;
 			break;
 
 		/** Left & Right */
 
-		case Types.ENineCoordinate.EAST:
-		case Types.ENineCoordinate.WEST:
-			dimensions = Object.freeze<Types.INineDimensions>({
-				height: null,
-				width: cornerPx,
-			});
+		case Types.NineCoordinate.EAST:
+		case Types.NineCoordinate.WEST:
+			dimensions.width = corner;
 			break;
 
-		/** Center */
-
-		case Types.ENineCoordinate.CENTER:
-			dimensions = Object.freeze<Types.INineDimensions>({
-				height: null,
-				width: null,
-			});
-			break;
 		default:
 			break;
 	}
@@ -230,56 +150,53 @@ function getSectionDimensions(
 }
 
 function getSectionBackgroundImagePosition(
-	ENinecoordinates: Types.ENineCoordinate,
+	coordinates: Types.NineCoordinate,
 	corner: INineSectionProps["corner"],
-): INineSectionBackgroundImagePosition {
-	const backgroundPosition: INineSectionBackgroundImagePosition = {
-		x: null,
-		y: null,
+): Types.INineSectionBackgroundImageOffset {
+	const backgroundPosition: Types.INineSectionBackgroundImageOffset = {
+		x: "center",
+		y: "center",
 	};
 
 	const cornerPx = Protocol.Snippets.value(corner, Protocol.Unit.PX);
 
-	switch (ENinecoordinates) {
-		case Types.ENineCoordinate.NORTH:
+	switch (coordinates) {
+		case Types.NineCoordinate.NORTH:
 			backgroundPosition.x = "left";
 			backgroundPosition.y = `top ${cornerPx}`;
 			break;
 
-		case Types.ENineCoordinate.SOUTH:
+		case Types.NineCoordinate.SOUTH:
 			backgroundPosition.x = "center";
 			backgroundPosition.y = `bottom ${cornerPx}`;
 			break;
 
-		case Types.ENineCoordinate.EAST:
+		case Types.NineCoordinate.EAST:
 			backgroundPosition.x = "right";
 			backgroundPosition.y = "center";
 			break;
 
-		case Types.ENineCoordinate.WEST:
+		case Types.NineCoordinate.WEST:
 			backgroundPosition.x = "left";
 			backgroundPosition.y = "center";
 			break;
 
-		case Types.ENineCoordinate.CENTER:
-			break;
-
-		case Types.ENineCoordinate.NORTH_WEST:
+		case Types.NineCoordinate.NORTH_WEST:
 			backgroundPosition.x = `left ${cornerPx}`;
 			backgroundPosition.y = `top ${cornerPx}`;
 			break;
 
-		case Types.ENineCoordinate.NORTH_EAST:
+		case Types.NineCoordinate.NORTH_EAST:
 			backgroundPosition.x = `right ${cornerPx}`;
 			backgroundPosition.y = `top ${cornerPx}`;
 			break;
 
-		case Types.ENineCoordinate.SOUTH_EAST:
+		case Types.NineCoordinate.SOUTH_EAST:
 			backgroundPosition.x = `right ${cornerPx}`;
 			backgroundPosition.y = `bottom ${cornerPx}`;
 			break;
 
-		case Types.ENineCoordinate.SOUTH_WEST:
+		case Types.NineCoordinate.SOUTH_WEST:
 			backgroundPosition.x = `left ${cornerPx}`;
 			backgroundPosition.y = `bottom ${cornerPx}`;
 			break;
