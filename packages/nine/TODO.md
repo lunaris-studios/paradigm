@@ -1,3 +1,4 @@
 - [ ] Add loading animation for `nine` image load
-- [x] Update snapshot summaries for tests
-- [ ] Fix client
+- [ ] Fix module declaration for non-typical static asset imports (ex: .png)
+
+- [x] Update snapshots
