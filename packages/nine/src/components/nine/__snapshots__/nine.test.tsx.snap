@@ -1,37 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Nine renders correctly 1`] = `
-<div
-  class="sc-AxjAm iTxQMi"
-  height="128"
-  width="128"
->
-  <div
-    class="sc-AxhCb dASrgk"
-  />
-  <div
-    class="sc-AxhCb eZhbGV"
-  />
-  <div
-    class="sc-AxhCb jgvTtt"
-  />
-  <div
-    class="sc-AxhCb lfLDmv"
-  />
-  <div
-    class="sc-AxhCb Idjxq"
-  />
-  <div
-    class="sc-AxhCb cijAeO"
-  />
-  <div
-    class="sc-AxhCb iZYjum"
-  />
-  <div
-    class="sc-AxhCb ftKOyX"
-  />
-  <div
-    class="sc-AxhCb jdDrLT"
-  />
-</div>
-`;
+exports[`Nine renders correctly 1`] = `null`;
