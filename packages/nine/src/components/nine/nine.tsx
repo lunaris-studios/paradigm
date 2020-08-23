@@ -1,6 +1,5 @@
 import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
-import * as Util from "@paradigmjs/util";
 
 import * as Common from "~/common";
 
@@ -15,6 +14,11 @@ export interface INineProps {
 	 * @default 8;
 	 */
 	corner: number;
+
+	/**
+	 * Passed as a child to the `Types.NineCoordinate.CENTER` 9-slice section.
+	 */
+	children: React.ReactNode;
 
 	/**
 	 * Height of the surface.
@@ -46,14 +50,20 @@ export interface INineProps {
 	width: number;
 }
 
-export interface INineDefaultProps extends Omit<INineProps, "image"> {}
+export interface INineDefaultProps extends Omit<INineProps, "image" | "children"> {}
 
 export interface INineState {
 	/**
-	 * Height & width of the 9-slice image
+	 * Height & width of the 9-slice image.
 	 * @default undefined
 	 */
-	imageSize: Types.INineImageDimensions | undefined;
+	imageSize: Types.INineImageSize | undefined;
+
+	/**
+	 * Indicates whether or not the image has finished loading.
+	 * @default false
+	 */
+	isLoaded: boolean;
 }
 
 const defaultProps = Object.freeze<INineDefaultProps>({
@@ -65,6 +75,7 @@ const defaultProps = Object.freeze<INineDefaultProps>({
 
 const defaultState = Object.freeze<INineState>({
 	imageSize: undefined,
+	isLoaded: false,
 });
 
 export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState> {
@@ -77,67 +88,73 @@ export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState>
 	}
 
 	public static readonly defaultProps: INineDefaultProps = defaultProps;
+	public state: INineState = defaultState;
 
 	public static Styled = Styled;
 	public static Errors = Errors;
 	public static Types = Types;
 
-	public state: INineState = defaultState;
-
 	public render(): JSX.Element | null {
 		const { children, corner, height, image, tagName, width } = this.props;
-		const { imageSize } = this.state;
+		const { imageSize, isLoaded } = this.state;
 
-		const sectionProps = { corner, image, imageSize };
+		const sectionProps = { corner, height, image, imageSize, width };
 
 		return (
 			<React.Fragment>
 				<Styled.Nine.StubImage src={image} onLoad={this.onImgLoad} />
-				<Styled.Nine.Container height={height} width={width} as={tagName}>
-					{/* Row One */}
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.NORTH_WEST}
-						{...sectionProps}
-					/>
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.NORTH}
-						{...sectionProps}
-					/>
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.NORTH_EAST}
-						{...sectionProps}
-					/>
-
-					{/* Row Two */}
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.WEST}
-						{...sectionProps}
-					/>
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.CENTER}
-						{...sectionProps}
+				{isLoaded ? (
+					<Styled.Nine.Container
+						as={tagName}
+						corner={corner}
+						height={height}
+						width={width}
 					>
-						{children}
-					</Styled.Nine.Section>
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.EAST}
-						{...sectionProps}
-					/>
+						{/* Row One */}
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.NORTH_WEST}
+							{...sectionProps}
+						/>
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.NORTH}
+							{...sectionProps}
+						/>
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.NORTH_EAST}
+							{...sectionProps}
+						/>
 
-					{/* Row Three */}
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.SOUTH_WEST}
-						{...sectionProps}
-					/>
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.SOUTH}
-						{...sectionProps}
-					/>
-					<Styled.Nine.Section
-						coordinates={Types.NineCoordinate.SOUTH_EAST}
-						{...sectionProps}
-					/>
-				</Styled.Nine.Container>
+						{/* Row Two */}
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.WEST}
+							{...sectionProps}
+						/>
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.CENTER}
+							{...sectionProps}
+						>
+							{children}
+						</Styled.Nine.Section>
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.EAST}
+							{...sectionProps}
+						/>
+
+						{/* Row Three */}
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.SOUTH_WEST}
+							{...sectionProps}
+						/>
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.SOUTH}
+							{...sectionProps}
+						/>
+						<Styled.Nine.Section
+							coordinate={Types.NineCoordinate.SOUTH_EAST}
+							{...sectionProps}
+						/>
+					</Styled.Nine.Container>
+				) : null}
 			</React.Fragment>
 		);
 	}
@@ -166,9 +183,10 @@ export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState>
 
 		this.setState({
 			imageSize: {
-				height: img.offsetHeight,
-				width: img.offsetWidth,
+				height: img.naturalHeight,
+				width: img.naturalWidth,
 			},
+			isLoaded: true,
 		});
 	}
 }

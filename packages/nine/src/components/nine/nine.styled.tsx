@@ -36,17 +36,29 @@ export const Nine = {} as Nine;
  */
 
 interface INineContainerProps {
+	corner: Component.INineProps["corner"];
 	height: Component.INineProps["height"];
 	width: Component.INineProps["width"];
 }
 
 Nine.Container = styled("div")<INineContainerProps>`
-	height: ${(props) => Protocol.Snippets.value(props.height, Protocol.Unit.PX)};
-	width: ${(props) => Protocol.Snippets.value(props.width, Protocol.Unit.PX)};
+	${(props) => {
+		const { height, width, corner } = props;
 
+		const heightPx = Protocol.Snippets.value(height, Protocol.Unit.PX);
+		const widthPx = Protocol.Snippets.value(width, Protocol.Unit.PX);
+		const cornerPX = Protocol.Snippets.value(corner, Protocol.Unit.PX);
+
+		return css`
+			height: ${heightPx};
+			width: ${widthPx};
+
+			grid-template-columns: ${cornerPX} 1fr ${cornerPX};
+			grid-template-rows: ${cornerPX} 1fr ${cornerPX};
+		`;
+	}}
+	/** */
 	display: grid;
-	grid-auto-columns: auto;
-	grid-auto-rows: auto;
 	grid-template-areas:
 		"${Types.NineCoordinate.NORTH_WEST} ${Types.NineCoordinate.NORTH} ${
 	Types.NineCoordinate.NORTH_EAST
@@ -80,95 +92,104 @@ Nine.StubImage = styled("img")<INineStubImageProps>`
  */
 
 interface INineSectionProps {
-	coordinates: Types.NineCoordinate;
+	coordinate: Types.NineCoordinate;
 	corner: Component.INineProps["corner"];
+	height: Component.INineProps["height"];
 	image: Component.INineProps["image"];
 	imageSize: Component.INineState["imageSize"];
+	width: Component.INineProps["width"];
 }
 
 Nine.Section = styled("div")<INineSectionProps>`
-	${Protocol.Snippets.debug()}
+	/* ${Protocol.Snippets.debug()} */
 	/** */
 	${(props) => {
-		const dimensions = getSectionDimensions(props.coordinates, props.corner);
-		const backgroundImagePosition = getSectionBackgroundImagePosition(
-			props.coordinates,
-			props.corner,
-		);
+		const { coordinate, corner, height, image, imageSize, width } = props;
+
+		const bgImage = Boolean(coordinate !== Types.NineCoordinate.CENTER)
+			? `url(${image})`
+			: "";
+
+		const bgPosition = getSectionBgPosition(coordinate);
+
+		const bgSize = getSectionBgSize(coordinate, corner, imageSize, height, width);
+		const bgSizeWidth = Boolean(bgSize.width)
+			? Protocol.Snippets.value(bgSize.width, Protocol.Unit.PX)
+			: "auto";
+		const bgSizeHeight = Boolean(bgSize.height)
+			? Protocol.Snippets.value(bgSize.height, Protocol.Unit.PX)
+			: "auto";
+
+		const display = Boolean(coordinate === Types.NineCoordinate.CENTER)
+			? "contents"
+			: "block";
 
 		return css`
-			height: ${dimensions.height || "auto"}
-			width: ${dimensions.width || "auto"}
-
-			background-position-x: ${backgroundImagePosition.x};
-			background-position-y: ${backgroundImagePosition.y};
+			background-image: ${bgImage};
+			background-position-x: ${bgPosition.x};
+			background-position-y: ${bgPosition.y};
+			background-size: ${bgSizeWidth} ${bgSizeHeight};
+			display: ${display};
+			grid-area: ${coordinate};
 		`;
 	}}
-	/** */
-	grid-area: ${(props) => props.coordinates};
-	background-image: ${(props) => props.image};
 `;
 
-function getSectionDimensions(
-	coordinates: Types.NineCoordinate,
+function getSectionBgSize(
+	coordinate: Types.NineCoordinate,
 	corner: INineSectionProps["corner"],
-): Types.INineSectionDimensions {
-	const dimensions: Types.INineSectionDimensions = {
+	imageSize: INineSectionProps["imageSize"],
+	height: INineSectionProps["height"],
+	width: INineSectionProps["width"],
+): Types.INineSectionBgSize {
+	const size: Types.INineSectionBgSize = {
 		height: 0,
 		width: 0,
 	};
 
-	switch (coordinates) {
-		/** Corners */
-		case Types.NineCoordinate.NORTH_WEST:
-		case Types.NineCoordinate.NORTH_EAST:
-		case Types.NineCoordinate.SOUTH_WEST:
-		case Types.NineCoordinate.SOUTH_EAST:
-			dimensions.height = corner;
-			dimensions.width = corner;
-			break;
+	const widthScaleOffset = Math.ceil((corner / imageSize!.width) * width);
+	const heightScaleOffset = Math.ceil((corner / imageSize!.height) * height);
 
+	switch (coordinate) {
 		/** Top & Bottom */
-
 		case Types.NineCoordinate.NORTH:
 		case Types.NineCoordinate.SOUTH:
-			dimensions.height = corner;
+			size.height = imageSize!.height;
+			size.width = width + widthScaleOffset;
 			break;
 
 		/** Left & Right */
-
 		case Types.NineCoordinate.EAST:
 		case Types.NineCoordinate.WEST:
-			dimensions.width = corner;
+			size.height = height + heightScaleOffset;
+			size.width = imageSize!.width;
 			break;
 
-		default:
-			break;
+		case Types.NineCoordinate.CENTER:
+			size.height = height - corner * 2;
+			size.width = width - corner * 2;
 	}
 
-	return dimensions;
+	return size;
 }
 
-function getSectionBackgroundImagePosition(
-	coordinates: Types.NineCoordinate,
-	corner: INineSectionProps["corner"],
+function getSectionBgPosition(
+	coordinate: Types.NineCoordinate,
 ): Types.INineSectionBackgroundImageOffset {
 	const backgroundPosition: Types.INineSectionBackgroundImageOffset = {
 		x: "center",
 		y: "center",
 	};
 
-	const cornerPx = Protocol.Snippets.value(corner, Protocol.Unit.PX);
-
-	switch (coordinates) {
+	switch (coordinate) {
 		case Types.NineCoordinate.NORTH:
-			backgroundPosition.x = "left";
-			backgroundPosition.y = `top ${cornerPx}`;
+			backgroundPosition.x = "center";
+			backgroundPosition.y = "top";
 			break;
 
 		case Types.NineCoordinate.SOUTH:
 			backgroundPosition.x = "center";
-			backgroundPosition.y = `bottom ${cornerPx}`;
+			backgroundPosition.y = "bottom";
 			break;
 
 		case Types.NineCoordinate.EAST:
@@ -182,23 +203,23 @@ function getSectionBackgroundImagePosition(
 			break;
 
 		case Types.NineCoordinate.NORTH_WEST:
-			backgroundPosition.x = `left ${cornerPx}`;
-			backgroundPosition.y = `top ${cornerPx}`;
+			backgroundPosition.x = "left";
+			backgroundPosition.y = "top";
 			break;
 
 		case Types.NineCoordinate.NORTH_EAST:
-			backgroundPosition.x = `right ${cornerPx}`;
-			backgroundPosition.y = `top ${cornerPx}`;
+			backgroundPosition.x = "right";
+			backgroundPosition.y = "top";
 			break;
 
 		case Types.NineCoordinate.SOUTH_EAST:
-			backgroundPosition.x = `right ${cornerPx}`;
-			backgroundPosition.y = `bottom ${cornerPx}`;
+			backgroundPosition.x = "right";
+			backgroundPosition.y = "bottom";
 			break;
 
 		case Types.NineCoordinate.SOUTH_WEST:
-			backgroundPosition.x = `left ${cornerPx}`;
-			backgroundPosition.y = `bottom ${cornerPx}`;
+			backgroundPosition.x = "left";
+			backgroundPosition.y = "bottom";
 			break;
 
 		default:

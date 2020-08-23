@@ -3,15 +3,15 @@ import * as CSS from "csstype";
 /**
  * Default height & width of the 9-slice image.
  */
-export interface INineImageDimensions {
+export interface INineImageSize {
 	height: number;
 	width: number;
 }
 
 /**
- * Dimensions of a 9-slice section.
+ * Size of a 9-slice section.
  */
-export interface INineSectionDimensions {
+export interface INineSectionBgSize {
 	height: number;
 	width: number;
 }
