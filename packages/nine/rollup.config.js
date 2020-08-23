@@ -1,5 +1,6 @@
 import alias from "@rollup/plugin-alias";
 import cleaner from "rollup-plugin-cleaner";
+import image from "@rollup/plugin-image";
 import tsPlugin from "rollup-plugin-typescript2";
 import ttypescript from "ttypescript";
 
@@ -36,11 +37,12 @@ export default {
 				},
 			},
 		}),
-		cleaner({
-			targets: pkg.files,
-		}),
 		alias({
 			entries: [{ find: "~/*", replacement: "src/*" }],
 		}),
+		cleaner({
+			targets: pkg.files,
+		}),
+		image(),
 	],
 };

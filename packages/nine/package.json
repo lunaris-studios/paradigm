@@ -27,7 +27,7 @@
     "dev": "run-p \"dev:*\"",
     "dev:jest": "npm run test:jest-generate-output -- --watch",
     "dev:rollup": "rollup -cw",
-    "dev:storybook": "start-storybook --ci",
+    "dev:storybook": "start-storybook --ci --port 9001",
     "dist": "run-s \"dist:*\"",
     "dist:rollup": "rollup -c",
     "lint": "run-p \"lint:*\"",
@@ -54,6 +54,7 @@
   "devDependencies": {
     "@babel/core": "^7.11.1",
     "@rollup/plugin-alias": "^3.1.1",
+    "@rollup/plugin-image": "^2.0.5",
     "@storybook/addon-essentials": "^6.0.10",
     "@storybook/addon-links": "^6.0.10",
     "@storybook/react": "^6.0.10",
