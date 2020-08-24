@@ -4,12 +4,13 @@ import * as React from "react";
 import * as Spring from "react-spring";
 
 import * as Common from "~/common";
-import * as Components from "~/components";
 
 import * as Util from "~/util";
 
 import * as Animated from "./overlay.animated";
 import * as Styled from "./overlay.styled";
+
+import { Portal } from "../portal/portal";
 
 /**
  * [Overlay]
@@ -324,11 +325,7 @@ export class Overlay extends Abstract.AbstractPureComponent<
 			/>
 		);
 
-		return usePortal ? (
-			<Components.Portal>{transitionGroup}</Components.Portal>
-		) : (
-			transitionGroup
-		);
+		return usePortal ? <Portal>{transitionGroup}</Portal> : transitionGroup;
 	}
 
 	/** */
