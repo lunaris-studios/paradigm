@@ -1,4 +1,4 @@
-import * as BIN from "~/bin";
+import { Theme } from "../";
 
 import "styled-components";
 
@@ -9,5 +9,5 @@ declare module "styled-components" {
 	 *
 	 * https://styled-components.com/docs/api#create-a-declarations-file
 	 */
-	export interface DefaultTheme extends BIN.Theme {}
+	export interface DefaultTheme extends Theme {}
 }
