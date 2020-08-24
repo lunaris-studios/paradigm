@@ -1,5 +1,6 @@
 import * as Protocol from "@paradigmjs/protocol";
 import * as SC from "styled-components";
+import * as Spring from "react-spring";
 // re-import `styled-components` development mode DOM classnames.
 import styled, { css } from "styled-components";
 
@@ -22,7 +23,7 @@ import * as Types from "./nine.types";
  */
 
 interface Nine {
-	Container: Util.SC.Styled<"div", INineContainerProps>;
+	Container: Util.SC.Styled<Spring.AnimatedComponent<"div">, INineContainerProps>;
 	Row: Util.SC.Styled<"div", INineRowProps>;
 
 	StubImage: Util.SC.Styled<"img", INineStubImageProps>;
@@ -41,8 +42,8 @@ interface INineContainerProps {
 	width: Component.INineProps["width"];
 }
 
-Nine.Container = styled("div")<INineContainerProps>`
-	${(props) => {
+Nine.Container = styled(Spring.animated.div)<INineContainerProps>`
+	${(props: INineContainerProps) => {
 		const { height, width, corner } = props;
 
 		const heightPx = Protocol.Snippets.value(height, Protocol.Unit.PX);
@@ -52,7 +53,6 @@ Nine.Container = styled("div")<INineContainerProps>`
 		return css`
 			height: ${heightPx};
 			width: ${widthPx};
-
 			grid-template-columns: ${cornerPX} 1fr ${cornerPX};
 			grid-template-rows: ${cornerPX} 1fr ${cornerPX};
 		`;
@@ -103,7 +103,7 @@ interface INineSectionProps {
 Nine.Section = styled("div")<INineSectionProps>`
 	/* ${Protocol.Snippets.debug()} */
 	/** */
-	${(props) => {
+	${(props: INineSectionProps) => {
 		const { coordinate, corner, height, image, imageSize, width } = props;
 
 		const bgImage = Boolean(coordinate !== Types.NineCoordinate.CENTER)

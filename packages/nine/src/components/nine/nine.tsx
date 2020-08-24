@@ -1,5 +1,7 @@
 import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
+import * as Spring from "react-spring";
+import styled, { css } from "styled-components";
 
 import * as Common from "~/common";
 
@@ -18,7 +20,7 @@ export interface INineProps {
 	/**
 	 * Passed as a child to the `Types.NineCoordinate.CENTER` 9-slice section.
 	 */
-	children: React.ReactNode;
+	children?: React.ReactNode;
 
 	/**
 	 * Height of the surface.
@@ -94,7 +96,7 @@ export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState>
 	public static Errors = Errors;
 	public static Types = Types;
 
-	public render(): JSX.Element | null {
+	public render(): JSX.Element {
 		const { children, corner, height, image, tagName, width } = this.props;
 		const { imageSize, isLoaded } = this.state;
 
@@ -103,58 +105,62 @@ export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState>
 		return (
 			<React.Fragment>
 				<Styled.Nine.StubImage src={image} onLoad={this.onImgLoad} />
-				{isLoaded ? (
-					<Styled.Nine.Container
-						as={tagName}
-						corner={corner}
-						height={height}
-						width={width}
-					>
-						{/* Row One */}
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.NORTH_WEST}
-							{...sectionProps}
-						/>
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.NORTH}
-							{...sectionProps}
-						/>
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.NORTH_EAST}
-							{...sectionProps}
-						/>
+				<Spring.Transition items={isLoaded} from={{ opacity: 0 }} enter={{ opacity: 1 }}>
+					{(springs, isLoaded) =>
+						isLoaded && (
+							<Styled.Nine.Container
+								corner={corner}
+								height={height}
+								style={springs}
+								width={width}
+							>
+								{/* Row One */}
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.NORTH_WEST}
+								/>
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.NORTH}
+								/>
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.NORTH_EAST}
+								/>
 
-						{/* Row Two */}
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.WEST}
-							{...sectionProps}
-						/>
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.CENTER}
-							{...sectionProps}
-						>
-							{children}
-						</Styled.Nine.Section>
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.EAST}
-							{...sectionProps}
-						/>
+								{/* Row Two */}
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.WEST}
+								/>
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.CENTER}
+								>
+									{children}
+								</Styled.Nine.Section>
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.EAST}
+								/>
 
-						{/* Row Three */}
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.SOUTH_WEST}
-							{...sectionProps}
-						/>
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.SOUTH}
-							{...sectionProps}
-						/>
-						<Styled.Nine.Section
-							coordinate={Types.NineCoordinate.SOUTH_EAST}
-							{...sectionProps}
-						/>
-					</Styled.Nine.Container>
-				) : null}
+								{/* Row Three */}
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.SOUTH_WEST}
+								/>
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.SOUTH}
+								/>
+								<Styled.Nine.Section
+									{...sectionProps}
+									coordinate={Types.NineCoordinate.SOUTH_EAST}
+								/>
+							</Styled.Nine.Container>
+						)
+					}
+				</Spring.Transition>
 			</React.Fragment>
 		);
 	}

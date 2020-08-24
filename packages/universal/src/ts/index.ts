@@ -1,5 +1,9 @@
+import "@testing-library/jest-dom/extend-expect";
+import "@testing-library/jest-dom";
+import "jest-styled-components";
+import "jest-extended";
+
 import * as React from "react";
-import { default as hoistNonReactStatics } from "hoist-non-react-statics";
 
 /**
  * Default properties for components rendered via `Universal.render`

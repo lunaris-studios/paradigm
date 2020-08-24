@@ -14,14 +14,14 @@ npm install --save @paradigmjs/nine
 
 ```js
 import * as React from "react";
-import { default as Nine } from "@paradigmjs/nine";
+import { Nine } from "@paradigmjs/nine";
 
 class MyComponent extends React.Component {
 	render() {
 		return (
 			<Nine width={256} height={256} corner={85} image="/images/myImage.png">
 				HELLO WORLD!
-			</NineSlicNinee>
+			</Nine>
 		);
 	}
 }
