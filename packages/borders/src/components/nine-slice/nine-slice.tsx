@@ -78,7 +78,7 @@ export interface INineSliceState {
 const defaultProps = Object.freeze<INineSliceDefaultProps>({
 	corner: 8,
 	height: 128,
-	springConfig: Protocol.SpringPresets.defaulta,
+	springConfig: Protocol.SpringPresets.default,
 	tagName: "div",
 	width: 128,
 });
