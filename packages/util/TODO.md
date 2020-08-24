@@ -1,0 +1,1 @@
+- [ ] Add explicit return types to all methods
