@@ -6,12 +6,6 @@ import styled, { css } from "styled-components";
 import * as Util from "~/util";
 
 /**
- * Table of Contents
- *
- * [Icon]
- */
-
-/**
  * [Icon]
  * - [Icon.Container(WRAPPER)]
  * - - [Icon.SVG(ELEMENT)]

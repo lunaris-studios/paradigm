@@ -10,12 +10,6 @@ import * as Component from "./nine-slice";
 import * as Types from "./nine-slice.types";
 
 /**
- * Table of Contents
- *
- * [NineSlice]
- */
-
-/**
  * [NineSlice]
  * - [NineSlice.Container(WRAPPER)]
  * - - [NineSlice.Row(WRAPPER)(MAP<3>)]

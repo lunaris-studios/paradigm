@@ -8,12 +8,6 @@ import * as Util from "~/util";
 import * as Component from "./divider";
 
 /**
- * Table of Contents
- *
- * [Divider]
- */
-
-/**
  * [Divider]
  * - [Divider.Element(ELEMENT)]
  */

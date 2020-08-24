@@ -8,12 +8,6 @@ import styled, { css, keyframes } from "styled-components";
 import * as Common from "~/common";
 
 /**
- * Table of Contents
- *
- * [Spinner]
- */
-
-/**
  * [Spinner]
  * - [Spinner.Container(WRAPPER)]
  */

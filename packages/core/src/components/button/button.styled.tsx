@@ -7,12 +7,6 @@ import styled from "styled-components";
 import * as Util from "~/util";
 
 /**
- * Table of Contents
- *
- * [Button]
- */
-
-/**
  * [Button]
  * - [Button.Container(WRAPPER)]
  * - - [Components.Spinner(COMPONENT)]

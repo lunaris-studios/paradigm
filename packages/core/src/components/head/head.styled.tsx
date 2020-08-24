@@ -4,12 +4,6 @@ import * as SC from "styled-components";
 import styled, { createGlobalStyle } from "styled-components";
 
 /**
- * Table of Contents
- *
- * [Head]
- */
-
-/**
  * [Head]
  * - [Head.Global(GLOBAL)]
  */
