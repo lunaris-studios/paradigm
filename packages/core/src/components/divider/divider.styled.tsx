@@ -19,7 +19,7 @@ import * as Component from "./divider";
  */
 
 interface Divider {
-	Element: Util.StyledComponent<"div", IDividerElementProps>;
+	Element: Util.SC.Styled<"div", IDividerElementProps>;
 }
 
 export const Divider = {} as Divider;
