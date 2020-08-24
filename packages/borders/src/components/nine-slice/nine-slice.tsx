@@ -1,7 +1,7 @@
 import * as Abstract from "@paradigmjs/abstract";
+import * as Protocol from "@paradigmjs/protocl";
 import * as React from "react";
 import * as Spring from "react-spring";
-import styled, { css } from "styled-components";
 
 import * as Common from "~/common";
 
@@ -33,6 +33,12 @@ export interface INineSliceProps {
 	 * surface.
 	 */
 	image: string;
+
+	/**
+	 * Spring configuration object.
+	 * @default Protocol.SpringPresets.default
+	 */
+	springConfig: Spring.SpringConfig;
 
 	/**
 	 * Styling to apply to the child element.
@@ -72,6 +78,7 @@ export interface INineSliceState {
 const defaultProps = Object.freeze<INineSliceDefaultProps>({
 	corner: 8,
 	height: 128,
+	springConfig: Spring.config.default,
 	tagName: "div",
 	width: 128,
 });
@@ -101,7 +108,7 @@ export class NineSlice extends Abstract.AbstractPureComponent<
 	public static Types = Types;
 
 	public render(): JSX.Element {
-		const { children, corner, height, image, tagName, width } = this.props;
+		const { children, corner, height, image, springConfig, tagName, width } = this.props;
 		const { imageSize, isLoaded } = this.state;
 
 		const sectionProps = { corner, height, image, imageSize, width };
@@ -109,7 +116,12 @@ export class NineSlice extends Abstract.AbstractPureComponent<
 		return (
 			<React.Fragment>
 				<Styled.NineSlice.StubImage src={image} onLoad={this.onImgLoad} />
-				<Spring.Transition items={isLoaded} from={{ opacity: 0 }} enter={{ opacity: 1 }}>
+				<Spring.Transition
+					config={springConfig}
+					items={isLoaded}
+					from={{ opacity: 0 }}
+					enter={{ opacity: 1 }}
+				>
 					{(springs, isLoaded) =>
 						isLoaded && (
 							<Styled.NineSlice.Container
