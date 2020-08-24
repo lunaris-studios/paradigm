@@ -1,5 +1,5 @@
 import * as Abstract from "@paradigmjs/abstract";
-import * as Protocol from "@paradigmjs/protocl";
+import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 import * as Spring from "react-spring";
 
@@ -78,7 +78,7 @@ export interface INineSliceState {
 const defaultProps = Object.freeze<INineSliceDefaultProps>({
 	corner: 8,
 	height: 128,
-	springConfig: Spring.config.default,
+	springConfig: Protocol.SpringPresets.defaulta,
 	tagName: "div",
 	width: 128,
 });
