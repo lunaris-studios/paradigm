@@ -1,4 +1,6 @@
-/** */
+/**
+ * Incremental stages to
+ */
 export enum BorderWidth {
 	ZERO = 0,
 	ONE = 1,

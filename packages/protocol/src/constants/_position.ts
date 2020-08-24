@@ -1,4 +1,6 @@
-/** */
+/**
+ * Two-dimensional coordinate locations.
+ */
 export enum Position {
 	BOTTOM = "BOTTOM",
 	BOTTOM_LEFT = "BOTTOM_LEFT",
