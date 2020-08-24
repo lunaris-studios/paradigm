@@ -39,6 +39,7 @@
 	"dependencies": {
 		"csstype": "^3.0.2",
 		"polished": "^3.6.5",
+		"react-spring": "^9.0.0-rc.3",
 		"styled-components": "^5.1.1",
 		"typography": "^0.16.19"
 	},
