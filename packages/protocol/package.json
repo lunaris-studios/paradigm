@@ -37,6 +37,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
+		"@paradigmjs/util": "^0.0.15",
 		"csstype": "^3.0.2",
 		"polished": "^3.6.5",
 		"react-spring": "^9.0.0-rc.3",
