@@ -1,6 +1,5 @@
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
-import * as SC from "styled-components";
 import * as Spring from "react-spring";
 // re-import `styled-components` development mode DOM classnames.
 import styled from "styled-components";
@@ -21,9 +20,9 @@ import * as Util from "~/util";
  */
 
 export interface Overlay {
-	Container: Util.StyledComponent<"div", IOverlayContainerProps>;
-	Content: Util.StyledComponent<Spring.AnimatedComponent<"div">, IOverlayContentProps>;
-	Backdrop: Util.StyledComponent<Spring.AnimatedComponent<"div">, IOverlayBackdropProps>;
+	Container: Util.SC.Styled<"div", IOverlayContainerProps>;
+	Content: Util.SC.Styled<Spring.AnimatedComponent<"div">, IOverlayContentProps>;
+	Backdrop: Util.SC.Styled<Spring.AnimatedComponent<"div">, IOverlayBackdropProps>;
 }
 
 export const Overlay = {} as Overlay;

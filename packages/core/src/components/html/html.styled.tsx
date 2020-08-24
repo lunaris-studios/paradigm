@@ -1,11 +1,9 @@
 import * as React from "react";
 import * as SC from "styled-components";
-
-import * as Common from "~/common";
-import * as Components from "~/components";
-
 // re-import `styled-components` development mode DOM classnames.
 import styled, { css } from "styled-components";
+
+import * as Util from "~/util";
 
 /**
  * [HTML]
@@ -19,20 +17,15 @@ import styled, { css } from "styled-components";
  */
 
 interface HTML {
-	Header: SC.StyledComponent<"h1", any, IHTMLHeaderAttrs, keyof IHTMLHeaderAttrs>;
+	Header: Util.SC.Styled<"h1", IHTMLHeaderProps>;
 
-	Blockquote: SC.StyledComponent<
-		"blockquote",
-		any,
-		IHTMLBlockquoteAttrs,
-		keyof IHTMLBlockquoteAttrs
-	>;
-	Code: SC.StyledComponent<"code", any, IHTMLCodeAttrs, keyof IHTMLCodeAttrs>;
-	Pre: SC.StyledComponent<"pre", any, IHTMLPreAttrs, keyof IHTMLPreAttrs>;
-	Label: SC.StyledComponent<"label", any, IHTMLLabelAttrs, keyof IHTMLLabelAttrs>;
+	Blockquote: Util.SC.Styled<"blockquote", IHTMLBlockquoteProps>;
+	Code: Util.SC.Styled<"code", IHTMLCodeProps>;
+	Pre: Util.SC.Styled<"pre", IHTMLPreProps>;
+	Label: Util.SC.Styled<"label", IHTMLLabelProps>;
 
-	OL: SC.StyledComponent<"ol", any, IHTMLOLAttrs, keyof IHTMLOLAttrs>;
-	UL: SC.StyledComponent<"ul", any, IHTMLULAttrs, keyof IHTMLULAttrs>;
+	OL: Util.SC.Styled<"ol", IHTMLOLProps>;
+	UL: Util.SC.Styled<"ul", IHTMLULProps>;
 }
 
 export const HTML = {} as HTML;
@@ -41,96 +34,54 @@ export const HTML = {} as HTML;
  * [HTML.Header]
  */
 
-interface IHTMLHeaderProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLHeaderProps {}
 
-interface IHTMLHeaderAttrs extends IHTMLHeaderProps {}
-
-HTML.Header = styled("h1").attrs(
-	(props: IHTMLHeaderProps): IHTMLHeaderAttrs => ({
-		...props,
-	}),
-)``;
+HTML.Header = styled("h1")<IHTMLHeaderProps>``;
 
 /**
  * [HTML.Blockquote]
  */
 
-interface IHTMLBlockquoteProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLBlockquoteProps {}
 
-interface IHTMLBlockquoteAttrs extends IHTMLBlockquoteProps {}
-
-HTML.Blockquote = styled("blockquote").attrs(
-	(props: IHTMLBlockquoteProps): IHTMLBlockquoteAttrs => ({
-		...props,
-	}),
-)``;
+HTML.Blockquote = styled("blockquote")<IHTMLBlockquoteProps>``;
 
 /**
  * [HTML.Code]
  */
 
-interface IHTMLCodeProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLCodeProps {}
 
-interface IHTMLCodeAttrs extends IHTMLCodeProps {}
-
-HTML.Code = styled("code").attrs(
-	(props: IHTMLCodeProps): IHTMLCodeAttrs => ({
-		...props,
-	}),
-)``;
+HTML.Code = styled("code")<IHTMLCodeProps>``;
 
 /**
  * [HTML.Pre]
  */
 
-interface IHTMLPreProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLPreProps {}
 
-interface IHTMLPreAttrs extends IHTMLPreProps {}
-
-HTML.Pre = styled("pre").attrs(
-	(props: IHTMLPreProps): IHTMLPreAttrs => ({
-		...props,
-	}),
-)``;
+HTML.Pre = styled("pre")<IHTMLPreProps>``;
 
 /**
  * [HTML.Label]
  */
 
-interface IHTMLLabelProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLLabelProps {}
 
-interface IHTMLLabelAttrs extends IHTMLLabelProps {}
-
-HTML.Label = styled("label").attrs(
-	(props: IHTMLLabelProps): IHTMLLabelAttrs => ({
-		...props,
-	}),
-)``;
+HTML.Label = styled("label")<IHTMLLabelProps>``;
 
 /**
  * [HTML.OL]
  */
 
-interface IHTMLOLProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLOLProps {}
 
-interface IHTMLOLAttrs extends IHTMLOLProps {}
-
-HTML.OL = styled("ol").attrs(
-	(props: IHTMLOLProps): IHTMLOLAttrs => ({
-		...props,
-	}),
-)``;
+HTML.OL = styled("ol")<IHTMLOLProps>``;
 
 /**
  * [HTML.UL]
  */
 
-interface IHTMLULProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IHTMLULProps {}
 
-interface IHTMLULAttrs extends IHTMLULProps {}
-
-HTML.UL = styled("ul").attrs(
-	(props: IHTMLULProps): IHTMLULAttrs => ({
-		...props,
-	}),
-)``;
+HTML.UL = styled("ul")<IHTMLULProps>``;

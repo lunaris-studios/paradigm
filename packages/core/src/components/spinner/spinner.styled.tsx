@@ -19,7 +19,7 @@ import * as Common from "~/common";
  */
 
 interface Spinner {
-	Container: Util.StyledComponent<"div", ISpinnerContainerProps>;
+	Container: Util.SC.Styled<"div", ISpinnerContainerProps>;
 
 	SVG: SpinnerSVG;
 }
@@ -49,7 +49,7 @@ Spinner.Container = styled("div")`
  */
 
 interface SpinnerSVG {
-	Container: Util.StyledComponent<"svg", ISpinnerSVGContainerProps>;
+	Container: Util.SC.Styled<"svg", ISpinnerSVGContainerProps>;
 
 	Path: SpinnerSVGPath;
 }
@@ -91,8 +91,8 @@ Spinner.SVG.Container = styled("svg")`
 interface SpinnerSVGPath {
 	Shared: SC.FlattenSimpleInterpolation;
 
-	Head: Util.StyledComponent<"path", ISpinnerSVGPathHeadProps>;
-	Track: Util.StyledComponent<"path", ISpinnerSVGPathTrackProps>;
+	Head: Util.SC.Styled<"path", ISpinnerSVGPathHeadProps>;
+	Track: Util.SC.Styled<"path", ISpinnerSVGPathTrackProps>;
 }
 
 Spinner.SVG.Path = {} as SpinnerSVGPath;

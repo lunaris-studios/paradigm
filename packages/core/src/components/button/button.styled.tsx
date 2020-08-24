@@ -6,8 +6,6 @@ import styled from "styled-components";
 
 import * as Util from "~/util";
 
-import * as Component from "./button";
-
 /**
  * Table of Contents
  *
@@ -18,18 +16,13 @@ import * as Component from "./button";
  * [Button]
  * - [Button.Container(WRAPPER)]
  * - - [Components.Spinner(COMPONENT)]
- * - - [Components.Icon()]
- * - - [Button.Text]
+ * - - [Components.Icon(COMPONENT)]
+ * - - [Button.Text(ELEMENT)]
  */
 
 interface Button {
-	Container: SC.StyledComponent<
-		Spring.AnimatedComponent<"button">,
-		IButtonContainerProps,
-		IButtonContainerProps,
-		keyof IButtonContainerProps
-	>;
-	Text: Util.StyledComponent<Spring.AnimatedComponent<"span">, IButtonTextProps>;
+	Container: Util.SC.Styled<Spring.AnimatedComponent<"button">, IButtonContainerProps>;
+	Text: Util.SC.Styled<Spring.AnimatedComponent<"span">, IButtonTextProps>;
 }
 
 export const Button = {} as Button;
