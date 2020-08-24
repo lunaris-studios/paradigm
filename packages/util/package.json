@@ -39,7 +39,6 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/protocol": "^0.0.15",
 		"@storybook/addons": "^6.0.16",
 		"@storybook/react": "^6.0.16",
 		"lodash-es": "^4.17.15",
