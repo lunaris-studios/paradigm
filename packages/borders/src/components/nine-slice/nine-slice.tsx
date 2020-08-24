@@ -5,11 +5,11 @@ import styled, { css } from "styled-components";
 
 import * as Common from "~/common";
 
-import * as Errors from "./nine.errors";
-import * as Styled from "./nine.styled";
-import * as Types from "./nine.types";
+import * as Errors from "./nine-slice.errors";
+import * as Styled from "./nine-slice.styled";
+import * as Types from "./nine-slice.types";
 
-export interface INineProps {
+export interface INineSliceProps {
 	/**
 	 * Squared length reserved for the non-scalable, static corner elements.
 	 * of the 9-slice layout.
@@ -18,7 +18,7 @@ export interface INineProps {
 	corner: number;
 
 	/**
-	 * Passed as a child to the `Types.NineCoordinate.CENTER` 9-slice section.
+	 * Passed as a child to the `Types.NineSliceCoordinate.CENTER` 9-slice section.
 	 */
 	children?: React.ReactNode;
 
@@ -52,14 +52,15 @@ export interface INineProps {
 	width: number;
 }
 
-export interface INineDefaultProps extends Omit<INineProps, "image" | "children"> {}
+export interface INineSliceDefaultProps
+	extends Omit<INineSliceProps, "image" | "children"> {}
 
-export interface INineState {
+export interface INineSliceState {
 	/**
 	 * Height & width of the 9-slice image.
 	 * @default undefined
 	 */
-	imageSize: Types.INineImageSize | undefined;
+	imageSize: Types.INineSliceImageSize | undefined;
 
 	/**
 	 * Indicates whether or not the image has finished loading.
@@ -68,29 +69,32 @@ export interface INineState {
 	isLoaded: boolean;
 }
 
-const defaultProps = Object.freeze<INineDefaultProps>({
+const defaultProps = Object.freeze<INineSliceDefaultProps>({
 	corner: 8,
 	height: 128,
 	tagName: "div",
 	width: 128,
 });
 
-const defaultState = Object.freeze<INineState>({
+const defaultState = Object.freeze<INineSliceState>({
 	imageSize: undefined,
 	isLoaded: false,
 });
 
-export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState> {
-	public static readonly displayName = `${Common.DISPLAYNAME_PREFIX}.Nine`;
+export class NineSlice extends Abstract.AbstractPureComponent<
+	INineSliceProps,
+	INineSliceState
+> {
+	public static readonly displayName = `${Common.DISPLAYNAME_PREFIX}.NineSlice`;
 
-	public constructor(props: INineProps) {
+	public constructor(props: INineSliceProps) {
 		super(props);
 
 		this.onImgLoad = this.onImgLoad.bind(this);
 	}
 
-	public static readonly defaultProps: INineDefaultProps = defaultProps;
-	public state: INineState = defaultState;
+	public static readonly defaultProps: INineSliceDefaultProps = defaultProps;
+	public state: INineSliceState = defaultState;
 
 	public static Styled = Styled;
 	public static Errors = Errors;
@@ -104,60 +108,60 @@ export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState>
 
 		return (
 			<React.Fragment>
-				<Styled.Nine.StubImage src={image} onLoad={this.onImgLoad} />
+				<Styled.NineSlice.StubImage src={image} onLoad={this.onImgLoad} />
 				<Spring.Transition items={isLoaded} from={{ opacity: 0 }} enter={{ opacity: 1 }}>
 					{(springs, isLoaded) =>
 						isLoaded && (
-							<Styled.Nine.Container
+							<Styled.NineSlice.Container
 								corner={corner}
 								height={height}
 								style={springs}
 								width={width}
 							>
 								{/* Row One */}
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.NORTH_WEST}
+									coordinate={Types.NineSliceCoordinate.NORTH_WEST}
 								/>
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.NORTH}
+									coordinate={Types.NineSliceCoordinate.NORTH}
 								/>
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.NORTH_EAST}
+									coordinate={Types.NineSliceCoordinate.NORTH_EAST}
 								/>
 
 								{/* Row Two */}
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.WEST}
+									coordinate={Types.NineSliceCoordinate.WEST}
 								/>
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.CENTER}
+									coordinate={Types.NineSliceCoordinate.CENTER}
 								>
 									{children}
-								</Styled.Nine.Section>
-								<Styled.Nine.Section
+								</Styled.NineSlice.Section>
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.EAST}
+									coordinate={Types.NineSliceCoordinate.EAST}
 								/>
 
 								{/* Row Three */}
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.SOUTH_WEST}
+									coordinate={Types.NineSliceCoordinate.SOUTH_WEST}
 								/>
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.SOUTH}
+									coordinate={Types.NineSliceCoordinate.SOUTH}
 								/>
-								<Styled.Nine.Section
+								<Styled.NineSlice.Section
 									{...sectionProps}
-									coordinate={Types.NineCoordinate.SOUTH_EAST}
+									coordinate={Types.NineSliceCoordinate.SOUTH_EAST}
 								/>
-							</Styled.Nine.Container>
+							</Styled.NineSlice.Container>
 						)
 					}
 				</Spring.Transition>
@@ -167,7 +171,7 @@ export class Nine extends Abstract.AbstractPureComponent<INineProps, INineState>
 
 	/** */
 
-	protected validateProps(props: INineProps): void {
+	protected validateProps(props: INineSliceProps): void {
 		const { height, image, corner, width } = props;
 
 		if (height == null) {

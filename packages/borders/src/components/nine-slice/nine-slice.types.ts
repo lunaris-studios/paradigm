@@ -3,7 +3,7 @@ import * as CSS from "csstype";
 /**
  * Default height & width of the 9-slice image.
  */
-export interface INineImageSize {
+export interface INineSliceImageSize {
 	height: number;
 	width: number;
 }
@@ -11,7 +11,7 @@ export interface INineImageSize {
 /**
  * Size of a 9-slice section.
  */
-export interface INineSectionBgSize {
+export interface INineSliceSectionBgSize {
 	height: number;
 	width: number;
 }
@@ -19,7 +19,7 @@ export interface INineSectionBgSize {
 /**
  * Coordinates on the x & y axis to offset the provided image for each section.
  */
-export interface INineSectionBackgroundImageOffset {
+export interface INineSliceSectionBackgroundImageOffset {
 	x: CSS.Property.BackgroundPositionX;
 	y: CSS.Property.BackgroundPositionY;
 }
@@ -27,7 +27,7 @@ export interface INineSectionBackgroundImageOffset {
 /**
  * Cardinal positions used to denote the layout of 9-slice components.
  */
-export enum NineCoordinate {
+export enum NineSliceCoordinate {
 	NORTH = "NORTH",
 	SOUTH = "SOUTH",
 	EAST = "EAST",

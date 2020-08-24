@@ -2,13 +2,13 @@ import * as React from "react";
 
 import * as Util from "~/util";
 
-import * as Component from "./nine";
+import * as Component from "./nine-slice";
 
 import BORDER from "~/assets/border.png";
 import SWORD from "~/assets/sword.png";
 
-const Template: Util.Storybook.React.Story<Component.INineProps> = (args) => (
-	<Component.Nine {...args} image={BORDER} corner={22} />
+const Template: Util.Storybook.React.Story<Component.INineSliceProps> = (args) => (
+	<Component.NineSlice {...args} image={BORDER} corner={22} />
 );
 
 export const Basic = Template.bind({});
@@ -47,6 +47,6 @@ Content.args = {
 };
 
 export default {
-	title: "Nine",
-	component: Component.Nine,
+	title: "NineSlice",
+	component: Component.NineSlice,
 } as Util.Storybook.React.Meta;

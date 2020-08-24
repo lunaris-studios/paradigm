@@ -1,11 +1,11 @@
 {
-  "name": "@paradigmjs/nine",
-  "version": "0.0.15",
-  "description": "React library to create 9-slice image surfaces",
+  "name": "@paradigmjs/borders",
+  "version": "0.0.1",
+  "description": "Paradigm Border Library",
   "repository": {
     "type": "git",
     "url": "git@github.com:lunaris-studios/paradigm.git",
-    "directory": "packages/nine"
+    "directory": "packages/borders"
   },
   "license": "MIT",
   "author": "Sam Craig <sam@lunaris.io>",

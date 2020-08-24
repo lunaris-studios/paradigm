@@ -9,6 +9,10 @@
 			"path": "../packages/abstract"
 		},
 		{
+			"name": "[BORDERS]",
+			"path": "../packages/borders"
+		},
+		{
 			"name": "[CORE]",
 			"path": "../packages/core"
 		},
@@ -19,10 +23,6 @@
 		{
 			"name": "[ICONS]",
 			"path": "../packages/icons"
-		},
-		{
-			"name": "[NINE]",
-			"path": "../packages/nine"
 		},
 		{
 			"name": "[PROTOCOL]",
