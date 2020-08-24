@@ -3,7 +3,6 @@ import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 
 import * as Common from "~/common";
-import * as Components from "~/components";
 
 import * as Styled from "./divider.styled";
 
