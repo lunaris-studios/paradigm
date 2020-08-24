@@ -28,12 +28,10 @@ export const Button = {} as Button;
 interface IButtonContainerProps {}
 
 /**
- * This is overwritten for `AnchorButton` with a corresponding `Spring.animated("a")`
+ * This is overwritten for `AnchorButton` with a corresponding `Spring.animated.a`
  * via styled-component `as` override.
  */
-const AnimatedButtonContainer = Spring.animated("button");
-
-Button.Container = styled(AnimatedButtonContainer)``;
+Button.Container = styled(Spring.animated.button)``;
 
 /**
  * [Button.Text]
@@ -41,10 +39,4 @@ Button.Container = styled(AnimatedButtonContainer)``;
 
 interface IButtonTextProps {}
 
-/**
- * This is overwritten for `AnchorButton` with a corresponding `Spring.animated("a")`
- * constant.
- */
-const AnimatedButtonText = Spring.animated("span");
-
-Button.Text = styled(AnimatedButtonText)``;
+Button.Text = styled(Spring.animated.span)``;

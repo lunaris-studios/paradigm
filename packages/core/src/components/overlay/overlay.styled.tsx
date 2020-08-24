@@ -44,9 +44,7 @@ Overlay.Container = styled("div")<IOverlayContainerProps>`
 
 interface IOverlayContentProps {}
 
-const AnimatedOverlayContent = Spring.animated("div");
-
-Overlay.Content = styled(AnimatedOverlayContent)``;
+Overlay.Content = styled(Spring.animated.div)``;
 
 /**
  * [Overlay.Backdrop]
@@ -54,9 +52,7 @@ Overlay.Content = styled(AnimatedOverlayContent)``;
 
 interface IOverlayBackdropProps {}
 
-const AnimatedOverlayBackdrop = Spring.animated("div");
-
-Overlay.Backdrop = styled(AnimatedOverlayBackdrop)`
+Overlay.Backdrop = styled(Spring.animated.div)`
 	${Protocol.Snippets.cover()}
   /*  */
 	z-index: ${Protocol.ZIndex.OVERLAY};
