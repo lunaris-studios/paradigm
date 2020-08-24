@@ -1,4 +1,3 @@
-import * as Abstract from "@paradigmjs/abstract";
 import * as Addons from "@storybook/addons";
 import * as React from "react";
 
