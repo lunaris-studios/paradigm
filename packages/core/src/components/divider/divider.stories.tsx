@@ -1,4 +1,3 @@
-import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
 import * as SR from "@storybook/react";
 
