@@ -11,14 +11,13 @@ import * as Types from "./nine-slice.types";
 
 /**
  * [NineSlice]
+ * - [NineSlice.StubImage(ELEMENT)]
  * - [NineSlice.Container(WRAPPER)]
- * - - [NineSlice.Row(WRAPPER)(MAP<3>)]
- * - - - [NineSlice.Section(ELEMENT)(MAP<3>)]
+ * - - [NineSlice.Section(ELEMENT)(MAP<3>)]
  */
 
 interface NineSlice {
 	Container: Util.SC.Styled<Spring.AnimatedComponent<"div">, INineSliceContainerProps>;
-	Row: Util.SC.Styled<"div", INineSliceRowProps>;
 
 	StubImage: Util.SC.Styled<"img", INineSliceStubImageProps>;
 	Section: Util.SC.Styled<"div", INineSliceSectionProps>;
@@ -64,14 +63,6 @@ NineSlice.Container = styled(Spring.animated.div)<INineSliceContainerProps>`
 	Types.NineSliceCoordinate.SOUTH_EAST
 }";
 `;
-
-/**
- * [NineSlice.Row]
- */
-
-interface INineSliceRowProps {}
-
-NineSlice.Row = styled("div")<INineSliceRowProps>``;
 
 /**
  * [NineSlice.StubImage]
