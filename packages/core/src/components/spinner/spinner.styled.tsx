@@ -117,7 +117,7 @@ Spinner.SVG.Path.Head = styled("path")`
 	stroke: ${SPINNER_SVG_PATH_HEAD_HEAD};
 	stroke-linecap: round;
 	transform-origin: center;
-	transition: stroke-dashoffset 200ms ${Protocol.TRANSITION_EASE};
+	transition: stroke-dashoffset 200ms ${Protocol.Transition.EASE};
 `;
 
 /**
