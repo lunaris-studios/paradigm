@@ -1,6 +1,6 @@
 import * as Spring from "react-spring";
 
-export const SpringPresets: Record<string, Spring.SpringConfig> = {
+export const SpringPresets = {
 	...Spring.config,
 };
 
