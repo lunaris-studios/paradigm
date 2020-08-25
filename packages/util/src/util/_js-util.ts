@@ -54,5 +54,7 @@ export function countDecimalPlaces(num: number) {
  * can click a button.
  */
 export function isKeyboardClick(keyCode: number) {
-	return keyCode === Protocol.Key.ENTER || keyCode === Protocol.Key.SPACE;
+	const enter = 13;
+	const space = 32;
+	return keyCode === enter || keyCode === space;
 }
