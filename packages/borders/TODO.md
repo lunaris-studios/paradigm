@@ -1,5 +1,6 @@
-- [ ] Add `react-spring` animation configuration via component prop for `NineSlice`
+- [ ] Clean up unused rollup plugins
 
+- [x] Add `react-spring` animation configuration via component prop for `NineSlice`
 - [x] Rename package to `borders`
 - [x] Rename `Nine` component to `NineSlice`
 - [x] Add loading animation for `nine` image load
