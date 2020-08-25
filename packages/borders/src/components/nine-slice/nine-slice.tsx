@@ -6,6 +6,7 @@ import * as Spring from "react-spring";
 import * as Common from "~/common";
 
 import * as Errors from "./nine-slice.errors";
+import * as Props from "./nine-slice.props";
 import * as Styled from "./nine-slice.styled";
 import * as Types from "./nine-slice.types";
 
@@ -92,7 +93,7 @@ export class NineSlice extends Abstract.AbstractPureComponent<
 	INineSliceProps,
 	INineSliceState
 > {
-	public static readonly displayName = `${Common.DISPLAYNAME_PREFIX}.NineSlice`;
+	public static readonly displayName = "";
 
 	public constructor(props: INineSliceProps) {
 		super(props);
