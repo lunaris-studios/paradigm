@@ -10,6 +10,7 @@ import strip from "@rollup/plugin-strip";
 import tsPlugin from "rollup-plugin-typescript2";
 import ttypescript from "ttypescript";
 import visualizer from "rollup-plugin-visualizer";
+
 import { terser } from "rollup-plugin-terser";
 
 import pkg from "./package.json";
@@ -60,7 +61,7 @@ export default {
 			targets: pkg.files,
 		}),
 		analyzer({ summaryOnly: true }),
-		visualizer({ filename: "./dist/bundle.html", sourcemap: true }),
+		visualizer({ filename: "./dist/bundle.html", sourcemap: true, gzipSize: true }),
 		...(isProduction ? [gzip(), strip(), terser()] : []),
 	],
 };
