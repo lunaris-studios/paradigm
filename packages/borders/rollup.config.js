@@ -59,7 +59,6 @@ export default {
 		cleaner({
 			targets: pkg.files,
 		}),
-
 		analyzer({ summaryOnly: true }),
 		visualizer({ filename: "./dist/bundle.html", sourcemap: true }),
 		...(isProduction ? [gzip(), strip(), terser()] : []),
