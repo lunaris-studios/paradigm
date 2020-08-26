@@ -47,6 +47,6 @@ Content.args = {
 };
 
 export default {
-	title: "NineSlice",
+	title: "Borders/NineSlice",
 	component: Component.NineSlice,
 } as Util.Storybook.React.Meta;
