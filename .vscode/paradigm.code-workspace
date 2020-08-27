@@ -80,10 +80,10 @@
 			"sensors",
 			"util",
 		],
-		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [
 			"gptl",
 			"paradigmjs"
-		]
+		],
+		"typescript.tsdk": "[HOME]/node_modules/typescript/lib"
 	}
 }
