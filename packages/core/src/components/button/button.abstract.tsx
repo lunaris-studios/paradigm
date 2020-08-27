@@ -91,10 +91,6 @@ export interface IAbstractButtonState {
 	isActive: boolean;
 }
 
-export interface IAbstractButtonRefHandlers {
-	button: React.Ref<any>;
-}
-
 const defaultProps = Object.freeze<IAbstractButtonProps>({
 	active: false,
 	alignText: Protocol.Alignment.CENTER,
@@ -130,9 +126,9 @@ export abstract class AbstractButton<
 	public static readonly defaultState: IAbstractButtonState = defaultState;
 	public state = defaultState;
 
-	protected buttonRef: HTMLElement | undefined = undefined;
+	protected buttonRef: HTMLElement | null = null;
 	protected refHandlers = {
-		button: (ref: HTMLElement) => {
+		button: (ref: HTMLElement | null) => {
 			this.buttonRef = ref;
 			Util.safeInvoke(this.props.elementRef, ref);
 		},
