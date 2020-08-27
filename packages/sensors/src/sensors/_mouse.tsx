@@ -55,13 +55,17 @@ export class MouseSensor extends React.Component<IMouseSensorProps, IMouseSensor
 
 	private unmounted: boolean = false;
 
-	private targetRef: Util.Nullable<HTMLElement> = null;
+	private targetRef: HTMLElement | null = null;
 	private refHandlers: IMouseSensorExports["refHandlers"] = {
 		target: (ref) => (this.targetRef = ref),
 	};
 
 	public componentDidMount() {
 		this.bindEvents();
+	}
+
+	public componentWillUnmount() {
+		this.unbindEvents();
 	}
 
 	private bindEvents() {
