@@ -10,7 +10,7 @@
 		"noEmit": true,
 		"resolveJsonModule": true,
 		"preserveSymlinks": true,
-		"skipLibCheck": true,
+		"skipLibCheck": false,
 		"sourceMap": true,
 		"strict": true,
 		"target": "esnext",
