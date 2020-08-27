@@ -1,5 +1,4 @@
 import * as Protocol from "@paradigmjs/protocol";
-import * as SC from "styled-components";
 import * as Spring from "react-spring";
 // re-import `styled-components` development mode DOM classnames.
 import styled, { css } from "styled-components";
@@ -36,7 +35,7 @@ interface INineSliceContainerProps {
 }
 
 NineSlice.Container = styled(Spring.animated.div)<INineSliceContainerProps>`
-	${(props: INineSliceContainerProps) => {
+	${(props) => {
 		const { height, width, corner } = props;
 
 		const heightPx = Protocol.Snippets.value(height, Protocol.Unit.PX);
@@ -90,7 +89,7 @@ interface INineSliceSectionProps {
 NineSlice.Section = styled("div")<INineSliceSectionProps>`
 	/* ${Protocol.Snippets.debug()} */
 	/** */
-	${(props: INineSliceSectionProps) => {
+	${(props) => {
 		const { coordinate, corner, height, image, imageSize, width } = props;
 
 		const bgImage = Boolean(coordinate !== Types.NineSliceCoordinate.CENTER)

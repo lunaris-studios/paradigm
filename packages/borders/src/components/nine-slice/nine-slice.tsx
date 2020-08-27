@@ -3,8 +3,6 @@ import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
 import * as Spring from "react-spring";
 
-import * as Common from "~/common";
-
 import * as Errors from "./nine-slice.errors";
 import * as Props from "./nine-slice.props";
 import * as Styled from "./nine-slice.styled";
@@ -93,7 +91,7 @@ export class NineSlice extends Abstract.AbstractPureComponent<
 	INineSliceProps,
 	INineSliceState
 > {
-	public static readonly displayName = "";
+	public static readonly displayName = Props.DISPLAYNAME;
 
 	public constructor(props: INineSliceProps) {
 		super(props);
