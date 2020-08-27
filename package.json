@@ -12,7 +12,7 @@
 		"clean": "run-s clean:packages clean:root",
 		"clean:packages": "lerna run --parallel clean",
 		"clean:root": "rm -rf ./*-debug* && rm -rf ./node_modules package-lock.json",
-		"compile": "lerna run --parallel compile",
+		"compile": "lerna run compile",
 		"depcheck": "depcheck",
 		"dev": "npm run dev:libs",
 		"dev:docs": "lerna bootstrap && lerna run dev --parallel --scope \"@paradigmjs/{docs,sensors,universal,util}\" --stream",
