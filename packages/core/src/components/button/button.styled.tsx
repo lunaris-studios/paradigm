@@ -31,7 +31,7 @@ interface IButtonContainerProps {}
  * This is overwritten for `AnchorButton` with a corresponding `Spring.animated.a`
  * via styled-component `as` override.
  */
-Button.Container = styled(Spring.animated.button)``;
+Button.Container = styled(Spring.animated.button)<IButtonContainerProps>``;
 
 /**
  * [Button.Text]
@@ -39,4 +39,4 @@ Button.Container = styled(Spring.animated.button)``;
 
 interface IButtonTextProps {}
 
-Button.Text = styled(Spring.animated.span)``;
+Button.Text = styled(Spring.animated.span)<IButtonTextProps>``;
