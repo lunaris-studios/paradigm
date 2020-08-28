@@ -7,7 +7,7 @@
 		]
 	},
 	"scripts": {
-		"bootstrap": "lerna bootstrap",
+		"bootstrap": "lerna bootstrap --force-local",
 		"bundle": "lerna run --parallel bundle",
 		"clean": "run-s clean:packages clean:root",
 		"clean:packages": "lerna run --parallel clean",
