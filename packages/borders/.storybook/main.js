@@ -18,11 +18,7 @@ module.exports = {
 			...config.resolve.alias,
 			"~": path.resolve(__dirname, "..", "src"),
 			// https://github.com/storybookjs/storybook/issues/6204#issuecomment-478992364
-			"core-js/modules": path.resolve(
-				__dirname,
-				"..",
-				"node_modules/@storybook/core/node_modules/core-js/modules",
-			),
+			"core-js/modules": path.resolve(__dirname, "..", "node_modules/core-js/modules"),
 		};
 		return config;
 	},
