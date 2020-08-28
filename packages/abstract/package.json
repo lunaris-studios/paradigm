@@ -41,7 +41,7 @@
 	"dependencies": {
 		"@paradigmjs/protocol": "^0.0.15",
 		"@paradigmjs/util": "^0.0.15",
-		"npm-check-updates": "^7.1.0",
+		"npm-check-updates": "^7.1.0"
 	},
 	"devDependencies": {
 		"@rollup/plugin-alias": "^3.1.1",
