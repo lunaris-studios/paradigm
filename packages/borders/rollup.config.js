@@ -1,6 +1,5 @@
 import alias from "@rollup/plugin-alias";
 import analyzer from "rollup-plugin-analyzer";
-import auto from "@rollup/plugin-auto-install";
 import cleaner from "rollup-plugin-cleaner";
 import commonjs from "@rollup/plugin-commonjs";
 import gzip from "rollup-plugin-gzip";
@@ -38,7 +37,6 @@ export default {
 		...Object.keys(pkg.peerDependencies || {}),
 	],
 	plugins: [
-		auto(),
 		tsPlugin({
 			clean: true,
 			typescript: ttypescript,
