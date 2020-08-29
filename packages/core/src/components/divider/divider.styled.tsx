@@ -1,7 +1,6 @@
 import * as Protocol from "@paradigmjs/protocol";
-import * as SC from "styled-components";
-// re-import `styled-components` development mode DOM classnames.
-import styled from "styled-components";
+
+import { default as styled, css } from "styled-components";
 
 import * as Util from "~/util";
 
@@ -26,15 +25,26 @@ interface IDividerElementProps {
 	color: Component.IDividerProps["color"];
 }
 
-const DIVIDER_ELEMENT_OPACITY = Protocol.bind("scheme", {
-	[Protocol.Scheme.DARK]: 0.75,
-	[Protocol.Scheme.LIGHT]: 0.5,
-});
+Divider.Element = styled("div")<IDividerElementProps>`
+	${Protocol.Snippets.debug()}
+	/*  */
+	${(props) => {
+		const { color, theme } = props;
 
-Divider.Element = styled("div")`
-	border-color: ${(props: IDividerElementProps) => props.color || Protocol.Color.BLACK_0};
-	margin: ${Protocol.Snippets.px(Protocol.Space.ONE)};
-	opacity: ${DIVIDER_ELEMENT_OPACITY};
+		const BORDER_COLOR = color || theme.colors.BLACK_0;
+		const MARGIN = Protocol.Snippets.px(theme.spaces.ONE);
+		const OPACITY = Protocol.bind("scheme", {
+			[theme.schemes.DARK]: 0.75,
+			[theme.schemes.LIGHT]: 0.5,
+		});
+
+		return css`
+			border-color: ${BORDER_COLOR};
+			margin: ${MARGIN};
+			opacity: ${OPACITY};
+		`;
+	}}
+	/*  */
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	/**
