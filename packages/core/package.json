@@ -27,7 +27,7 @@
     "dev": "run-p \"dev:*\"",
     "dev:jest": "npm run test:jest-generate-output -- --watch",
     "dev:rollup": "rollup -cw",
-    "dev:storybook": "start-storybook --ci",
+    "dev:storybook": "start-storybook --ci --port 8000 --static-dir ./dist",
     "dist": "run-s \"dist:*\"",
     "dist:rollup": "rollup -c",
     "lint": "run-p \"lint:*\"",
