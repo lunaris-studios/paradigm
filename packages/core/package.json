@@ -74,7 +74,7 @@
     "@types/lodash-es": "^4.17.3",
     "@types/react": "^16.9.48",
     "@types/react-dom": "^16.9.8",
-    "@types/styled-components": "^4.4.3",
+    "@types/styled-components": "^5.1.2",
     "@zerollup/ts-transform-paths": "^1.7.18",
     "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.11.1",
