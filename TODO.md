@@ -1,0 +1,1 @@
+- [ ] Fix `.styled` component annotations

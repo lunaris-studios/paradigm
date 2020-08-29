@@ -1,8 +1,8 @@
 import * as Polished from "polished";
 import { css } from "styled-components";
 
-import * as BIN from "~/bin";
 import * as Constants from "~/constants";
+import { bind } from "../";
 
 export enum BoxShadow {
 	DEFAULT = "DEFAULT",
@@ -32,7 +32,7 @@ export function boxShadow(props: IBoxShadowProps = boxShadowDefaultProps) {
 	}
 }
 
-const boxShadowDefault = BIN.bind("scheme", {
+const boxShadowDefault = bind("scheme", {
 	[Constants.Scheme.DARK]: css`
 		box-shadow: 0 0 0 1px ${Constants.Color.BLACK_5};
 	`,
@@ -47,7 +47,7 @@ const DROP_SHADOW_OPACITY_LIGHT = 0.2;
 const BORDER_SHADOW_OPACITY_DARK = BORDER_SHADOW_OPACITY_LIGHT * 2;
 const DROP_SHADOW_OPACITY_DARK = DROP_SHADOW_OPACITY_LIGHT * 2;
 
-const boxShadowElevation = BIN.bind.variants("scheme", "elevation", {
+const boxShadowElevation = bind.variants("scheme", "elevation", {
 	[Constants.Elevation.ZERO]: {
 		[Constants.Scheme.LIGHT]: css`
 			box-shadow: 0 0 0 1px ${Constants.Color.BLACK_5},

@@ -1,17 +1,9 @@
 import * as React from "react";
 import * as SC from "styled-components";
-
-import * as Common from "~/common";
-import * as Components from "~/components";
-
 // re-import `styled-components` development mode DOM classnames.
 import styled, { css } from "styled-components";
 
-/**
- * Table of Contents
- *
- * [Icon]
- */
+import * as Util from "~/util";
 
 /**
  * [Icon]
@@ -21,15 +13,10 @@ import styled, { css } from "styled-components";
  */
 
 interface Icon {
-	Container: SC.StyledComponent<
-		"div",
-		any,
-		IIconContainerAttrs,
-		keyof IIconContainerAttrs
-	>;
+	Container: Util.SC.Styled<"div", IIconContainerProps>;
 
-	SVG: SC.StyledComponent<"svg", any, IIconSVGAttrs, keyof IIconSVGAttrs>;
-	Title: SC.StyledComponent<"desc", any, IIconTitleAttrs, keyof IIconTitleAttrs>;
+	SVG: Util.SC.Styled<"svg", IIconSVGProps>;
+	Title: Util.SC.Styled<"desc", IIconTitleProps>;
 }
 
 export const Icon = {} as Icon;
@@ -38,15 +25,9 @@ export const Icon = {} as Icon;
  * [Icon.Container]
  */
 
-interface IIconContainerProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IIconContainerProps {}
 
-interface IIconContainerAttrs extends IIconContainerProps {}
-
-Icon.Container = styled("div").attrs(
-	(props: IIconContainerProps): IIconContainerAttrs => ({
-		...props,
-	}),
-)`
+Icon.Container = styled("div")<IIconContainerProps>`
 	/* ensure icons sit inline with text & isolate svg from surrounding elements */
 	/* (vertical alignment in flow is usually off due to svg - not an issue with flex.) */
 	display: inline-block;
@@ -66,15 +47,9 @@ Icon.Container = styled("div").attrs(
  * [Icon.SVG]
  */
 
-interface IIconSVGProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IIconSVGProps {}
 
-interface IIconSVGAttrs extends IIconSVGProps {}
-
-Icon.SVG = styled("svg").attrs(
-	(props: IIconSVGProps): IIconSVGAttrs => ({
-		...props,
-	}),
-)`
+Icon.SVG = styled("svg")<IIconSVGProps>`
 	/* prevent extra vertical whitespace */
 	display: block;
 
@@ -88,12 +63,6 @@ Icon.SVG = styled("svg").attrs(
  * [Icon.Title]
  */
 
-interface IIconTitleProps extends SC.ThemeProps<SC.DefaultTheme> {}
+interface IIconTitleProps {}
 
-interface IIconTitleAttrs extends IIconTitleProps {}
-
-Icon.Title = styled("desc").attrs(
-	(props: IIconTitleProps): IIconTitleAttrs => ({
-		...props,
-	}),
-)``;
+Icon.Title = styled("desc")<IIconTitleProps>``;

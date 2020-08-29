@@ -15,31 +15,28 @@ export abstract class AbstractPureComponent<
 	// this should be static, not an instance method
 	public getDerivedStateFromProps: never;
 
-	/** Component displayName should be `public static`. This property exists to prevent incorrect usage. */
-	protected displayName: never;
-
 	// Not bothering to remove entries when their timeouts finish because clearing invalid ID is a no-op
 	private timeoutIds: number[] = [];
 
 	private requestTimeoutIds: number[] = [];
 
-	constructor(props: P) {
+	constructor(props: P, context?: any) {
 		super(props);
-		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
+		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION) && this.validateProps) {
 			this.validateProps(this.props);
 		}
 	}
 
-	public componentDidUpdate = (_prevProps: P, _prevState: S, _snapshot?: SS): void => {
-		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION)) {
+	public componentDidUpdate(_prevProps: P, _prevState: S, _snapshot?: SS): void {
+		if (!Util.isNodeEnv(Protocol.Stage.PRODUCTION) && this.validateProps) {
 			this.validateProps(this.props);
 		}
-	};
+	}
 
-	public componentWillUnmount = (): void => {
+	public componentWillUnmount(): void {
 		this.clearTimeouts();
 		this.clearRequestTimeouts();
-	};
+	}
 
 	//
 
@@ -48,45 +45,45 @@ export abstract class AbstractPureComponent<
 	 * All stored timeouts will be cleared when component unmounts.
 	 * @returns a "cancel" function that will clear timeout when invoked.
 	 */
-	public setTimeout = (callback: () => void, timeout = 0): Util.RequestFn => {
+	public setTimeout(callback: () => void, timeout = 0): Util.RequestFn {
 		const handle = window.setTimeout(callback, timeout);
 		this.timeoutIds.push(handle);
 		return (): void => window.clearTimeout(handle);
-	};
+	}
 
 	/**
 	 * Clear all known timeouts.
 	 */
-	public clearTimeouts = (): void => {
+	public clearTimeouts(): void {
 		if (this.timeoutIds.length > 0) {
 			this.requestTimeoutIds.forEach((id) => {
 				Util.clearRequestTimeout(id);
 			});
 			this.timeoutIds = [];
 		}
-	};
+	}
 
 	/**
 	 * Set a timeout driven by raf() and remember
 	 * its ID. All stored timeouts will be cleared when component unmounts.
 	 */
-	public setRequestTimeout = (callback: Util.RequestFn, timeout = 0): Util.RequestFn => {
+	public setRequestTimeout(callback: Util.RequestFn, timeout = 0): Util.RequestFn {
 		const handle = Util.requestTimeout(callback, timeout);
 		this.requestTimeoutIds.push(handle.id);
 		return (): void => Util.clearRequestTimeout(handle.id);
-	};
+	}
 
 	/**
 	 * Clear all known raf() timeouts.
 	 */
-	public clearRequestTimeouts = (): void => {
+	public clearRequestTimeouts(): void {
 		if (this.requestTimeoutIds.length > 0) {
 			this.requestTimeoutIds.forEach((id) => {
 				Util.clearRequestTimeout(id);
 			});
 			this.requestTimeoutIds = [];
 		}
-	};
+	}
 
 	/**
 	 * Ensures that the props specified for a component are valid.
@@ -97,7 +94,5 @@ export abstract class AbstractPureComponent<
 	 * [propTypes](https://facebook.github.io/react/docs/reusable-components.html#prop-validation) feature.
 	 * Like propTypes, these runtime checks run only in development mode.
 	 */
-	protected validateProps = (_props: P): void => {
-		// implement in subclass
-	};
+	protected validateProps?(_props: P): void;
 }

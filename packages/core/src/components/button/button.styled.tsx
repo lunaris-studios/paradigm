@@ -1,81 +1,41 @@
 import * as React from "react";
-import * as SC from "styled-components";
 import * as Spring from "react-spring";
 
-import * as Component from "./button";
+import { default as styled } from "styled-components";
 
-// re-import `styled-components` development mode DOM classnames.
-import styled, { css } from "styled-components";
-
-/**
- * Table of Contents
- *
- * [Button]
- * - [Button.Element]
- * - [Button.Text]
- */
+import * as Util from "~/util";
 
 /**
  * [Button]
- * - [Button.Element(WRAPPER)]
+ * - [Button.Container(WRAPPER)]
+ * - - [Components.Spinner(COMPONENT)]
+ * - - [Components.Icon(COMPONENT)]
+ * - - [Button.Text(ELEMENT)]
  */
 
 interface Button {
-	Element: SC.StyledComponent<
-		Spring.AnimatedComponent<"button">,
-		any,
-		IButtonElementAttrs,
-		keyof IButtonElementAttrs
-	>;
-	Text: SC.StyledComponent<
-		Spring.AnimatedComponent<"span">,
-		any,
-		IButtonTextAttrs,
-		keyof IButtonTextAttrs
-	>;
+	Container: Util.SC.Styled<Spring.AnimatedComponent<"button">, IButtonContainerProps>;
+	Text: Util.SC.Styled<Spring.AnimatedComponent<"span">, IButtonTextProps>;
 }
 
 export const Button = {} as Button;
 
 /**
- * [Button.Element]
+ * [Button.Container]
  */
 
-interface IButtonElementProps
-	extends SC.ThemeProps<SC.DefaultTheme>,
-		Component.IButtonProps {}
-
-interface IButtonElementAttrs extends IButtonElementProps {}
+interface IButtonContainerProps {}
 
 /**
- * This is overwritten for `AnchorButton` with a corresponding `Spring.animated("a")`
- * constant.
+ * This is overwritten for `AnchorButton` with a corresponding `Spring.animated.a`
+ * via styled-component `as` override.
  */
-const AniamtedButtonElement = Spring.animated("button");
-
-Button.Element = styled(AniamtedButtonElement).attrs(
-	(props: IButtonElementProps): IButtonElementAttrs => ({
-		...props,
-	}),
-)``;
+Button.Container = styled(Spring.animated.button)<IButtonContainerProps>``;
 
 /**
  * [Button.Text]
  */
 
-interface IButtonTextProps
-	extends SC.ThemeProps<SC.DefaultTheme>,
-		Component.IButtonProps {}
+interface IButtonTextProps {}
 
-interface IButtonTextAttrs extends IButtonTextProps {}
-
-const AniamtedButtonText = Spring.animated("span");
-
-Button.Text = styled(AniamtedButtonText).attrs(
-	(props: IButtonTextProps): IButtonTextAttrs => ({
-		...props,
-	}),
-)`
-	/** default: don't grow to fill but allow shrinking as necessary */
-	flex: 0 1 auto;
-`;
+Button.Text = styled(Spring.animated.span)<IButtonTextProps>``;

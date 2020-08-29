@@ -9,8 +9,8 @@ export interface IWindowSizeSensorProps
 		TS.ISensorProps {}
 
 export interface IWindowSizeSensorState {
-	width: Util.Nullable<number>;
-	height: Util.Nullable<number>;
+	width: number;
+	height: number;
 }
 
 const defaultProps = Object.freeze<IWindowSizeSensorProps>({
@@ -18,8 +18,8 @@ const defaultProps = Object.freeze<IWindowSizeSensorProps>({
 });
 
 const defaultState = Object.freeze<IWindowSizeSensorState>({
-	width: Util.isBrowser() ? window.innerWidth : null,
-	height: Util.isBrowser() ? window.innerHeight : null,
+	width: Util.isBrowser() ? window.innerWidth : 0,
+	height: Util.isBrowser() ? window.innerHeight : 0,
 });
 
 export class WindowSizeSensor extends React.Component<

@@ -1,4 +1,6 @@
-/** Keyboard key names and their corresponding codes. */
+/**
+ * Keyboard key names and their corresponding codes.
+ */
 export enum Key {
 	BACKSPACE = 8,
 	TAB = 9,

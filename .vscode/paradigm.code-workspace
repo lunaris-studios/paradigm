@@ -9,6 +9,10 @@
 			"path": "../packages/abstract"
 		},
 		{
+			"name": "[BORDERS]",
+			"path": "../packages/borders"
+		},
+		{
 			"name": "[CORE]",
 			"path": "../packages/core"
 		},
@@ -17,16 +21,8 @@
 			"path": "../packages/docs"
 		},
 		{
-			"name": "[GATSBY]",
-			"path": "../packages/gatsby"
-		},
-		{
 			"name": "[ICONS]",
 			"path": "../packages/icons"
-		},
-		{
-			"name": "[NINE]",
-			"path": "../packages/nine"
 		},
 		{
 			"name": "[PROTOCOL]",
@@ -84,10 +80,10 @@
 			"sensors",
 			"util",
 		],
-		"typescript.tsdk": "[SENSORS]/node_modules/typescript/lib",
 		"cSpell.words": [
 			"gptl",
 			"paradigmjs"
-		]
+		],
+		"typescript.tsdk": "[HOME]/node_modules/typescript/lib"
 	}
 }

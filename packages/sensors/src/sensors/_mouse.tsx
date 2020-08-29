@@ -19,10 +19,12 @@ export interface IMouseSensorState {
 	elY: number;
 }
 
+export interface IMouseRefHandlers {
+	target: React.Ref<any>;
+}
+
 export interface IMouseSensorExports extends IMouseSensorState {
-	refHandlers?: {
-		target: React.Ref<any>;
-	};
+	refHandlers?: IMouseRefHandlers;
 }
 
 const defaultProps = Object.freeze<IMouseSensorProps>({
@@ -53,9 +55,9 @@ export class MouseSensor extends React.Component<IMouseSensorProps, IMouseSensor
 
 	private unmounted: boolean = false;
 
-	private target: Util.Nullable<HTMLElement> = null;
+	private targetRef: HTMLElement | null = null;
 	private refHandlers: IMouseSensorExports["refHandlers"] = {
-		target: (ref) => (this.target = ref),
+		target: (ref) => (this.targetRef = ref),
 	};
 
 	public componentDidMount() {
@@ -63,7 +65,6 @@ export class MouseSensor extends React.Component<IMouseSensorProps, IMouseSensor
 	}
 
 	public componentWillUnmount() {
-		this.unmounted = true;
 		this.unbindEvents();
 	}
 
@@ -76,11 +77,11 @@ export class MouseSensor extends React.Component<IMouseSensorProps, IMouseSensor
 	}
 
 	private handleMouseMove = Util.throttle((event: MouseEvent) => {
-		if (this.unmounted || !this.target) {
+		if (this.unmounted || !this.targetRef) {
 			return;
 		}
 
-		const { left, top, width: elW, height: elH } = this.target.getBoundingClientRect();
+		const { left, top, width: elW, height: elH } = this.targetRef.getBoundingClientRect();
 		const posX = left + window.pageXOffset;
 		const posY = top + window.pageYOffset;
 		const elX = event.pageX - posX;

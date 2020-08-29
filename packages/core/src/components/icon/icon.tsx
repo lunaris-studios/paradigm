@@ -1,8 +1,8 @@
+import * as Abstract from "@paradigmjs/abstract";
 import * as React from "react";
 import * as Icons from "@paradigmjs/icons";
 
 import * as Common from "~/common";
-import * as Components from "~/components";
 
 import * as Styled from "./icon.styled";
 
@@ -25,7 +25,7 @@ export interface IIconProps extends Common.IIntentProps, Common.IProps {
 	htmlTitle?: string;
 
 	/**
-	 * Name of a Blueprint UI icon, or an icon element, to render. This prop is
+	 * Name of a Paradigm UI icon, or an icon element, to render. This prop is
 	 * required because it determines the content of the component, but it can
 	 * be explicitly set to falsy values to render nothing.
 	 *
@@ -36,18 +36,18 @@ export interface IIconProps extends Common.IIntentProps, Common.IProps {
 	 *   will render a blank icon to occupy space.
 	 * - If given a `JSX.Element`, that element will be rendered and _all other
 	 *   props on this component are ignored._ This type is supported to
-	 *   simplify icon support in other Blueprint components. As a consumer, you
+	 *   simplify icon support in other Paradigm components. As a consumer, you
 	 *   should avoid using `<Icon icon={<Element />}` directly; simply render
 	 *   `<Element />` instead.
 	 */
 	icon?: Icons.IconName | Common.MaybeElement;
 
 	/**
-	 * Size of the icon, in pixels. Blueprint contains 16px and 20px SVG icon
+	 * Size of the icon, in pixels. Paradigm contains 16px and 20px SVG icon
 	 * images, and chooses the appropriate resolution based on this prop.
 	 * @default Icon.SIZE_STANDARD = 16
 	 */
-	iconSize?: number;
+	iconSize: number;
 
 	/** CSS style properties. */
 	style?: React.CSSProperties;
@@ -56,7 +56,7 @@ export interface IIconProps extends Common.IIntentProps, Common.IProps {
 	 * HTML tag to use for the rendered element.
 	 * @default "span"
 	 */
-	tagName?: keyof JSX.IntrinsicElements;
+	tagName: keyof JSX.IntrinsicElements;
 
 	/**
 	 * Description string. This string does not appear in normal browsers, but
@@ -77,7 +77,7 @@ const defaultProps = Object.freeze<IIconProps>({
 	tagName: "span",
 });
 
-export class Icon extends Components.AbstractPureComponent<
+export class Icon extends Abstract.AbstractPureComponent<
 	IIconProps & React.DOMAttributes<HTMLElement>
 > {
 	public static displayName = `${Common.DISPLAYNAME_PREFIX}.Icon`;
@@ -85,11 +85,12 @@ export class Icon extends Components.AbstractPureComponent<
 	public static readonly SIZE_STANDARD = IconSize.SIZE_STANDARD;
 	public static readonly SIZE_LARGE = IconSize.SIZE_LARGE;
 
-	static readonly defaultProps: IIconProps = defaultProps;
+	public static readonly defaultProps: IIconProps = defaultProps;
 
 	public render(): JSX.Element | null {
 		const { icon } = this.props;
-		if (icon == null || typeof icon === "boolean") {
+
+		if (icon === undefined || typeof icon === "boolean") {
 			return null;
 		} else if (typeof icon !== "string") {
 			return icon;
@@ -129,7 +130,10 @@ export class Icon extends Components.AbstractPureComponent<
 		);
 	}
 
-	/** Render `<path>` elements for the given icon name. Returns `null` if name is unknown. */
+	/**
+	 * Render `<path>` elements for the given icon name. Returns `null`
+	 * if name is unknown.
+	 */
 	private renderSvgPaths(
 		pathsSize: number,
 		iconName: Icons.IconName,

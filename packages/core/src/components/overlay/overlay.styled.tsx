@@ -1,19 +1,10 @@
 import * as Protocol from "@paradigmjs/protocol";
 import * as React from "react";
-import * as SC from "styled-components";
 import * as Spring from "react-spring";
-
-import * as Common from "~/common";
-import * as Components from "~/components";
-
 // re-import `styled-components` development mode DOM classnames.
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
-/**
- * Table of Contents
- *
- * [Overlay]
- */
+import * as Util from "~/util";
 
 /**
  * [Overlay]
@@ -23,24 +14,9 @@ import styled, { css } from "styled-components";
  */
 
 export interface Overlay {
-	Container: SC.StyledComponent<
-		Spring.AnimatedComponent<"div">,
-		any,
-		IOverlayContainerAttrs,
-		keyof IOverlayContainerAttrs
-	>;
-	Backdrop: SC.StyledComponent<
-		Spring.AnimatedComponent<"div">,
-		any,
-		IOverlayBackdropAttrs,
-		keyof IOverlayBackdropAttrs
-	>;
-	Content: SC.StyledComponent<
-		Spring.AnimatedComponent<"div">,
-		any,
-		IOverlayContentAttrs,
-		keyof IOverlayContentAttrs
-	>;
+	Container: Util.SC.Styled<"div", IOverlayContainerProps>;
+	Content: Util.SC.Styled<Spring.AnimatedComponent<"div">, IOverlayContentProps>;
+	Backdrop: Util.SC.Styled<Spring.AnimatedComponent<"div">, IOverlayBackdropProps>;
 }
 
 export const Overlay = {} as Overlay;
@@ -49,31 +25,16 @@ export const Overlay = {} as Overlay;
  * [Overlay.Container]
  */
 
-interface IOverlayContainerProps extends SC.ThemeProps<SC.DefaultTheme> {
+interface IOverlayContainerProps {
 	isOpen: boolean;
-	usePortal: boolean;
 }
 
-interface IOverlayContainerAttrs extends IOverlayContainerProps {
-	overflow: Nullable<string>;
-	pointerEvents: Nullable<string>;
-}
-
-const AnimatedOverlayContainer = Spring.animated.div;
-
-Overlay.Container = styled(AnimatedOverlayContainer).attrs(
-	(props: IOverlayContainerProps): IOverlayContainerAttrs => ({
-		overflow: props.isOpen ? "hidden" : null,
-		pointerEvents: !props.isOpen ? "none" : null,
-		...props,
-	}),
-)`
+Overlay.Container = styled("div")<IOverlayContainerProps>`
 	${Protocol.Snippets.cover()}
 	${Protocol.Snippets.flex()}
-
-	overflow: ${(props) => props.overflow};
-	pointer-events:  ${(props) => props.pointerEvents};
-
+	/*  */
+	overflow: ${(props: IOverlayContainerProps) => (props.isOpen ? "hidden" : null)};
+	pointer-events: ${(props: IOverlayContainerProps) => (!props.isOpen ? "none" : null)};
 	z-index: ${Protocol.ZIndex.OVERLAY};
 `;
 
@@ -83,15 +44,7 @@ Overlay.Container = styled(AnimatedOverlayContainer).attrs(
 
 interface IOverlayContentProps {}
 
-interface IOverlayContentAttrs extends IOverlayContentProps {}
-
-const AnimatedOverlayContent = Spring.animated("div");
-
-Overlay.Content = styled(AnimatedOverlayContent).attrs(
-	(props: IOverlayContentProps): IOverlayContentAttrs => ({
-		...props,
-	}),
-)``;
+Overlay.Content = styled(Spring.animated.div)``;
 
 /**
  * [Overlay.Backdrop]
@@ -99,17 +52,9 @@ Overlay.Content = styled(AnimatedOverlayContent).attrs(
 
 interface IOverlayBackdropProps {}
 
-interface IOverlayBackdropAttrs extends IOverlayBackdropProps {}
-
-const AnimatedOverlayBackdrop = Spring.animated("div");
-
-Overlay.Backdrop = styled(AnimatedOverlayBackdrop).attrs(
-	(props: IOverlayBackdropProps): IOverlayBackdropAttrs => ({
-		...props,
-	}),
-)`
+Overlay.Backdrop = styled(Spring.animated.div)`
 	${Protocol.Snippets.cover()}
-
+  /*  */
 	z-index: ${Protocol.ZIndex.OVERLAY};
 	background: ${Protocol.Color.BLACK_2};
 `;

@@ -1,1 +1,1 @@
-export * from "./_neptune-provider";
+export * from "./_paradigm-provider";

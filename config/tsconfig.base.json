@@ -1,23 +1,20 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "esModuleInterop": true,
+	"compilerOptions": {
+		"allowSyntheticDefaultImports": true,
+		"declaration": true,
+		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
-		"experimentalDecorators": true,
-    "jsx": "react",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "noEmit": true,
-    "resolveJsonModule": true,
-    "preserveSymlinks": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "strict": true,
+		"jsx": "react",
+		"module": "esnext",
+		"moduleResolution": "node",
+		"noEmit": true,
+		"resolveJsonModule": true,
+		"preserveSymlinks": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
 		"target": "esnext",
-		"plugins": [
-      { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
-    ]
-  }
+		"types": ["jest", "node"],
+		"lib": ["es2019", "dom"]
+	}
 }

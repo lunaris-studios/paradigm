@@ -1,12 +1,12 @@
-import * as BIN from "~/bin";
+import { bind } from "../";
 import * as Constants from "~/constants";
 
-export const borderShadowOpacity = BIN.bind("scheme", {
+export const borderShadowOpacity = bind("scheme", {
 	[Constants.Scheme.LIGHT]: "",
 	[Constants.Scheme.DARK]: "",
 });
 
-export const dropShadowOpacity = BIN.bind("scheme", {
+export const dropShadowOpacity = bind("scheme", {
 	[Constants.Scheme.LIGHT]: "",
 	[Constants.Scheme.DARK]: "",
 });

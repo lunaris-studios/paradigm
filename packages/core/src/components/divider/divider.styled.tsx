@@ -1,14 +1,10 @@
 import * as Protocol from "@paradigmjs/protocol";
-import * as SC from "styled-components";
 
-// re-import `styled-components` development mode DOM classnames.
-import styled from "styled-components";
+import { default as styled, css } from "styled-components";
 
-/**
- * Table of Contents
- *
- * [Divider]
- */
+import * as Util from "~/util";
+
+import * as Component from "./divider";
 
 /**
  * [Divider]
@@ -16,12 +12,7 @@ import styled from "styled-components";
  */
 
 interface Divider {
-	Element: SC.StyledComponent<
-		"div",
-		any,
-		IDividerElementAttrs,
-		keyof IDividerElementAttrs
-	>;
+	Element: Util.SC.Styled<"div", IDividerElementProps>;
 }
 
 export const Divider = {} as Divider;
@@ -30,40 +21,32 @@ export const Divider = {} as Divider;
  * [Divider.Element]
  */
 
-interface IDividerElementProps extends SC.ThemeProps<SC.DefaultTheme> {
-	/**
-	 * Should be a [[solid color]], changes in color scheme
-	 * are dynamic handled via relative opacity changes.
-	 * @default Color.BLACK_0
-	 */
-	color: Protocol.Color;
+interface IDividerElementProps {
+	color: Component.IDividerProps["color"];
 }
 
-interface IDividerElementAttrs extends IDividerElementProps {}
+Divider.Element = styled("div")<IDividerElementProps>`
+	${Protocol.Snippets.debug()}
+	/*  */
+	${(props) => {
+		const { color, theme } = props;
 
-const DIVIDER_ELEMENT_OPACITY = Protocol.bind("scheme", {
-	[Protocol.Scheme.DARK]: 0.75,
-	[Protocol.Scheme.LIGHT]: 0.5,
-});
+		const BORDER_COLOR = color || theme.colors.BLACK_0;
+		const MARGIN = Protocol.Snippets.px(theme.spaces.ONE);
+		const OPACITY = Protocol.bind("scheme", {
+			[theme.schemes.DARK]: 0.75,
+			[theme.schemes.LIGHT]: 0.5,
+		});
 
-const defaultDividerElementProps = Object.freeze<IDividerElementProps>({
-	color: Protocol.Color.BLACK_0,
-	// TODO (sam): Fix parent extension of <SC.ThemeProps>
-	theme: {} as Protocol.Theme,
-});
-
-Divider.Element = styled("div").attrs(
-	(props: IDividerElementProps = defaultDividerElementProps): IDividerElementAttrs => ({
-		...props,
-	}),
-)`
-	border-color: ${(props) => props.color};
-	margin: ${Protocol.Snippets.px(Protocol.Space.ONE)};
-	opacity: ${DIVIDER_ELEMENT_OPACITY};
-
+		return css`
+			border-color: ${BORDER_COLOR};
+			margin: ${MARGIN};
+			opacity: ${OPACITY};
+		`;
+	}}
+	/*  */
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
-
 	/**
    * Since the element is empty, it will occupy minimal space and only show
    * the appropriate border based on direction of container.
