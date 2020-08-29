@@ -9,7 +9,7 @@ import * as Styled from "./divider.styled";
 export interface IDividerProps extends Common.IProps {
 	/**
 	 * Should be a [[solid color]]. Changes in global color scheme
-	 * are dynamic handled via relative opacity changes.
+	 * are dynamically handled via relative opacity changes.
 	 * @default Protocol.Color.BLACK_0
 	 */
 	color: Protocol.Color;
