@@ -1,8 +1,7 @@
 import * as React from "react";
-import * as SC from "styled-components";
 import * as Spring from "react-spring";
-// re-import `styled-components` development mode DOM classnames.
-import styled from "styled-components";
+
+import { default as styled } from "styled-components";
 
 import * as Util from "~/util";
 
