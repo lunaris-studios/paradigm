@@ -1,6 +1,6 @@
 {
   "name": "@paradigmjs/borders",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Paradigm Border Library",
   "repository": {
     "type": "git",
@@ -42,10 +42,10 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@paradigmjs/abstract": "^0.0.2",
-    "@paradigmjs/core": "^0.0.15",
-    "@paradigmjs/protocol": "^0.0.15",
-    "@paradigmjs/util": "^0.0.15",
+    "@paradigmjs/abstract": "^0.0.3",
+    "@paradigmjs/core": "^0.0.16",
+    "@paradigmjs/protocol": "^0.0.16",
+    "@paradigmjs/util": "^0.0.16",
     "csstype": "^3.0.3",
     "react": "^16.13.1",
     "react-spring": "^9.0.0-rc.3"

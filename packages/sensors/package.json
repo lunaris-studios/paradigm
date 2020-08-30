@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/sensors",
-	"version": "0.0.15",
+	"version": "0.0.16",
 	"description": "Paradigm Sensor Utilities",
 	"repository": {
 		"type": "git",
@@ -40,9 +40,9 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/protocol": "^0.0.15",
-		"@paradigmjs/universal": "^0.0.15",
-		"@paradigmjs/util": "^0.0.15"
+		"@paradigmjs/protocol": "^0.0.16",
+		"@paradigmjs/universal": "^0.0.16",
+		"@paradigmjs/util": "^0.0.16"
 	},
 	"devDependencies": {
 		"@rollup/plugin-alias": "^3.1.1",
