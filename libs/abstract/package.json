@@ -19,5 +19,6 @@
 	"publishConfig": {
 		"access": "public",
 		"directory": "../../dist/libs/abstract"
-	}
+	},
+	"gitHead": "f386212f7d50dee4d1455956224a53dc87254e99"
 }
