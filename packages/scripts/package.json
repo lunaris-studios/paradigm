@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/scripts",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "Node.js build scripts for Paradigm packages",
 	"repository": {
 		"type": "git",

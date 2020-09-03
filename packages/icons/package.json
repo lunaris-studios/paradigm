@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/icons",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "Paradigm Icon Library",
 	"repository": {
 		"type": "git",
@@ -79,7 +79,7 @@
 	},
 	"gitHead": "c4734a568a3c12e70a85faf416465e04a935a71e",
 	"dependencies": {
-		"@paradigmjs/scripts": "^0.0.16",
+		"@paradigmjs/scripts": "^0.0.17",
 		"npm-check-updates": "^7.1.0"
 	}
 }

@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/protocol",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "Paradigm Protocol Library",
 	"repository": {
 		"type": "git",
@@ -37,7 +37,7 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/util": "^0.0.16",
+		"@paradigmjs/util": "^0.0.17",
 		"csstype": "^3.0.3",
 		"polished": "^3.6.5",
 		"react-spring": "^9.0.0-rc.3",

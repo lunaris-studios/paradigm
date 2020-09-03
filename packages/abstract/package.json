@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/abstract",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"description": "Abstract React Components",
 	"repository": {
 		"type": "git",
@@ -39,8 +39,8 @@
 		"verify": "npm-run-all compile -p dist test lint"
 	},
 	"dependencies": {
-		"@paradigmjs/protocol": "^0.0.16",
-		"@paradigmjs/util": "^0.0.16",
+		"@paradigmjs/protocol": "^0.0.17",
+		"@paradigmjs/util": "^0.0.17",
 		"npm-check-updates": "^7.1.0"
 	},
 	"devDependencies": {

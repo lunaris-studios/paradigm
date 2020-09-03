@@ -1,6 +1,6 @@
 {
   "name": "@paradigmjs/core",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Paradigm Core Component & Design System",
   "repository": {
     "type": "git",
@@ -44,9 +44,9 @@
     "verify": "npm-run-all compile -p dist test lint"
   },
   "dependencies": {
-    "@paradigmjs/abstract": "^0.0.3",
-    "@paradigmjs/icons": "^0.0.16",
-    "@paradigmjs/sensors": "^0.0.16",
+    "@paradigmjs/abstract": "^0.0.4",
+    "@paradigmjs/icons": "^0.0.17",
+    "@paradigmjs/sensors": "^0.0.17",
     "polished": "^3.6.5",
     "react-helmet": "^6.1.0",
     "react-i18next": "^11.7.2",
@@ -57,8 +57,8 @@
     "@babel/core": "^7.11.4",
     "@babel/preset-env": "^7.11.0",
     "@babel/preset-react": "^7.10.4",
-    "@paradigmjs/protocol": "^0.0.16",
-    "@paradigmjs/util": "^0.0.16",
+    "@paradigmjs/protocol": "^0.0.17",
+    "@paradigmjs/util": "^0.0.17",
     "@rollup/plugin-alias": "^3.1.1",
     "@rollup/plugin-babel": "^5.2.0",
     "@rollup/plugin-commonjs": "^15.0.0",
