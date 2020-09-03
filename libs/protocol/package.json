@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/protocol",
-	"version": "0.0.16",
+	"version": "0.0.17",
 	"description": "Abstract React Components",
 	"repository": {
 		"type": "git",
@@ -10,12 +10,12 @@
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"dependencies": {
-		"@paradigmjs/util": "0.0.16"
+		"@paradigmjs/util": "^0.0.17"
 	},
 	"peerDependencies": {
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-    "styled-components": "^5.1.1"
+		"styled-components": "^5.1.1"
 	},
 	"publishConfig": {
 		"access": "public",

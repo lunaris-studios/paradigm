@@ -1,6 +1,6 @@
 {
 	"name": "@paradigmjs/borders",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "Abstract React Components",
 	"repository": {
 		"type": "git",
@@ -10,13 +10,13 @@
 	"license": "MIT",
 	"author": "Sam Craig <sam@lunaris.io>",
 	"dependencies": {
-		"@paradigmjs/protocol": "0.0.16",
-		"@paradigmjs/util": "0.0.16"
+		"@paradigmjs/protocol": "^0.0.17",
+		"@paradigmjs/util": "^0.0.17"
 	},
 	"peerDependencies": {
 		"react": "^16.13.1",
 		"react-dom": "^16.13.1",
-    "styled-components": "^5.1.1"
+		"styled-components": "^5.1.1"
 	},
 	"publishConfig": {
 		"access": "public",
