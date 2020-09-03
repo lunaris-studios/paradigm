@@ -12,6 +12,7 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:unicorn/recommended",
     "prettier",
     "prettier/@typescript-eslint"
   ],
@@ -28,7 +29,72 @@
           { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
         ]
       }
-    ]
+    ],	"@typescript-eslint/naming-convention": [
+			"warn",
+			{
+				"selector": "typeParameter",
+				"format": ["StrictPascalCase"],
+				"prefix": ["T"]
+			},
+			{
+				"selector": "interface",
+				"format": ["StrictPascalCase"],
+				"prefix": ["I"]
+			}
+		],
+		"@typescript-eslint/no-empty-interface": "off",
+		"@typescript-eslint/no-useless-constructor": "off",
+		"max-classes-per-file": "off",
+		// Always prefer explicit implementations
+		"react/jsx-fragments": ["warn", "element"],
+		"react/static-property-placement": [
+			"warn",
+			"property assignment",
+			{
+				"defaultProps": "static public field",
+				"displayName": "static public field"
+			}
+		],
+		// Too restrictive, writing ugly code to defend against a very unlikely scenario: https://eslint.org/docs/rules/no-prototype-builtins
+		"no-prototype-builtins": "off",
+		// https://basarat.gitbooks.io/typescript/docs/tips/defaultIsBad.html
+		"import/prefer-default-export": "off",
+		// Too restrictive, some libraries require default exports
+		"import/no-default-export": "warn",
+		// Too restrictive: https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/destructuring-assignment.md
+		"react/destructuring-assignment": "off",
+		// No jsx extension: https://github.com/facebook/create-react-app/issues/87#issuecomment-234627904
+		"react/jsx-filename-extension": "off",
+		// Use function hoisting to improve code readability
+		"no-use-before-define": [
+			"error",
+			{
+				"functions": false,
+				"classes": true,
+				"variables": true
+			}
+		],
+		"@typescript-eslint/explicit-module-boundary-types": [
+			"error",
+			{
+				"allowHigherOrderFunctions": true
+			}
+		],
+		"@typescript-eslint/no-use-before-define": [
+			"error",
+			{
+				"functions": false,
+				"classes": true,
+				"variables": true,
+				"typedefs": true
+			}
+		],
+		// Common abbreviations are known and readable
+		"unicorn/prevent-abbreviations": "off",
+		// ALlow co-located class members for improved readability
+		"@typescript-eslint/lines-between-class-members": "off",
+
+		"react/jsx-props-no-spreading": "warn"
   },
   "overrides": [
     {
@@ -36,6 +102,15 @@
       "rules": {
         "@typescript-eslint/no-unused-vars": "off"
       }
+    }
+	],
+	"nx-enforce-module-boundaries": [
+    true,
+    {
+      "allow": [
+				"$abstract/**",
+				"$borders/**"
+			]
     }
   ]
 }

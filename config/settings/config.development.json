@@ -1,0 +1,32 @@
+{
+	"project": {
+		"name": "Paradigm",
+		"organization": "lunaris-studios"
+	},
+	"package": {
+		"core": {
+			"host": "package-core",
+			"port": "9000",
+			"url": "core.development.lunaris.io"
+		},
+		"docs": {
+			"host": "package-docs",
+			"port": "9100",
+			"url": "development.lunaris.io"
+		},
+		"nine": {
+			"host": "package-nine",
+			"port": "9200",
+			"url": "nine.development.lunaris.io"
+		}
+	},
+	"app": {
+		"nginx": {
+			"host": "app-nginx",
+			"httpPort": 80,
+			"httpsPort": 443,
+			"httpAddress": "app-nginx:80",
+			"httpsAddress": "app-nginx:443"
+		}
+	}
+}

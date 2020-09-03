@@ -1,0 +1,17 @@
+{
+	"extends": "./tsconfig.json",
+	"compilerOptions": {
+		"outDir": "../../dist/out-tsc",
+		"types": ["node"],
+		"plugins": [
+			{ "transform": "@zerollup/ts-transform-paths" },
+			{ "transform": "@zerollup/ts-transform-paths", "afterDeclarations": true },
+		],
+	},
+	"files": [
+		"../../node_modules/@nrwl/react/typings/cssmodule.d.ts",
+		"../../node_modules/@nrwl/react/typings/image.d.ts"
+	],
+	"exclude": ["**/*.test.ts", "**/*.test.tsx"],
+	"include": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"]
+}

@@ -1,0 +1,31 @@
+diff --git a/node_modules/@nrwl/web/src/builders/package/package.impl.js b/node_modules/@nrwl/web/src/builders/package/package.impl.js
+index 149b42d..756791a 100644
+--- a/node_modules/@nrwl/web/src/builders/package/package.impl.js
++++ b/node_modules/@nrwl/web/src/builders/package/package.impl.js
+@@ -24,6 +24,7 @@ const delete_output_dir_1 = require("../../utils/delete-output-dir");
+ const resolve = require('@rollup/plugin-node-resolve');
+ const commonjs = require('@rollup/plugin-commonjs');
+ const typescript = require('rollup-plugin-typescript2');
++const ttypescript = require('ttypescript');
+ const image = require('@rollup/plugin-image');
+ const copy = require('rollup-plugin-copy');
+ exports.default = architect_1.createBuilder(run);
+@@ -97,6 +98,7 @@ function createRollupOptions(options, dependencies, context, packageJson, source
+             typescript({
+                 check: true,
+                 tsconfig: options.tsConfig,
++                typescript: ttypescript,
+                 tsconfigOverride: {
+                     compilerOptions: {
+                         rootDir: options.entryRoot,
+@@ -104,6 +106,10 @@ function createRollupOptions(options, dependencies, context, packageJson, source
+                         declaration: true,
+                         paths: compilerOptionPaths,
+                         target: config.format === 'esm' ? 'esnext' : 'es5',
++                        plugins: [
++                            { transform: "@zerollup/ts-transform-paths" },
++                            { transform: "@zerollup/ts-transform-paths", afterDeclarations: true },
++					    ],
+                     },
+                 },
+             }),

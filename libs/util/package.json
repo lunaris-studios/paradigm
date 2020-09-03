@@ -1,0 +1,20 @@
+{
+	"name": "@paradigmjs/util",
+	"version": "0.0.16",
+	"description": "Abstract React Components",
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:lunaris-studios/paradigm.git",
+		"directory": "packages/util"
+	},
+	"license": "MIT",
+	"author": "Sam Craig <sam@lunaris.io>",
+	"peerDependencies": {
+		"react": "^16.13.1",
+		"react-dom": "^16.13.1"
+	},
+	"publishConfig": {
+		"access": "public",
+		"directory": "../../dist/libs/util"
+	}
+}

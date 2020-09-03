@@ -1,21 +1,31 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "typeRoots": ["node_modules/@types"],
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {}
-  },
-  "exclude": ["node_modules", "tmp"]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"typeRoots": ["node_modules/@types"],
+		"lib": ["es2017", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@paradigmjs/abstract": ["libs/abstract/src/index.ts"],
+			"@paradigmjs/borders": ["libs/borders/src/index.ts"],
+			"@paradigmjs/protocol": ["libs/protocol/src/index.ts"],
+			"@paradigmjs/util": ["libs/util/src/index.ts"],
+			"$abstract/*": ["libs/abstract/src/*"],
+			"$borders/*": ["libs/borders/src/*"],
+			"$protocol/*": ["libs/protocol/src/*"],
+			"$util/*": ["libs/util/src/*"]
+		}
+	},
+	"include": ["./global.d.ts"],
+	"exclude": ["node_modules", "tmp"]
 }
